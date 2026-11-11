@@ -1,0 +1,48 @@
+<section class="tldr"><h2>The short version</h2><ul>
+<li>On weekly changes of six rate and stress series (1994–2026), changeforest finds <strong>35 breaks</strong>, and 28 of them recur in at least 8 of 10 seeds. The mean-change test finds 0. Every number reproduced exactly.</li>
+<li>But a <strong>break-free VAR(1)</strong> with the same persistence (spectral radius 0.957) gets <strong>20–37 breaks</strong>. As they stand, the 35 can't be told apart from autocorrelation.</li>
+<li>After prewhitening (rerunning on VAR(1) residuals) there are 22 breaks, <strong>12 stable</strong>, and the null drops to 0–2. Those 12 are the defensible regime dates.</li>
+</ul></section>
+
+<div class="sec-head"><span class="n">01</span><h2>Question</h2><span class="line"></span></div>
+<p>When did the joint behaviour of rates, mortgage rates and financial-stress indices change: their volatility, their co-movement, or both?</p>
+
+<div class="sec-head"><span class="n">02</span><h2>Data used</h2><span class="line"></span></div>
+<p>Drive FRED files VIXCLS, T10Y2Y, DGS2, MORTGAGE30US, NFCI and STLFSI4 (retrieved 2026-11-10; Drive ids and sha256 in <a href="../SKILLROOT/methods/changeforest/applications/1/manifest.json">manifest.json</a>). Each is averaged to Friday weeks; then log VIX and the other levels are differenced and z-scored. That leaves <strong>n = 1,709 weeks, 1994-01-14 → 2026-10-09</strong>. Only aggregates are shown.</p>
+
+<div class="sec-head"><span class="n">03</span><h2>What we ran</h2><span class="line"></span></div>
+<p><code>methods/changeforest/applications/1/run.py</code> runs <code>changeforest(Z, "random_forest", "bs")</code> with default settings. As a pre-processing check, the same call runs on levels. Robustness covers seeds 0–9, drop-one-series, the first 70% of the sample, Binseg-l2/rbf with the same K, k-means, 5 iid shuffles, 5 VAR(1) simulations, and a prewhitened rerun.</p>
+
+<div class="sec-head"><span class="n">04</span><h2>Figures</h2><span class="line"></span></div>
+<figure><img src="../fig/changeforest_app1_weekly.png" alt="weekly breaks"><figcaption>Breaks on weekly changes. Bold lines recur in at least 8 of 10 seeds.</figcaption></figure>
+<figure><img src="../fig/changeforest_app1_levels_artifact.png" alt="levels artifact"><figcaption>The failure mode: on levels, the detector returns 63 breaks about 27 weeks apart.</figcaption></figure>
+
+<div class="sec-head"><span class="n">05</span><h2>Original vs reproduced</h2><span class="line"></span></div>
+<div class="table-wrap"><table><thead><tr><th>number</th><th>original (scout)</th><th>reproduced (clean venv)</th></tr></thead><tbody>
+<tr><td>breaks on levels</td><td class="num">63 (median gap 27 wk)</td><td class="num">63 (median gap 27 wk)</td></tr>
+<tr><td>breaks on changes, default seed</td><td class="num">35</td><td class="num">35, same dates</td></tr>
+<tr><td>change-in-mean breaks</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td>break count across 10 seeds</td><td class="num">32–47</td><td class="num">32–47</td></tr>
+<tr><td>iid-shuffled data (5×)</td><td class="num">0,0,0,0,0</td><td class="num">0,0,0,0,0</td></tr>
+<tr><td>first-70% refit, share recovered</td><td class="num">0.76</td><td class="num">0.76</td></tr>
+<tr><td>overlap with Binseg-rbf / -l2 (±13 wk)</td><td class="num">0.57 / 0.29</td><td class="num">0.57 / 0.29</td></tr>
+<tr><td>k-means label switches vs changeforest breaks</td><td class="num">1,529 vs 35</td><td class="num">1,529 vs 35</td></tr>
+</tbody></table></div>
+<p class="meta">585 values compared, 0 mismatches (abs tolerance 1e-4; timings excluded).</p>
+
+<div class="sec-head"><span class="n">06</span><h2>Robustness</h2><span class="line"></span></div>
+<div class="table-wrap"><table><thead><tr><th>check</th><th>result</th></tr></thead><tbody>
+<tr><td>seed-stable breaks (≥ 8/10)</td><td>28 of 35</td></tr>
+<tr><td>stationary VAR(1) null on changes (5×, radius 0.957)</td><td><strong>31, 20, 31, 37, 31</strong> breaks: fails</td></tr>
+<tr><td>stationary VAR(1) null on levels (3×, radius 0.997)</td><td>64, 65, 71: the mechanism behind the levels artifact</td></tr>
+<tr><td>prewhitened rerun</td><td>22 breaks; 17–22 across seeds; <strong>12 stable</strong>: 1995-01, 2000-07, 2003-12, 2007-07, 2008-10, 2009-04, 2012-07, 2019-12, 2020-06, 2021-03, 2022-01, 2023-04</td></tr>
+<tr><td>VAR(1) null on the prewhitened data (5×)</td><td>0, 0, 2, 0, 0: passes</td></tr>
+</tbody></table></div>
+
+<div class="sec-head"><span class="n">07</span><h2>Limitations</h2><span class="line"></span></div>
+<ul><li>Weekly averaging of daily data, and the smoothed NFCI and STLFSI indices, leave strong autocorrelation even after differencing. changeforest assumes independent rows within a segment.</li>
+<li>The prewhitening VAR(1) is fitted on the full sample, so it can absorb some of the real regime structure. Treat the 12 dates as a conservative set.</li>
+<li>The prewhitening remedy was added after the null failed. It is a post hoc fix that hasn't yet been tested on fresh data.</li></ul>
+
+<div class="sec-head"><span class="n">08</span><h2>Takeaway</h2><span class="line"></span></div>
+<div class="card dark"><p>Differencing alone wasn't enough here. The skill now checks persistence and prewhitens automatically (<code>--prewhiten auto</code>), and it always runs the VAR(1) null. An iid shuffle that returns 0 breaks is not evidence the breaks are real.</p></div>

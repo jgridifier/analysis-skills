@@ -1,0 +1,9 @@
+{
+ "original": "methods/changeforest/original/m2_results.json",
+ "reproduction": "methods/changeforest/applications/1/out/results.json",
+ "tolerances": "default abs 1e-4 on every float",
+ "n_compared": 585,
+ "n_mismatch": 0,
+ "status": "PASS",
+ "mismatches": []
+}

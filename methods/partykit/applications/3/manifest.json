@@ -1,0 +1,37 @@
+{
+ "retrieved": "2026-11-10",
+ "source": "Google Drive (owner's research data)",
+ "raw_files": [
+  {
+   "file": "county_panel.xlsx",
+   "drive_id": "1YfMJUsjbQoOEC5k8JiqeYSX8atFZDsbVi9lomoyV5Zg",
+   "rows": 81259,
+   "bytes": 5349559,
+   "sha256": "2c7999caf0d6cd316ef1d273666262e1b3c8943bd49c2f54ae7e605c8212fefc"
+  }
+ ],
+ "derived_panels": {
+  "county_panel.csv": {
+   "rows": 81259,
+   "sha256": "e099c850111747a3fedb23d35a6fbe1aee02762a9d3c061b88508605c54028ce"
+  },
+  "county_edu.csv": {
+   "rows": 19228,
+   "sha256": "81dcb28abdb5662fd4886fe57a98be22f0791d723b87c1c211b15521f7f128ef"
+  }
+ },
+ "build_panels": "python common/prep_panels.py",
+ "command": "Rscript methods/partykit/applications/3/run.R",
+ "seed": 20261110,
+ "environment": {
+  "lockfile": "env/r-conda-lock.txt",
+  "packages": "env/r-packages.csv",
+  "R": "4.4.3",
+  "partykit": "1.2-29",
+  "rpart": "4.1.27"
+ },
+ "committed_outputs": [
+  "out/results.json (aggregates only)",
+  "reproduction.json"
+ ]
+}

@@ -1,0 +1,54 @@
+{
+  "A3_leaves": [
+    {
+      "leaf": 2,
+      "n": 404,
+      "X.Intercept.": -0.0028,
+      "dVIX": 0.0293,
+      "dDGS10": -0.1252,
+      "rule": "NFCI <= 0.057"
+    },
+    {
+      "leaf": 3,
+      "n": 36,
+      "X.Intercept.": -0.0384,
+      "dVIX": 0.0587,
+      "dDGS10": -0.4444,
+      "rule": "NFCI > 0.057"
+    }
+  ],
+  "A3_pooled": [-0.0014, 0.0432, -0.1576],
+  "A3_BIC": [-350.47279, -513.60926],
+  "A3_n": 440,
+  "A3_root_tests": [
+    [14.30858, 46.13535, 19.52777, 8.88588],
+    [0.19705, 0, 0.02449, 0.82929]
+  ],
+  "R_windows": {
+    "pre2008": {
+      "n": 215,
+      "leaves": 2,
+      "root_var": "DGS2",
+      "root_thr": "3.874"
+    },
+    "post2008": {
+      "n": 225,
+      "leaves": 2,
+      "root_var": "NFCI",
+      "root_thr": "-0.181"
+    }
+  },
+  "R_ex_crises": {
+    "n": 412,
+    "leaves": 2,
+    "root_var": "NFCI",
+    "root_thr": "-0.162"
+  },
+  "R_null_shift_split_rate": 0.53,
+  "R_baseline_BIC": [-418.50566, -347.77843],
+  "versions": {
+    "R": "R version 4.4.3 (2025-02-28)",
+    "partykit": "1.2.29",
+    "rpart": "4.1.27"
+  }
+}

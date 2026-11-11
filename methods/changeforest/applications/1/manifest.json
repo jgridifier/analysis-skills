@@ -1,0 +1,67 @@
+{
+ "retrieved": "2026-11-10",
+ "source": "Google Drive (owner's research data)",
+ "raw_files": [
+  {
+   "file": "VIXCLS.csv",
+   "drive_id": "1oR2YeiLnbwzaUfS48h5iyoj_0GOAq7gs",
+   "rows": 9288,
+   "bytes": 161476,
+   "sha256": "1ca7fdaed43b150be701105757136a2506b29bb173d3c0fd8b65aab8b41853da"
+  },
+  {
+   "file": "T10Y2Y.csv",
+   "drive_id": "1StWWFDf1D4tuIdnpEpi1ZF7lxI52IbSU",
+   "rows": 12583,
+   "bytes": 210025,
+   "sha256": "e4b4e915644232516a30aab73c89eded87468cc6f5d5ea7d46c7eda5e650dad0"
+  },
+  {
+   "file": "DGS2.csv",
+   "drive_id": "15_SMUHNukWjF45TXGxEyhuyDYSEYimGp",
+   "rows": 12582,
+   "bytes": 209108,
+   "sha256": "c485d0921ec4bdf60477054cba5946092401ef490cce3fb33387b73f42a72a71"
+  },
+  {
+   "file": "MORTGAGE30US.csv",
+   "drive_id": "1czZ1kub5e-7kf81ROdso06WNkTuXH-sx",
+   "rows": 2897,
+   "bytes": 46947,
+   "sha256": "3ffacebbee5e0acd5f2f7b7effddb2bfbc54b89dd85405475e37545cd3be98db"
+  },
+  {
+   "file": "NFCI.csv",
+   "drive_id": "1XtT0rC15EPaOsh2Oc_Xsw06Dky98GmWm",
+   "rows": 2908,
+   "bytes": 51511,
+   "sha256": "dced46c27eae5349b9c52b710fabe65368dfdcae06f7b42e82bb7e4017850967"
+  },
+  {
+   "file": "STLFSI4.csv",
+   "drive_id": "18VuYJxft7OOfpd5EdyX0qv4dX3lGZtsN",
+   "rows": 1709,
+   "bytes": 31888,
+   "sha256": "c9cb371503bef44af0a3900961f8b7e48d0d609f5c6b7821e94898b84cb4cd6a"
+  }
+ ],
+ "derived_panels": {
+  "weekly_panel.csv": {
+   "rows": 1710,
+   "sha256": "0502c20b0ca4d5775c787c9597b92abee7d605e153dc9247cb7a5aee1bd8cf94"
+  }
+ },
+ "build_panels": "python common/prep_panels.py",
+ "command": "python methods/changeforest/applications/1/run.py",
+ "seed": "changeforest Control() default; seeds 0-9 for stability; numpy rng(1) shuffles, rng(7) VAR null",
+ "environment": {
+  "lockfile": "env/requirements.lock.txt",
+  "python": "3.13.5",
+  "changeforest": "1.2.1",
+  "ruptures": "1.1.10"
+ },
+ "committed_outputs": [
+  "out/results.json (aggregates only)",
+  "reproduction.json"
+ ]
+}

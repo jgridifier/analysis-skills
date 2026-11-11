@@ -1,0 +1,33 @@
+<section class="tldr"><h2>The short version</h2><ul>
+<li>A model-based tree on the monthly change in the GZ spread, regressed on ΔVIX and Δ10y, splits once at <strong>NFCI 0.057</strong>. When conditions are tight, the VIX slope doubles (0.029 → 0.059) and the 10y slope more than triples (−0.125 → −0.444).</li>
+<li>Financial conditions beat calendar time as the split variable (NFCI p &lt; 1e-5; time p = 0.83). BIC is −513.6 against −350.5 pooled. Reproduced exactly.</li>
+<li>The catch: shifting the state variables, which keeps them persistent, still produced a split <strong>53%</strong> of the time. Part of the finding is volatility clustering that any persistent state variable can flag.</li>
+</ul></section>
+<div class="sec-head"><span class="n">01</span><h2>Question</h2><span class="line"></span></div>
+<p>Does the sensitivity of credit spreads to equity-vol and rate shocks depend on the state of financial conditions, or did it just change at some date?</p>
+<div class="sec-head"><span class="n">02</span><h2>Data used</h2><span class="line"></span></div>
+<p>The same monthly Drive panel as application 1 (<a href="../SKILLROOT/methods/partykit/applications/2/manifest.json">manifest.json</a>). ΔGZ, ΔVIX and Δ10y, with 10y–2y, NFCI, 2y and a time index as partitioning variables. <strong>n = 440 months.</strong></p>
+<div class="sec-head"><span class="n">03</span><h2>What we ran</h2><span class="line"></span></div>
+<p><code>lmtree(dGZ ~ dVIX + dDGS10 | T10Y2Y + NFCI + DGS2 + time, minsize = 36, alpha = 0.01, bonferroni = TRUE)</code>, plus pooled OLS, OLS with the tree's split as an interaction, OLS with a 2008 break, pre- and post-2008 windows, a fit that leaves out the crises, and 100 circular shifts of the state variables.</p>
+<div class="sec-head"><span class="n">04</span><h2>Figures and tables</h2><span class="line"></span></div>
+<figure><img src="../fig/partykit_app2_mob.png" alt="MOB"><figcaption>The MOB tree with the leaf regressions.</figcaption></figure>
+<div class="table-wrap"><table><thead><tr><th>leaf</th><th>n</th><th>intercept</th><th>ΔVIX slope</th><th>Δ10y slope</th></tr></thead><tbody>
+<tr><td>NFCI ≤ 0.057</td><td class="num">404</td><td class="num">−0.0028</td><td class="num">0.0293</td><td class="num">−0.1252</td></tr>
+<tr><td>NFCI &gt; 0.057</td><td class="num">36</td><td class="num">−0.0384</td><td class="num">0.0587</td><td class="num">−0.4444</td></tr>
+<tr><td>pooled OLS</td><td class="num">440</td><td class="num">−0.0014</td><td class="num">0.0432</td><td class="num">−0.1576</td></tr>
+</tbody></table></div>
+<div class="sec-head"><span class="n">05</span><h2>Original vs reproduced</h2><span class="line"></span></div>
+<div class="table-wrap"><table><thead><tr><th>number</th><th>original</th><th>reproduced</th></tr></thead><tbody>
+<tr><td>split</td><td>NFCI ≤ 0.057</td><td>NFCI ≤ 0.057</td></tr>
+<tr><td>BIC pooled / MOB</td><td class="num">−350.5 / −513.6</td><td class="num">−350.5 / −513.6</td></tr>
+<tr><td>root test p: 10y–2y / NFCI / 2y / time</td><td class="num">0.197 / &lt;1e-5 / 0.024 / 0.829</td><td class="num">same</td></tr>
+</tbody></table></div>
+<p class="meta">26 values compared, 0 mismatches.</p>
+<div class="sec-head"><span class="n">06</span><h2>Robustness</h2><span class="line"></span></div>
+<ul><li>Windows: before 2008 the root is 2y ≤ 3.87; after 2008 it is NFCI ≤ −0.18. Without 2008–09 and Mar–Jun 2020 it is still NFCI (≤ −0.16).</li>
+<li>Baselines: OLS with an NFCI &gt; 0.057 interaction has BIC −418.5 and OLS with a 2008 break −347.8. MOB's extra gain over the dummy-interaction OLS comes partly from a separate error variance per leaf.</li>
+<li><strong>Null: circularly shifted state variables split in 53% of 100 shifts.</strong> This fails.</li></ul>
+<div class="sec-head"><span class="n">07</span><h2>Limitations</h2><span class="line"></span></div>
+<ul><li>Only 36 months sit in the tight-conditions leaf, and they are concentrated in crises.</li><li>The instability test reacts to heteroskedasticity, so "the slope changes" and "the noise changes" are partly confounded.</li></ul>
+<div class="sec-head"><span class="n">08</span><h2>Takeaway</h2><span class="line"></span></div>
+<div class="card dark"><p>"Spreads react harder to VIX when conditions are tight" is a reasonable description, and it survives windows and dropping the crises. But it doesn't pass a dependence-aware null, so the skill reports it as descriptive, together with its null split rate.</p></div>

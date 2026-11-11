@@ -1,0 +1,37 @@
+<section class="tldr"><h2>The short version</h2><ul>
+<li>9,174 daily changes of log VIX, 10y–2y, 2y and 10y (1990–2026) split into <strong>28 segments</strong>. 23 of the 28 breaks recur in at least 8 of 10 seeds.</li>
+<li>The nulls give <strong>zero</strong> breaks: iid shuffle 0/0/0, stationary VAR(1) 0/0/0 (radius 0.50). The mean-change test also gives 0. Every number reproduced exactly.</li>
+<li>The segments separate calm and stressed volatility, and flips in how VIX and the 10y yield move together.</li>
+</ul></section>
+<div class="sec-head"><span class="n">01</span><h2>Question</h2><span class="line"></span></div>
+<p>At daily frequency, when did the volatility of rates and the stock-vol/rates correlation change regime?</p>
+<div class="sec-head"><span class="n">02</span><h2>Data used</h2><span class="line"></span></div>
+<p>Drive FRED files VIXCLS, T10Y2Y, DGS2 and DGS10 (retrieved 2026-11-10; see <a href="../SKILLROOT/methods/changeforest/applications/2/manifest.json">manifest.json</a>). Daily changes of log VIX and the three rates, with rows beyond the 99.99th percentile of |change| trimmed and the rest z-scored. <strong>n = 9,174 days, 1990 → 2026-10.</strong></p>
+<div class="sec-head"><span class="n">03</span><h2>What we ran</h2><span class="line"></span></div>
+<p><code>methods/changeforest/applications/2/run.py</code> runs random_forest with binary segmentation, plus change_in_mean, 3 iid shuffles (replaying the scout's RNG stream), seeds 0–9 at ±63 trading days, 3 VAR(1) simulations, and a synthetic scaling benchmark with one variance break at n/2.</p>
+<div class="sec-head"><span class="n">04</span><h2>Figures and tables</h2><span class="line"></span></div>
+<figure><img src="../fig/changeforest_app2_daily.png" alt="daily breaks"><figcaption>63-day rolling sd of daily 10y changes, with changeforest breaks. Bold lines are seed-stable.</figcaption></figure>
+<div class="table-wrap"><table><thead><tr><th>segment</th><th>days</th><th>sd Δ10y</th><th>corr(Δlog VIX, Δ10y)</th></tr></thead><tbody>
+<tr><td>2007-08-07 → 2008-10-21</td><td class="num">303</td><td class="num">0.078</td><td class="num">−0.49</td></tr>
+<tr><td>2008-10-22 → 2009-03-10</td><td class="num">94</td><td class="num">0.103</td><td class="num">−0.33</td></tr>
+<tr><td>2011-08-03 → 2012-02-16</td><td class="num">135</td><td class="num">0.073</td><td class="num">−0.56</td></tr>
+<tr><td>2016-02-22 → 2018-10-17</td><td class="num">666</td><td class="num">0.038</td><td class="num">−0.24</td></tr>
+<tr><td>2020-03-06 → 2020-07-17</td><td class="num">93</td><td class="num">0.075</td><td class="num">−0.38</td></tr>
+<tr><td>2022-05-19 → 2024-02-05</td><td class="num">426</td><td class="num">0.078</td><td class="num">+0.13</td></tr>
+<tr><td>2024-02-06 → 2024-07-16</td><td class="num">111</td><td class="num">0.058</td><td class="num">+0.26</td></tr>
+</tbody></table></div>
+<details><summary>All 29 segments</summary><p>See <code>B3_segments</code> in <a href="../SKILLROOT/methods/changeforest/applications/2/out/results.json">results.json</a>.</p></details>
+<div class="sec-head"><span class="n">05</span><h2>Original vs reproduced</h2><span class="line"></span></div>
+<div class="table-wrap"><table><thead><tr><th>number</th><th>original</th><th>reproduced</th></tr></thead><tbody>
+<tr><td>breaks</td><td class="num">28</td><td class="num">28, same dates</td></tr>
+<tr><td>change-in-mean breaks</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td>iid shuffles (3×)</td><td class="num">0,0,0</td><td class="num">0,0,0</td></tr>
+<tr><td>synthetic break located (n = 1k…16k)</td><td class="num">500, 1000, 2006, 4003, 8009</td><td class="num">same</td></tr>
+</tbody></table></div>
+<p class="meta">275 values compared, 0 mismatches.</p>
+<div class="sec-head"><span class="n">06</span><h2>Robustness</h2><span class="line"></span></div>
+<ul><li>Seeds: 28–36 breaks; 23 of 28 recur in at least 8 of 10.</li><li>Stationary VAR(1) null: 0, 0, 0 (radius 0.50): passes.</li><li>Baseline: change-in-mean finds nothing, so every break here is in variance or correlation.</li></ul>
+<div class="sec-head"><span class="n">07</span><h2>Limitations</h2><span class="line"></span></div>
+<ul><li>Volatility clustering within a segment is only partly absorbed. Short spikes can be merged into neighbouring segments.</li><li>The VAR(1) null has constant variance. A GARCH-type null would be a stricter test, and isn't done yet.</li></ul>
+<div class="sec-head"><span class="n">08</span><h2>Takeaway</h2><span class="line"></span></div>
+<div class="card dark"><p>Daily changes with low persistence are where changeforest is strongest. It adds information a mean test can't see, and it runs fast at n ≈ 9k.</p></div>

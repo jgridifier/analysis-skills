@@ -1,0 +1,38 @@
+<section class="tldr">
+<h2>The short version</h2>
+<ul>
+<li><strong>What it is.</strong> A change-point detector that asks a random forest "can you tell rows before time <em>s</em> from rows after it?" and turns the answer into a likelihood ratio. It catches breaks in volatility, correlation or shape, not only the mean.</li>
+<li><strong>Verdict:</strong> <span class="verdict adopt">promoted</span>. All three applications reproduced exactly in a clean environment. Two cleared every gate; the third cleared them after prewhitening.</li>
+<li><strong>Lesson the skill now enforces:</strong> persistence fools it. On levels it found 63 evenly spaced breaks, and even on weekly changes a break-free VAR(1) simulation produced 20–37. Check persistence and run the VAR(1) null every time.</li>
+</ul>
+</section>
+
+<div class="sec-head"><span class="n">01</span><h2>Citation</h2><span class="line"></span></div>
+<div class="card teal"><p>Londschien, M., Bühlmann, P. &amp; Kovács, S. (2023). "Random Forests for Change Point Detection." <em>Journal of Machine Learning Research</em> 24(216):1–45. Package <a href="https://github.com/mlondschien/changeforest">changeforest</a> v1.2.1: Rust core, Python and R bindings. Baselines in this study: <code>change_in_mean</code> (same package), <a href="https://centre-borelli.github.io/ruptures-docs/">ruptures</a> 1.1.10 Binseg (l2 and rbf), scikit-learn k-means.</p></div>
+
+<div class="sec-head"><span class="n">02</span><h2>The math, plainly</h2><span class="line"></span></div>
+<p>Take a segment of rows \((u, v]\) and a candidate split \(s\). Label rows by side and fit a classifier; let \(\hat\pi(x_i)\) be its out-of-bag probability that row \(i\) belongs to the left part. If the two sides really come from different distributions, the classifier beats the base rate, and the classifier-based log-likelihood ratio</p>
+<div class="math-block">$$G(u,s,v)=\sum_{i=u+1}^{s}\log\frac{\hat\pi(x_i)}{(s-u)/(v-u)}+\sum_{i=s+1}^{v}\log\frac{1-\hat\pi(x_i)}{(v-s)/(v-u)}$$</div>
+<p>is large. Binary segmentation then picks the best \(s\), keeps it only if the gain survives a permutation-style test, and recurses on both halves. Swap the forest for a k-nearest-neighbour classifier and you get the <code>knn</code> variant; swap in a Gaussian mean model and you get <code>change_in_mean</code>, our baseline.</p>
+
+<div class="sec-head"><span class="n">03</span><h2>Why it is unusual, and fast</h2><span class="line"></span></div>
+<ul>
+<li><strong>Non-parametric and multivariate.</strong> No distribution is assumed, so a break in correlation or variance counts as much as a break in the mean. On all three of our panels the mean-change baseline found <strong>0</strong> breaks while changeforest found structure.</li>
+<li><strong>One forest scores every split.</strong> Out-of-bag predictions from a single fit score a whole grid of candidate splits, and a coarse-then-fine search keeps the number of fits small. The core is Rust.</li>
+<li><strong>Measured here:</strong> 16,000 × 5 synthetic rows in 0.72 s, and the 9,174-day panel in about 1 s. ruptures PELT-rbf took 25.7 s at n = 2,000 in the scout run. Timings depend on the machine.</li>
+</ul>
+
+<div class="sec-head"><span class="n">04</span><h2>Verdict</h2><span class="line"></span></div>
+<div class="card green"><div class="card-top"><span class="tag teal">Stage 4</span><span class="verdict adopt">promoted</span></div>
+<p>Reproduces exactly in all three applications. Applications 2 and 3 clear every gate, and application 1 clears them once prewhitened. Folded into <a href="../SKILLROOT/skills/run-changepoint-analysis/SKILL.md"><code>run-changepoint-analysis</code></a> as the default method, with four rules made mandatory: (1) never run it on levels; (2) check the VAR(1) spectral radius of the input and prewhiten above about 0.8; (3) always run a stationary VAR(1) null, because the iid shuffle passed even where the VAR null failed; (4) report only breaks that recur in at least 8 of 10 seeds.</p></div>
+
+<div class="sec-head"><span class="n">05</span><h2>Reproduction status</h2><span class="line"></span></div>
+<div class="table-wrap"><table><thead><tr><th>application</th><th>values compared</th><th>mismatches</th><th>reproduce</th><th>null</th><th>baseline</th></tr></thead><tbody>
+<tr><td><a href="changeforest-app1.html">1 · weekly rate/stress regimes</a></td><td class="num">585</td><td class="num">0</td><td>✓ exact</td><td>✗ raw · ✓ prewhitened</td><td>✓</td></tr>
+<tr><td><a href="changeforest-app2.html">2 · daily vol/corr regimes</a></td><td class="num">275</td><td class="num">0</td><td>✓ exact</td><td>✓</td><td>✓</td></tr>
+<tr><td><a href="changeforest-app3.html">3 · monthly credit-spread regimes (new)</a></td><td class="num">73</td><td class="num">0</td><td>✓ exact*</td><td>✓</td><td>✓</td></tr>
+</tbody></table></div>
+<p class="meta">Original = 2026-11-10 scout run (apps 1–2), or the first run in the scout environment (app 3). Reproduction = a fresh venv built from <code>env/requirements.lock.txt</code>, run on panels rebuilt from the Drive files, whose sha256 matched the scout's byte for byte. *App 3 used the same package versions, so it checks determinism, not cross-version stability. Full numbers are in <a href="../SKILLROOT/methods/changeforest/RESULTS.md">RESULTS.md</a>.</p>
+
+<div class="sec-head"><span class="n">06</span><h2>The three applications</h2><span class="line"></span></div>
+CHILDREN

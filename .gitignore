@@ -1,0 +1,8 @@
+# Raw or derived row-level data is never committed.
+.work/
+data/raw/
+*.xlsx
+**/out/*.csv
+__pycache__/
+*.pyc
+.Rhistory

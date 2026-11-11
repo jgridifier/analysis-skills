@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A VIX-led regime tree for credit spreads: readable, stable, and not real enough · analysis-skills</title><meta name="description" content="The 4-leaf tree reproduces exactly and VIX wins the root in about 70% of bootstraps. But a shifted response still splits 60% of the time, and the tree loses to the historical mean out of sample.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="../assets/brief.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>.grid figure img,figure img{max-width:100%;height:auto} .card h3 a{color:inherit} .tags .tag{margin-right:.35rem}</style>
+</head><body><main>
+<header class="mast"><div class="date">Tuesday · November 10, 2026 · Application article</div><h1>A VIX-led regime tree for credit spreads: readable, stable, and not real enough</h1><p class="dek">The 4-leaf tree reproduces exactly and VIX wins the root in about 70% of bootstraps. But a shifted response still splits 60% of the time, and the tree loses to the historical mean out of sample.</p><nav><a href="../index.html">Newsroom</a><a href="../articles/partykit.html">← Method: partykit</a><a href="https://github.com/jgridifier/analysis-skills/blob/main/methods/partykit/applications/1">Code</a><a href="https://github.com/jgridifier/analysis-skills/blob/main/methods/partykit/applications/1/out/results.json">Results</a><a href="https://github.com/jgridifier/analysis-skills/blob/main/skills/run-regime-tree-analysis/SKILL.md">Skill</a></nav></header><div class="ticker"><span class="tag">partykit</span><span class="tag">ctree</span><span class="tag">time series</span><span class="tag">credit spreads</span><span class="tag teal">run-regime-tree-analysis</span></div><section class="tldr"><h2>The short version</h2><ul>
+<li>A 4-leaf conditional inference tree for the 6-month-ahead change in the GZ credit spread. The root is <strong>VIX ≤ 31.9</strong>, and VIX takes the root in 68% of block bootstraps (65–75% across 5 more seeds). Reproduced exactly.</li>
+<li>It is <strong>not real enough</strong>. When the response is circularly shifted, which keeps its autocorrelation but breaks its link to the features, the tree still splits <strong>60%</strong> of the time.</li>
+<li>As a forecaster it <strong>lost to the historical mean</strong>, with walk-forward OOS R² of −0.31. CART (−0.40) and OLS (−0.43) did worse.</li>
+</ul></section>
+<div class="sec-head"><span class="n">01</span><h2>Question</h2><span class="line"></span></div>
+<p>Which macro-financial states come before large widening or tightening of credit spreads over the next six months?</p>
+<div class="sec-head"><span class="n">02</span><h2>Data used</h2><span class="line"></span></div>
+<p>Drive ebp_monthly.csv (GZ spread, EBP) and FRED VIXCLS, T10Y2Y, NFCI, DGS2 and MORTGAGE30US, as month-end means (<a href="https://github.com/jgridifier/analysis-skills/blob/main/methods/partykit/applications/1/manifest.json">manifest.json</a>). The response is GZ<sub>t+6</sub> − GZ<sub>t</sub>. Features: VIX, 10y–2y, NFCI, 2y, 12-month Δ2y, EBP, 12-month Δmortgage rate, and 3-month ΔGZ. <strong>n = 423 months, 1991-01 → 2026-03.</strong></p>
+<div class="sec-head"><span class="n">03</span><h2>What we ran</h2><span class="line"></span></div>
+<p><code>methods/partykit/applications/1/run.R</code> fits <code>ctree(alpha = 0.05, minbucket = 24, maxdepth = 3)</code>. It also runs an annual walk-forward from 2004, where training ends 6 months before each refit; CART with CV pruning and OLS as baselines; split windows; 300 bootstraps with 24-month blocks; 5 more bootstrap seeds; and 100 iid and 100 circular-shift nulls.</p>
+<div class="sec-head"><span class="n">04</span><h2>Figures and tables</h2><span class="line"></span></div>
+<figure><img src="../fig/partykit_app1_ctree.png" alt="ctree"><figcaption>The fitted tree. Boxplots show the 6-month ΔGZ in each leaf.</figcaption></figure>
+<div class="table-wrap"><table><thead><tr><th>leaf rule</th><th>n</th><th>mean 6m ΔGZ</th><th>P(widen &gt; 50bp)</th></tr></thead><tbody>
+<tr><td>VIX &gt; 31.9</td><td class="num">24</td><td class="num">−1.40</td><td class="num">0.00</td></tr>
+<tr><td>VIX ≤ 31.9 &amp; NFCI &gt; −0.063</td><td class="num">25</td><td class="num">+0.92</td><td class="num">0.56</td></tr>
+<tr><td>VIX ≤ 31.9 &amp; NFCI ≤ −0.063 &amp; 2y &gt; 0.376</td><td class="num">330</td><td class="num">+0.06</td><td class="num">0.13</td></tr>
+<tr><td>VIX ≤ 31.9 &amp; NFCI ≤ −0.063 &amp; 2y ≤ 0.376</td><td class="num">44</td><td class="num">−0.25</td><td class="num">0.00</td></tr>
+</tbody></table></div>
+<div class="sec-head"><span class="n">05</span><h2>Original vs reproduced</h2><span class="line"></span></div>
+<div class="table-wrap"><table><thead><tr><th>number</th><th>original</th><th>reproduced</th></tr></thead><tbody>
+<tr><td>leaves / root</td><td>4 / VIX ≤ 31.94</td><td>4 / VIX ≤ 31.94</td></tr>
+<tr><td>OOS R² vs hist mean (n = 267): ctree / CART / OLS</td><td class="num">−0.310 / −0.400 / −0.426</td><td class="num">−0.310 / −0.400 / −0.426</td></tr>
+<tr><td>bootstrap share with VIX at root</td><td class="num">0.683</td><td class="num">0.683</td></tr>
+<tr><td>window roots: 1990–2007 / 2008–2026</td><td>10y–2y ≤ 2.03 / VIX ≤ 27.3</td><td>same</td></tr>
+</tbody></table></div>
+<p class="meta">106 values compared, 0 mismatches. The ported script keeps the scout's RNG order, so even the bootstrap matches exactly.</p>
+<div class="sec-head"><span class="n">06</span><h2>Robustness</h2><span class="line"></span></div>
+<ul><li>Share with VIX at root over 5 more bootstrap seeds: 0.653–0.747.</li>
+<li>iid-permutation null: splits in 3% of 100, as expected at α = 0.05.</li>
+<li><strong>Circular-shift null: splits in 60% of 100.</strong> Two persistent series line up by chance often enough to fool the permutation test.</li>
+<li>By era, ctree OOS R² was −0.32 (2004–09), −0.46 (2010–19) and +0.27 (2020–26).</li></ul>
+<div class="sec-head"><span class="n">07</span><h2>Limitations</h2><span class="line"></span></div>
+<ul><li>Overlapping 6-month targets and persistent features break the exchangeability that ctree's p-values rely on.</li><li>The root moves between sub-samples: the yield curve before 2008, VIX after.</li></ul>
+<div class="sec-head"><span class="n">08</span><h2>Takeaway</h2><span class="line"></span></div>
+<div class="card dark"><p>It's a readable description of past states. It isn't a regime model you can trust or a forecaster. The skill now requires the circular-shift null for any time-series tree.</p></div>
+<div class="sec-head"><span class="n">↩</span><h2>Back to the method</h2><span class="line"></span></div><div class="grid"><div class="card teal"><div class="card-top"><span class="tag">Method · partykit</span><span class="verdict adopt">promoted (scoped)</span></div><h3><a href="../articles/partykit.html">partykit trees: readable subgroups that pass on a cross-section and overfit time series</a></h3><p>Conditional inference trees and model-based trees reproduced exactly. They clear every gate on 3,074 counties, but a circular-shift null breaks both time-series uses. Promoted, scoped.</p><div class="foot tags"><span class="tag">partykit</span><span class="tag">ctree</span><span class="tag">MOB</span><span class="tag">R</span><span class="tag teal">run-regime-tree-analysis</span><span class="meta">2026-11-10</span></div></div></div><footer><p>analysis-skills newsroom · scripts, lockfiles and full results in <a href="https://github.com/jgridifier/analysis-skills">https://github.com/jgridifier/analysis-skills</a> ·
+no raw data is published, only aggregates and fitted structure · built 2026-11-10</p></footer></main></body></html>

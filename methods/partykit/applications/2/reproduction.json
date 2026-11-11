@@ -1,0 +1,9 @@
+{
+ "original": "methods/partykit/original/m1_results.json",
+ "reproduction": "methods/partykit/applications/2/out/results.json",
+ "tolerances": "default abs 1e-4 on every float",
+ "n_compared": 26,
+ "n_mismatch": 0,
+ "status": "PASS",
+ "mismatches": []
+}

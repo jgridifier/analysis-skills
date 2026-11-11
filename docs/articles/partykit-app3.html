@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Which counties took the biggest unemployment hits in 2008 and 2020 · analysis-skills</title><meta name="description" content="Great Recession damage sorted on pre-crisis unemployment; COVID damage sorted on county size. Both trees clear the null and stay within reach of OLS.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="../assets/brief.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>.grid figure img,figure img{max-width:100%;height:auto} .card h3 a{color:inherit} .tags .tag{margin-right:.35rem}</style>
+</head><body><main>
+<header class="mast"><div class="date">Tuesday · November 10, 2026 · Application article</div><h1>Which counties took the biggest unemployment hits in 2008 and 2020</h1><p class="dek">Great Recession damage sorted on pre-crisis unemployment; COVID damage sorted on county size. Both trees clear the null and stay within reach of OLS.</p><nav><a href="../index.html">Newsroom</a><a href="../articles/partykit.html">← Method: partykit</a><a href="https://github.com/jgridifier/analysis-skills/blob/main/methods/partykit/applications/3">Code</a><a href="https://github.com/jgridifier/analysis-skills/blob/main/methods/partykit/applications/3/out/results.json">Results</a><a href="https://github.com/jgridifier/analysis-skills/blob/main/skills/run-regime-tree-analysis/SKILL.md">Skill</a></nav></header><div class="ticker"><span class="tag">partykit</span><span class="tag">ctree</span><span class="tag">cross-section</span><span class="tag">counties</span><span class="tag teal">run-regime-tree-analysis</span></div><section class="tldr"><h2>The short version</h2><ul>
+<li>3,074 counties. The <strong>Great Recession</strong> rise in unemployment (2007→2010) sorts first on pre-crisis unemployment (≤ 4.3%). The <strong>COVID</strong> rise (2019→2020) sorts on county size, with labor force at about 14.6k as the root.</li>
+<li>COVID leaf means run from <strong>1.10 pp</strong> (labor force ≤ ~2.3k and 2019 unemployment ≤ 5%) to <strong>5.34 pp</strong> (labor force &gt; ~426k).</li>
+<li>It passes the iid null (0% and 4% spurious splits). Its CV R² ties CART and stays within 0.035 of OLS while giving 7–8 readable groups. The trees reproduced exactly; the CV scores moved by at most 0.018 because the fold draw differs.</li>
+</ul></section>
+<div class="sec-head"><span class="n">01</span><h2>Question</h2><span class="line"></span></div>
+<p>Which pre-shock county traits mark the counties hit hardest by the two big unemployment shocks?</p>
+<div class="sec-head"><span class="n">02</span><h2>Data used</h2><span class="line"></span></div>
+<p>The Drive Sheet "County econ panel — GDP, unemployment, population, migration, poverty (FIPS x year)", panel and Education tabs (<a href="https://github.com/jgridifier/analysis-skills/blob/main/methods/partykit/applications/3/manifest.json">manifest.json</a>). Pre-shock traits: unemployment rate, prior 6-year log GDP growth, RUCC, metro flag, share with a bachelor's degree (2000, or 2008–12), and log labor force. <strong>n = 3,074 counties</strong> with complete data. Only leaf-level aggregates are shown.</p>
+<div class="sec-head"><span class="n">03</span><h2>What we ran</h2><span class="line"></span></div>
+<p><code>methods/partykit/applications/3/run.R</code> fits <code>ctree(alpha = 0.01, minbucket = 50, maxdepth = 3)</code> for each shock. It also runs 5-fold CV against the mean, CART and OLS (with ctree at maxdepth 4 inside the CV); repeats the CV over 10 seeds; and runs 50 iid-permutation nulls.</p>
+<div class="sec-head"><span class="n">04</span><h2>Figures and tables</h2><span class="line"></span></div>
+<figure><img src="../fig/partykit_app3_gr.png" alt="GR tree"><figcaption>Great Recession shock tree (pp change in unemployment, 2007→2010).</figcaption></figure>
+<figure><img src="../fig/partykit_app3_cv.png" alt="COVID tree"><figcaption>COVID shock tree (pp change, 2019→2020).</figcaption></figure>
+<div class="table-wrap"><table><thead><tr><th>Great Recession leaf</th><th>n</th><th>mean shock (pp)</th></tr></thead><tbody>
+<tr><td>unemp 2007 ≤ 4.3 &amp; small labor force</td><td class="num">305</td><td class="num">2.20</td></tr>
+<tr><td>unemp 2007 ≤ 4.3 &amp; largest labor forces</td><td class="num">721</td><td class="num">4.23</td></tr>
+<tr><td>unemp 2007 &gt; 4.3 &amp; bachelor's 2000 ≤ 12.1% &amp; not tiny</td><td class="num">754</td><td class="num">5.53</td></tr>
+<tr><td>unemp 2007 &gt; 4.3 &amp; bachelor's &gt; 12.1% &amp; large</td><td class="num">519</td><td class="num">5.00</td></tr>
+</tbody></table></div>
+<details><summary>All leaves and exact thresholds</summary><p>See <code>A4_gr_leaves</code> and <code>A4_cv_leaves</code> in <a href="https://github.com/jgridifier/analysis-skills/blob/main/methods/partykit/applications/3/out/results.json">results.json</a>.</p></details>
+<div class="sec-head"><span class="n">05</span><h2>Original vs reproduced</h2><span class="line"></span></div>
+<div class="table-wrap"><table><thead><tr><th>number</th><th>original</th><th>reproduced</th></tr></thead><tbody>
+<tr><td>GR root / leaves</td><td>unemp 2007 ≤ 4.3 / 7</td><td>same</td></tr>
+<tr><td>COVID root / leaves</td><td>log labor force 2019 ≤ 9.593 / 8</td><td>same</td></tr>
+<tr><td>GR CV R²: ctree / CART / OLS</td><td class="num">0.185 / 0.189 / 0.200</td><td class="num">0.197 / 0.207 / 0.203</td></tr>
+<tr><td>COVID CV R²: ctree / CART / OLS</td><td class="num">0.251 / 0.259 / 0.290</td><td class="num">0.256 / 0.253 / 0.289</td></tr>
+</tbody></table></div>
+<p class="meta">97 values compared. In strict mode there are 13 mismatches, all of them CV scores. At the stated tolerance (abs 0.03 on CV fields) there are 0. The original COVID ctree score (0.2513) sits just below the 10-seed range (0.2547–0.2779); the other five original scores fall inside their ranges.</p>
+<div class="sec-head"><span class="n">06</span><h2>Robustness</h2><span class="line"></span></div>
+<ul><li>10 CV seeds: ctree 0.173–0.199 (GR) and 0.255–0.278 (COVID); CART 0.188–0.212 and 0.256–0.277; OLS 0.201–0.203 and 0.287–0.292.</li>
+<li>iid-permutation null: 0% (GR) and 4% (COVID) of 50 permutations split. Counties are a cross-section, so the iid null is the right one here.</li></ul>
+<div class="sec-head"><span class="n">07</span><h2>Limitations</h2><span class="line"></span></div>
+<ul><li>Spatial correlation between neighbouring counties isn't modelled, so the iid null may be a little generous.</li><li>OLS still predicts slightly better. The tree's value is the readable subgroups, not accuracy.</li></ul>
+<div class="sec-head"><span class="n">08</span><h2>Takeaway</h2><span class="line"></span></div>
+<div class="card dark"><p>This is the use partykit is built for. The two shocks hit different kinds of counties: in 2008 the already-weak, less-educated places; in 2020 the big ones.</p></div>
+<div class="sec-head"><span class="n">↩</span><h2>Back to the method</h2><span class="line"></span></div><div class="grid"><div class="card teal"><div class="card-top"><span class="tag">Method · partykit</span><span class="verdict adopt">promoted (scoped)</span></div><h3><a href="../articles/partykit.html">partykit trees: readable subgroups that pass on a cross-section and overfit time series</a></h3><p>Conditional inference trees and model-based trees reproduced exactly. They clear every gate on 3,074 counties, but a circular-shift null breaks both time-series uses. Promoted, scoped.</p><div class="foot tags"><span class="tag">partykit</span><span class="tag">ctree</span><span class="tag">MOB</span><span class="tag">R</span><span class="tag teal">run-regime-tree-analysis</span><span class="meta">2026-11-10</span></div></div></div><footer><p>analysis-skills newsroom · scripts, lockfiles and full results in <a href="https://github.com/jgridifier/analysis-skills">https://github.com/jgridifier/analysis-skills</a> ·
+no raw data is published, only aggregates and fitted structure · built 2026-11-10</p></footer></main></body></html>

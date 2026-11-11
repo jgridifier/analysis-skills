@@ -1,0 +1,12 @@
+{
+ "original": "methods/partykit/original/m1_results.json",
+ "reproduction": "methods/partykit/applications/3/out/results.json",
+ "tolerances": {
+  "A4_gr_cv": 0.03,
+  "A4_cv_cv": 0.03
+ },
+ "n_compared": 97,
+ "n_mismatch": 0,
+ "status": "PASS",
+ "mismatches": []
+}

@@ -1,0 +1,33 @@
+<section class="tldr"><h2>The short version</h2><ul>
+<li>A new application, not in the scout: monthly changes of the GZ credit spread, the excess bond premium, log VIX and the 10y yield (1990–2026, n = 440).</li>
+<li><strong>Two breaks, Aug 1998 and Jul 2012</strong>, recurring in 9 and 8 of 10 seeds. Zero breaks in 10 iid shuffles and 10 VAR(1) simulations. Zero for the mean-change test.</li>
+<li>The three regimes: calm before 1998 (sd ΔGZ 0.069, spreads unrelated to VIX), a volatile 1998–2012 (sd 0.331, corr with VIX 0.70), and a calmer but still VIX-linked period since 2012 (sd 0.205, corr 0.68).</li>
+</ul></section>
+<div class="sec-head"><span class="n">01</span><h2>Question</h2><span class="line"></span></div>
+<p>Has the behaviour of credit spreads, and their link to equity volatility, changed regime since 1990, and when?</p>
+<div class="sec-head"><span class="n">02</span><h2>Data used</h2><span class="line"></span></div>
+<p>ebp_monthly.csv (GZ spread and excess bond premium) plus FRED VIXCLS and DGS10 from Drive (retrieved 2026-11-10; <a href="../SKILLROOT/methods/changeforest/applications/3/manifest.json">manifest.json</a>). Month-end means, then monthly changes, z-scored. <strong>n = 440 months, 1990-02 → 2026-09.</strong></p>
+<div class="sec-head"><span class="n">03</span><h2>What we ran</h2><span class="line"></span></div>
+<p><code>methods/changeforest/applications/3/run.py</code> runs random_forest, plus change_in_mean, knn, Binseg-rbf with the same K, seeds 0–9 at ±3 months, 10 iid shuffles and 10 VAR(1) simulations. The "original" is the first run in the scout venv; the reproduction is a clean venv built from the lockfile.</p>
+<div class="sec-head"><span class="n">04</span><h2>Figures and tables</h2><span class="line"></span></div>
+<figure><img src="../fig/changeforest_app3_credit.png" alt="credit breaks"><figcaption>The GZ spread level (top) and the 12-month sd of its monthly change (bottom), with the two seed-stable breaks.</figcaption></figure>
+<div class="table-wrap"><table><thead><tr><th>segment</th><th>months</th><th>sd ΔGZ</th><th>sd ΔEBP</th><th>sd Δlog VIX</th><th>corr(ΔGZ, Δlog VIX)</th><th>mean GZ</th></tr></thead><tbody>
+<tr><td>1990-02 → 1998-07</td><td class="num">102</td><td class="num">0.069</td><td class="num">0.087</td><td class="num">0.113</td><td class="num">−0.02</td><td class="num">1.26</td></tr>
+<tr><td>1998-08 → 2012-06</td><td class="num">167</td><td class="num">0.331</td><td class="num">0.309</td><td class="num">0.162</td><td class="num">0.70</td><td class="num">2.68</td></tr>
+<tr><td>2012-07 → 2026-09</td><td class="num">171</td><td class="num">0.205</td><td class="num">0.204</td><td class="num">0.187</td><td class="num">0.68</td><td class="num">1.67</td></tr>
+</tbody></table></div>
+<div class="sec-head"><span class="n">05</span><h2>Original vs reproduced</h2><span class="line"></span></div>
+<div class="table-wrap"><table><thead><tr><th>number</th><th>original (scout venv)</th><th>reproduced (clean venv)</th></tr></thead><tbody>
+<tr><td>breaks</td><td class="num">1998-08-31, 2012-07-31</td><td class="num">same</td></tr>
+<tr><td>break count across seeds</td><td class="num">2–4</td><td class="num">2–4</td></tr>
+<tr><td>recurrence of each break</td><td class="num">0.9, 0.8</td><td class="num">0.9, 0.8</td></tr>
+<tr><td>change-in-mean / knn breaks</td><td class="num">0 / 5</td><td class="num">0 / 5</td></tr>
+<tr><td>Binseg-rbf overlap</td><td class="num">0.5</td><td class="num">0.5</td></tr>
+</tbody></table></div>
+<p class="meta">73 values compared, 0 mismatches. Both runs used identical package versions.</p>
+<div class="sec-head"><span class="n">06</span><h2>Robustness</h2><span class="line"></span></div>
+<ul><li>iid shuffles: 0 breaks in all 10. VAR(1) null (radius 0.42): 0 breaks in all 10.</li><li>knn instead puts 5 breaks in 2000–2004, clustered in one stress episode. That is a different and less stable answer.</li></ul>
+<div class="sec-head"><span class="n">07</span><h2>Limitations</h2><span class="line"></span></div>
+<ul><li>The 2008–09 and 2020 spikes don't get their own segments. With 440 rows and binary segmentation, short episodes are absorbed into longer regimes.</li><li>This was the application's first run, so the reproduction checks determinism; it isn't an independent replication.</li></ul>
+<div class="sec-head"><span class="n">08</span><h2>Takeaway</h2><span class="line"></span></div>
+<div class="card dark"><p>There are three credit regimes, and the cleanest finding is the 1998 break. Before it, spread changes were unrelated to VIX changes; after it, the two moved together (corr about 0.7) and have kept doing so.</p></div>
