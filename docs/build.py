@@ -47,10 +47,12 @@ def tags(a):
 
 def card(a, prefix):
     acc = ACC.get(a.get("status"), "blue" if a["type"] == "application" else ("" if a.get("novelty") == "well-known" else "teal"))
-    kind = "Method" if a["type"] == "method" else "Application"
+    if a["type"] == "scout": acc = ""
+    kind = {"method": "Method", "application": "Application", "scout": "Daily scout"}[a["type"]]
+    href = a["links"]["self"] if a["links"]["self"].startswith("http") else prefix + a["links"]["self"]
     return (f'<div class="card {acc}"><div class="card-top"><span class="tag">{kind} · {html.escape(a["method"])}</span>'
             f'<span class="verdict {VCL(a["verdict"])}">{html.escape(a["verdict"])}</span></div>'
-            f'<h3><a href="{prefix}{a["links"]["self"]}">{html.escape(a["title"])}</a></h3><p>{html.escape(a["dek"])}</p>'
+            f'<h3><a href="{href}">{html.escape(a["title"])}</a></h3><p>{html.escape(a["dek"])}</p>'
             f'<div class="foot tags">{badges(a)}{tags(a)}<span class="meta">{a["date"]}</span></div></div>')
 
 
@@ -136,7 +138,8 @@ def build_index(arts):
 
 def main():
     arts = M["articles"]; by_self = {a["links"]["self"]: a for a in arts}
-    for a in arts: build_article(a, by_self)
+    for a in arts:
+        if a["type"] != "scout": build_article(a, by_self)  # scout cards link out to the research-lab scout page
     build_index(arts); print(f"built index + {len(arts)} articles")
 
 
