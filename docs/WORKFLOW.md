@@ -96,3 +96,7 @@ Every recommended, promoted or rejected method is published on the Pages site (`
   the most novel method article, and well-known methods sort after the niche and obscure ones.
   Article bodies are HTML fragments in `docs/content/<slug>.html`; the daily scout and future methods add articles by
   appending manifest entries, writing the fragments and running `python docs/build.py` (CI fails if the built pages are stale).
+- **Daily scout cards** (`type: scout`): a short card per scouted method that links out to its research-lab scout page
+  (`links.self` = `https://jgridifier.github.io/research-lab/methods-scout/<date>.html#m<n>`, no fragment, no children).
+  Status is always `scouted, not in workflow`; the verdict is the scout's recommendation only. A scout card never enters the
+  promote workflow or changes any skill. That happens only when Jared picks the method (Stage 1) and later approves it (APPROVAL.md).

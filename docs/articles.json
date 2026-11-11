@@ -213,6 +213,50 @@
    },
    "status": "recommended, awaiting approval",
    "novelty": "well-known"
+  },
+  {
+   "slug": "scout-2026-11-11-marss",
+   "type": "scout",
+   "method": "MARSS",
+   "date": "2026-11-11",
+   "title": "Scout: MARSS splits dealer share moves into market, sticky and transient parts",
+   "dek": "State-space model from ecology (R Journal 2012), run on a PROXY Y-9C dealer-share panel for Q1. GS's equity-revenue-share loss is sticky and mirrors JPM's gain (corr −0.79, BH q = 0.04), while market factors drive 59–74% of quarterly swings for JPM, MS and BAC. Scout recommends it for the promote workflow; not started, awaiting Jared's pick.",
+   "verdict": "scout: recommend for promote workflow",
+   "status": "scouted, not in workflow",
+   "novelty": "niche",
+   "tags": [
+    "MARSS",
+    "state-space",
+    "compositional shares",
+    "Q1"
+   ],
+   "links": {
+    "self": "https://jgridifier.github.io/research-lab/methods-scout/2026-11-11.html#m1",
+    "parent": null,
+    "children": []
+   }
+  },
+  {
+   "slug": "scout-2026-11-11-inspectchangepoint",
+   "type": "scout",
+   "method": "InspectChangepoint",
+   "date": "2026-11-11",
+   "title": "Scout: InspectChangepoint names which dealers moved at a break, but the breaks fail a persistence null",
+   "dek": "Sparse-projection change points (JRSS-B 2018), 9.6 ms per panel. On PROXY dealer shares, level breaks (8) are fewer than persistence-matched surrogates produce (12.4–13.3), and drift tests find no significant break: gradual migration, not shocks. Scout verdict: interesting.",
+   "verdict": "scout: interesting",
+   "status": "scouted, not in workflow",
+   "novelty": "obscure",
+   "tags": [
+    "InspectChangepoint",
+    "change-points",
+    "sparse projection",
+    "Q1"
+   ],
+   "links": {
+    "self": "https://jgridifier.github.io/research-lab/methods-scout/2026-11-11.html#m2",
+    "parent": null,
+    "children": []
+   }
   }
  ]
 }

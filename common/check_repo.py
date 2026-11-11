@@ -3,7 +3,7 @@
 - every skills/<name>/SKILL.md starts with YAML frontmatter holding `name` (== folder name) and a `description`
   that says when to use it (must contain "Use when" or "Use first when");
 - every skill is listed in skills/README.md;
-- docs/articles.json: unique slugs, type in {method, application}, each application has a parent method article,
+- docs/articles.json: unique slugs, type in {method, application, scout} (scout = a daily-scout card that links out), each application has a parent method article,
   every linked article page and content fragment exists, and each method's children point back to it.
 """
 import json, pathlib, re, sys
@@ -24,7 +24,12 @@ by = {a["links"]["self"]: a for a in M}
 for a in M:
     for k in ["slug", "title", "type", "method", "date", "tags", "links"]:
         if k not in a: err.append(f"{a.get('slug')}: missing {k}")
-    if a["type"] not in ("method", "application"): err.append(f"{a['slug']}: bad type")
+    if a["type"] not in ("method", "application", "scout"): err.append(f"{a['slug']}: bad type")
+    if a["type"] == "scout":  # daily-scout card: links out to the research-lab scout page; never a promotion status
+        if a.get("status") != "scouted, not in workflow": err.append(f"{a['slug']}: scout cards must have status 'scouted, not in workflow'")
+        if not a["links"]["self"].startswith("https://jgridifier.github.io/research-lab/methods-scout/"): err.append(f"{a['slug']}: scout card must link to the research-lab scout page")
+        if a.get("novelty") not in ("well-known", "niche", "obscure"): err.append(f"{a['slug']}: novelty must be well-known|niche|obscure")
+        continue
     if a.get("novelty") not in ("well-known", "niche", "obscure"): err.append(f"{a['slug']}: novelty must be well-known|niche|obscure")
     st = a.get("status")
     if st not in ("recommended, awaiting approval", "promoted", "rejected"): err.append(f"{a['slug']}: bad status {st!r}")
