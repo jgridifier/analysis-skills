@@ -3,6 +3,8 @@ name: run-regime-tree-analysis
 description: Use when the question is "which combinations of conditions mark different groups or regimes, and what happens in each?" — finding readable subgroups in a cross-section (which counties, firms or cases behaved differently and why), describing state-dependent behaviour with if-then rules, or testing whether a regression's slopes depend on observed state variables (model-based trees). Not for dating breaks in time (use run-changepoint-analysis) and not as a forecaster.
 ---
 
+> **DRAFT (pending approval).** The method behind this skill is recommended but awaiting Jared's approval (docs/WORKFLOW.md, Stage 4b). Use it only as a draft, and say so in your output.
+
 # Run a regime / subgroup tree analysis
 
 Conditional inference trees (ctree) split the sample on the covariate most associated with the response,

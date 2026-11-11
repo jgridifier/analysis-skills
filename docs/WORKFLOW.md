@@ -46,7 +46,7 @@ For each application, three gates: **reproduces** (Stage 3.2), **clears the null
 (for a forecasting use: beats the baseline out of sample; for a descriptive use: finds structure the baseline does not,
 without being materially worse than it on held-out fit).
 
-- **Promote** a method when it reproduces in all three applications and at least one application clears all three gates.
+- **Recommend for promotion** a method when it reproduces in all three applications and at least one application clears all three gates.
   The skill's scope is limited to the uses that cleared; every failed gate becomes a mandatory check or an
   anti-pattern in the skill.
 - **Reject** otherwise, with the reason, in `RESULTS.md` (`Decision: REJECTED — <reason>`). Rejected methods stay in
@@ -54,6 +54,20 @@ without being materially worse than it on held-out fit).
 
 Note on provenance: these gates were written during the first run (partykit and changeforest, 2026-11-10),
 after their results were visible. The next method through the pipeline is the first one judged by rules fixed in advance.
+
+## Stage 4b — Jared's approval (required for every promotion)
+A Stage 4 "promote" is only a **recommendation**. The method's status is
+**`recommended, awaiting approval`** until Jared approves it himself.
+
+- It becomes **`promoted`** only when Jared's own words, with the date, are recorded in `methods/<method>/APPROVAL.md`:
+  his verbatim text, the date, the channel it came from, and the commit or PR it approves.
+- An agent relaying that "he agreed", a summary, or an inferred yes does **not** count.
+- **No agent may create or edit `APPROVAL.md` on its own.** It is added only on Jared's explicit instruction, and it quotes him word for word.
+- Until then, the skill built in Stage 5 is marked **DRAFT (pending approval)** in `skills/README.md` and in the
+  `choose-analysis-method` router. Its files stay in the repo, and agents may use it only as a draft, saying so.
+- Every status shown on the site (`articles.json`, the method and application articles, the front page) must match
+  this status.
+- Rejections don't need approval. They are recorded as rejected, with the reason.
 
 ## Stage 5 — Skill
 Fold what was learned into a **general task skill** (`run-changepoint-analysis`, not `use-changeforest`).
@@ -63,19 +77,22 @@ runnable `scripts/`, and citations. Then add a row to `skills/choose-analysis-me
 If the skill for the question type already exists, add a method row instead of a new skill.
 
 ## Publishing: the newsroom
-Every promoted or rejected method is published on the Pages site (`docs/`) as news articles in the shared
+Every recommended, promoted or rejected method is published on the Pages site (`docs/`) as news articles in the shared
 `brief.css` theme:
 
 - **Front page** `docs/index.html`: lead story (newest method article) plus a card grid of every article,
   newest first, each tagged by method and skill. Built from the manifest.
 - **One method article** per method, `docs/articles/<method>.html`, in this order:
-  1. citation(s) first; 2. the math in plain notation; 3. why it is unusual or fast; 4. verdict (Stage 4 decision);
+  1. citation(s) first; 2. the math in plain notation; 3. why it is unusual or fast; 4. verdict (Stage 4 decision), approval status (Stage 4b) and novelty, with one line on why;
   5. reproduction status per application; 6. links to the application articles; 7. the skill it feeds.
 - **One application article** per application, `docs/articles/<method>-app<n>.html`, in this order:
   1. question; 2. data used (named sources, sample size and period; aggregates only, never rows);
   3. what we ran (script path, settings); 4. figures and tables; 5. original vs reproduced numbers;
   6. robustness (seeds, windows, null, baseline); 7. limitations; 8. takeaway; 9. link back to the method article.
 - **Manifest** `docs/articles.json`: one entry per article with
-  `slug, title, type (method|application), method, date, tags, links {self, parent, children, code, results}`.
+  `slug, title, type (method|application), method, date, status, novelty, tags, links {self, parent, children, code, results}`.
+  `status`: `recommended, awaiting approval` | `promoted` (only with APPROVAL.md) | `rejected`.
+  `novelty`: `well-known` | `niche` | `obscure`. The scout's goal is diamonds in the rough, so on the front page the lead story is
+  the most novel method article, and well-known methods sort after the niche and obscure ones.
   Article bodies are HTML fragments in `docs/content/<slug>.html`; the daily scout and future methods add articles by
   appending manifest entries, writing the fragments and running `python docs/build.py` (CI fails if the built pages are stale).

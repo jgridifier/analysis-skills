@@ -2,7 +2,7 @@
 <h2>The short version</h2>
 <ul>
 <li><strong>What it is.</strong> A change-point detector that asks a random forest "can you tell rows before time <em>s</em> from rows after it?" and turns the answer into a likelihood ratio. It catches breaks in volatility, correlation or shape, not only the mean.</li>
-<li><strong>Verdict:</strong> <span class="verdict adopt">promoted</span>. All three applications reproduced exactly in a clean environment. Two cleared every gate; the third cleared them after prewhitening.</li>
+<li><strong>Status:</strong> <span class="verdict interesting">recommended, awaiting approval</span>. Not promoted until Jared approves it (Stage 4b). <strong>Novelty: niche.</strong> All three applications reproduced exactly in a clean environment. Two cleared every gate; the third cleared them after prewhitening.</li>
 <li><strong>Lesson the skill now enforces:</strong> persistence fools it. On levels it found 63 evenly spaced breaks, and even on weekly changes a break-free VAR(1) simulation produced 20–37. Check persistence and run the VAR(1) null every time.</li>
 </ul>
 </section>
@@ -23,8 +23,9 @@
 </ul>
 
 <div class="sec-head"><span class="n">04</span><h2>Verdict</h2><span class="line"></span></div>
-<div class="card green"><div class="card-top"><span class="tag teal">Stage 4</span><span class="verdict adopt">promoted</span></div>
-<p>Reproduces exactly in all three applications. Applications 2 and 3 clear every gate, and application 1 clears them once prewhitened. Folded into <a href="../SKILLROOT/skills/run-changepoint-analysis/SKILL.md"><code>run-changepoint-analysis</code></a> as the default method, with four rules made mandatory: (1) never run it on levels; (2) check the VAR(1) spectral radius of the input and prewhiten above about 0.8; (3) always run a stationary VAR(1) null, because the iid shuffle passed even where the VAR null failed; (4) report only breaks that recur in at least 8 of 10 seeds.</p></div>
+<div class="card green"><div class="card-top"><span class="tag teal">Stage 4 · 4b</span><span class="verdict interesting">recommended, awaiting approval</span></div>
+<p><strong>Status:</strong> recommended for promotion, awaiting Jared's approval. It becomes promoted only once his dated words are recorded in <code>methods/changeforest/APPROVAL.md</code>, and the skill stays DRAFT until then. <strong>Novelty: niche.</strong> A 2023 JMLR method from a small team, with a Rust core and little use outside its authors' circle, which fits the scout's diamonds-in-the-rough goal.</p>
+<p>Reproduces exactly in all three applications. Applications 2 and 3 clear every gate, and application 1 clears them once prewhitened. Recommended for <a href="../SKILLROOT/skills/run-changepoint-analysis/SKILL.md"><code>run-changepoint-analysis</code></a> as the default method, with four rules made mandatory: (1) never run it on levels; (2) check the VAR(1) spectral radius of the input and prewhiten above about 0.8; (3) always run a stationary VAR(1) null, because the iid shuffle passed even where the VAR null failed; (4) report only breaks that recur in at least 8 of 10 seeds.</p></div>
 
 <div class="sec-head"><span class="n">05</span><h2>Reproduction status</h2><span class="line"></span></div>
 <div class="table-wrap"><table><thead><tr><th>application</th><th>values compared</th><th>mismatches</th><th>reproduce</th><th>null</th><th>baseline</th></tr></thead><tbody>

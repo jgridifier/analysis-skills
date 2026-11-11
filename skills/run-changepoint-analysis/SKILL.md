@@ -3,6 +3,8 @@ name: run-changepoint-analysis
 description: Use when the question is "when did the behaviour of this series (or set of series) change?" — finding regime breaks in time-ordered data, including breaks in volatility, correlation or distribution shape and not only in the mean; dating structural breaks before modelling; or checking whether a claimed regime shift is real. Not for forecasting the next break, and not for cross-sectional subgroups (use run-regime-tree-analysis).
 ---
 
+> **DRAFT (pending approval).** The method behind this skill is recommended but awaiting Jared's approval (docs/WORKFLOW.md, Stage 4b). Use it only as a draft, and say so in your output.
+
 # Run a change-point analysis
 
 Change-point detection splits a time-ordered sample into segments whose joint distribution differs. It answers

@@ -8,10 +8,10 @@ lockfiles, aggregates, fitted structure and figures.
 - **Workflow:** [docs/WORKFLOW.md](docs/WORKFLOW.md) (agent version: [skills/promote-method-to-skill](skills/promote-method-to-skill/SKILL.md)).
 - **Skills:** [skills/README.md](skills/README.md) — `choose-analysis-method`, `run-changepoint-analysis`, `run-regime-tree-analysis`, `promote-method-to-skill`.
 
-| method | applications | reproduction | decision | skill |
+| method | applications | reproduction | status (novelty) | skill |
 |---|---|---|---|---|
-| [changeforest](methods/changeforest/RESULTS.md) (Londschien, Bühlmann & Kovács 2023, JMLR 24(216)) | 3 | 3/3 exact | **promoted** | run-changepoint-analysis |
-| [partykit ctree/MOB](methods/partykit/RESULTS.md) (Hothorn, Hornik & Zeileis 2006; Zeileis, Hothorn & Hornik 2008; Hothorn & Zeileis 2015) | 3 | 2/3 exact, 1/3 at stated tolerance (CV folds) | **promoted (scoped)** | run-regime-tree-analysis |
+| [changeforest](methods/changeforest/RESULTS.md) (Londschien, Bühlmann & Kovács 2023, JMLR 24(216)) | 3 | 3/3 exact | **recommended, awaiting approval** (niche) | run-changepoint-analysis |
+| [partykit ctree/MOB](methods/partykit/RESULTS.md) (Hothorn, Hornik & Zeileis 2006; Zeileis, Hothorn & Hornik 2008; Hothorn & Zeileis 2015) | 3 | 2/3 exact, 1/3 at stated tolerance (CV folds) | **recommended (scoped), awaiting approval** (well-known) | run-regime-tree-analysis |
 
 ## Layout
 ```
@@ -30,5 +30,7 @@ export AS_DATA_DIR=/path/to/raw/drive/files   # see data/MANIFEST.json for names
 ```
 CI (`.github/workflows/smoke.yml`) checks skill frontmatter, the article manifest and that the site is rebuilt, and runs each skill
 script's `--synthetic` example (Python job for changeforest, R job for partykit). CI does not touch real data.
+
+Nothing is promoted without Jared's own dated approval in `methods/<method>/APPROVAL.md` (Stage 4b); until then skills are DRAFT.
 
 MIT licensed.

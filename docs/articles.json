@@ -2,55 +2,217 @@
  "site": "analysis-skills newsroom",
  "repo": "https://github.com/jgridifier/analysis-skills",
  "articles": [
-  {"slug": "changeforest", "type": "method", "method": "changeforest", "date": "2026-11-10",
+  {
+   "slug": "changeforest",
+   "type": "method",
+   "method": "changeforest",
+   "date": "2026-11-10",
    "title": "changeforest: a random forest that dates regime breaks, once you stop feeding it levels",
-   "dek": "Rust-core change-point detection that sees volatility and correlation breaks a mean test misses. Reproduced exactly in all three applications; promoted, with a mandatory persistence check.",
-   "verdict": "promoted", "tags": ["changeforest", "change-points", "Rust", "run-changepoint-analysis"],
-   "links": {"self": "articles/changeforest.html", "parent": null,
-             "children": ["articles/changeforest-app1.html", "articles/changeforest-app2.html", "articles/changeforest-app3.html"],
-             "code": "methods/changeforest", "results": "methods/changeforest/RESULTS.md", "skill": "skills/run-changepoint-analysis/SKILL.md"}},
-  {"slug": "changeforest-app1", "type": "application", "method": "changeforest", "date": "2026-11-10",
+   "dek": "Rust-core change-point detection that sees volatility and correlation breaks a mean test misses. Reproduced exactly in all three applications; recommended for promotion with a mandatory persistence check, awaiting Jared's approval.",
+   "verdict": "recommended, awaiting approval",
+   "tags": [
+    "changeforest",
+    "change-points",
+    "Rust",
+    "run-changepoint-analysis"
+   ],
+   "links": {
+    "self": "articles/changeforest.html",
+    "parent": null,
+    "children": [
+     "articles/changeforest-app1.html",
+     "articles/changeforest-app2.html",
+     "articles/changeforest-app3.html"
+    ],
+    "code": "methods/changeforest",
+    "results": "methods/changeforest/RESULTS.md",
+    "skill": "skills/run-changepoint-analysis/SKILL.md"
+   },
+   "status": "recommended, awaiting approval",
+   "novelty": "niche"
+  },
+  {
+   "slug": "changeforest-app1",
+   "type": "application",
+   "method": "changeforest",
+   "date": "2026-11-10",
    "title": "Weekly rate and stress regimes: 35 breaks, and a null that finds just as many",
    "dek": "On weekly changes of six series the break dates reproduce exactly, but a stationary VAR(1) null produces 20–37 breaks too. Prewhitening leaves 12 stable breaks.",
-   "verdict": "null failed raw; passes prewhitened", "tags": ["changeforest", "weekly", "prewhitening", "run-changepoint-analysis"],
-   "links": {"self": "articles/changeforest-app1.html", "parent": "articles/changeforest.html", "children": [],
-             "code": "methods/changeforest/applications/1", "results": "methods/changeforest/applications/1/out/results.json", "skill": "skills/run-changepoint-analysis/SKILL.md"}},
-  {"slug": "changeforest-app2", "type": "application", "method": "changeforest", "date": "2026-11-10",
+   "verdict": "null failed raw; passes prewhitened",
+   "tags": [
+    "changeforest",
+    "weekly",
+    "prewhitening",
+    "run-changepoint-analysis"
+   ],
+   "links": {
+    "self": "articles/changeforest-app1.html",
+    "parent": "articles/changeforest.html",
+    "children": [],
+    "code": "methods/changeforest/applications/1",
+    "results": "methods/changeforest/applications/1/out/results.json",
+    "skill": "skills/run-changepoint-analysis/SKILL.md"
+   },
+   "status": "recommended, awaiting approval",
+   "novelty": "niche"
+  },
+  {
+   "slug": "changeforest-app2",
+   "type": "application",
+   "method": "changeforest",
+   "date": "2026-11-10",
    "title": "Daily volatility and correlation regimes in 9,174 days of rates and VIX",
    "dek": "28 breaks, 23 stable across seeds, zero under both nulls, zero for a mean-change test: this is the use changeforest is built for.",
-   "verdict": "all gates pass", "tags": ["changeforest", "daily", "volatility", "correlation", "run-changepoint-analysis"],
-   "links": {"self": "articles/changeforest-app2.html", "parent": "articles/changeforest.html", "children": [],
-             "code": "methods/changeforest/applications/2", "results": "methods/changeforest/applications/2/out/results.json", "skill": "skills/run-changepoint-analysis/SKILL.md"}},
-  {"slug": "changeforest-app3", "type": "application", "method": "changeforest", "date": "2026-11-10",
+   "verdict": "all gates pass",
+   "tags": [
+    "changeforest",
+    "daily",
+    "volatility",
+    "correlation",
+    "run-changepoint-analysis"
+   ],
+   "links": {
+    "self": "articles/changeforest-app2.html",
+    "parent": "articles/changeforest.html",
+    "children": [],
+    "code": "methods/changeforest/applications/2",
+    "results": "methods/changeforest/applications/2/out/results.json",
+    "skill": "skills/run-changepoint-analysis/SKILL.md"
+   },
+   "status": "recommended, awaiting approval",
+   "novelty": "niche"
+  },
+  {
+   "slug": "changeforest-app3",
+   "type": "application",
+   "method": "changeforest",
+   "date": "2026-11-10",
    "title": "Credit spreads have had three regimes since 1990, split in Aug 1998 and Jul 2012",
    "dek": "New application: monthly changes of the GZ spread, excess bond premium, VIX and the 10y. Two breaks, both stable, zero under both nulls.",
-   "verdict": "all gates pass", "tags": ["changeforest", "monthly", "credit spreads", "run-changepoint-analysis"],
-   "links": {"self": "articles/changeforest-app3.html", "parent": "articles/changeforest.html", "children": [],
-             "code": "methods/changeforest/applications/3", "results": "methods/changeforest/applications/3/out/results.json", "skill": "skills/run-changepoint-analysis/SKILL.md"}},
-  {"slug": "partykit", "type": "method", "method": "partykit", "date": "2026-11-10",
+   "verdict": "all gates pass",
+   "tags": [
+    "changeforest",
+    "monthly",
+    "credit spreads",
+    "run-changepoint-analysis"
+   ],
+   "links": {
+    "self": "articles/changeforest-app3.html",
+    "parent": "articles/changeforest.html",
+    "children": [],
+    "code": "methods/changeforest/applications/3",
+    "results": "methods/changeforest/applications/3/out/results.json",
+    "skill": "skills/run-changepoint-analysis/SKILL.md"
+   },
+   "status": "recommended, awaiting approval",
+   "novelty": "niche"
+  },
+  {
+   "slug": "partykit",
+   "type": "method",
+   "method": "partykit",
+   "date": "2026-11-10",
    "title": "partykit trees: readable subgroups that pass on a cross-section and overfit time series",
-   "dek": "Conditional inference trees and model-based trees reproduced exactly. They clear every gate on 3,074 counties, but a circular-shift null breaks both time-series uses. Promoted, scoped.",
-   "verdict": "promoted (scoped)", "tags": ["partykit", "ctree", "MOB", "R", "run-regime-tree-analysis"],
-   "links": {"self": "articles/partykit.html", "parent": null,
-             "children": ["articles/partykit-app1.html", "articles/partykit-app2.html", "articles/partykit-app3.html"],
-             "code": "methods/partykit", "results": "methods/partykit/RESULTS.md", "skill": "skills/run-regime-tree-analysis/SKILL.md"}},
-  {"slug": "partykit-app1", "type": "application", "method": "partykit", "date": "2026-11-10",
+   "dek": "Conditional inference trees and model-based trees reproduced exactly. They clear every gate on 3,074 counties, but a circular-shift null breaks both time-series uses. Recommended (scoped), awaiting approval. A well-known package, so less of a scout find.",
+   "verdict": "recommended (scoped), awaiting approval",
+   "tags": [
+    "partykit",
+    "ctree",
+    "MOB",
+    "R",
+    "run-regime-tree-analysis"
+   ],
+   "links": {
+    "self": "articles/partykit.html",
+    "parent": null,
+    "children": [
+     "articles/partykit-app1.html",
+     "articles/partykit-app2.html",
+     "articles/partykit-app3.html"
+    ],
+    "code": "methods/partykit",
+    "results": "methods/partykit/RESULTS.md",
+    "skill": "skills/run-regime-tree-analysis/SKILL.md"
+   },
+   "status": "recommended, awaiting approval",
+   "novelty": "well-known"
+  },
+  {
+   "slug": "partykit-app1",
+   "type": "application",
+   "method": "partykit",
+   "date": "2026-11-10",
    "title": "A VIX-led regime tree for credit spreads: readable, stable, and not real enough",
    "dek": "The 4-leaf tree reproduces exactly and VIX wins the root in about 70% of bootstraps. But a shifted response still splits 60% of the time, and the tree loses to the historical mean out of sample.",
-   "verdict": "null and baseline failed", "tags": ["partykit", "ctree", "time series", "credit spreads", "run-regime-tree-analysis"],
-   "links": {"self": "articles/partykit-app1.html", "parent": "articles/partykit.html", "children": [],
-             "code": "methods/partykit/applications/1", "results": "methods/partykit/applications/1/out/results.json", "skill": "skills/run-regime-tree-analysis/SKILL.md"}},
-  {"slug": "partykit-app2", "type": "application", "method": "partykit", "date": "2026-11-10",
+   "verdict": "null and baseline failed",
+   "tags": [
+    "partykit",
+    "ctree",
+    "time series",
+    "credit spreads",
+    "run-regime-tree-analysis"
+   ],
+   "links": {
+    "self": "articles/partykit-app1.html",
+    "parent": "articles/partykit.html",
+    "children": [],
+    "code": "methods/partykit/applications/1",
+    "results": "methods/partykit/applications/1/out/results.json",
+    "skill": "skills/run-regime-tree-analysis/SKILL.md"
+   },
+   "status": "recommended, awaiting approval",
+   "novelty": "well-known"
+  },
+  {
+   "slug": "partykit-app2",
+   "type": "application",
+   "method": "partykit",
+   "date": "2026-11-10",
    "title": "When financial conditions tighten, credit spreads react twice as hard to VIX",
    "dek": "A model-based tree splits once, at NFCI 0.057, and beats a calendar break. The catch: shifted state variables split 53% of the time too.",
-   "verdict": "null failed; baseline passed", "tags": ["partykit", "MOB", "time series", "run-regime-tree-analysis"],
-   "links": {"self": "articles/partykit-app2.html", "parent": "articles/partykit.html", "children": [],
-             "code": "methods/partykit/applications/2", "results": "methods/partykit/applications/2/out/results.json", "skill": "skills/run-regime-tree-analysis/SKILL.md"}},
-  {"slug": "partykit-app3", "type": "application", "method": "partykit", "date": "2026-11-10",
+   "verdict": "null failed; baseline passed",
+   "tags": [
+    "partykit",
+    "MOB",
+    "time series",
+    "run-regime-tree-analysis"
+   ],
+   "links": {
+    "self": "articles/partykit-app2.html",
+    "parent": "articles/partykit.html",
+    "children": [],
+    "code": "methods/partykit/applications/2",
+    "results": "methods/partykit/applications/2/out/results.json",
+    "skill": "skills/run-regime-tree-analysis/SKILL.md"
+   },
+   "status": "recommended, awaiting approval",
+   "novelty": "well-known"
+  },
+  {
+   "slug": "partykit-app3",
+   "type": "application",
+   "method": "partykit",
+   "date": "2026-11-10",
    "title": "Which counties took the biggest unemployment hits in 2008 and 2020",
    "dek": "Great Recession damage sorted on pre-crisis unemployment; COVID damage sorted on county size. Both trees clear the null and stay within reach of OLS.",
-   "verdict": "all gates pass", "tags": ["partykit", "ctree", "cross-section", "counties", "run-regime-tree-analysis"],
-   "links": {"self": "articles/partykit-app3.html", "parent": "articles/partykit.html", "children": [],
-             "code": "methods/partykit/applications/3", "results": "methods/partykit/applications/3/out/results.json", "skill": "skills/run-regime-tree-analysis/SKILL.md"}}
+   "verdict": "all gates pass",
+   "tags": [
+    "partykit",
+    "ctree",
+    "cross-section",
+    "counties",
+    "run-regime-tree-analysis"
+   ],
+   "links": {
+    "self": "articles/partykit-app3.html",
+    "parent": "articles/partykit.html",
+    "children": [],
+    "code": "methods/partykit/applications/3",
+    "results": "methods/partykit/applications/3/out/results.json",
+    "skill": "skills/run-regime-tree-analysis/SKILL.md"
+   },
+   "status": "recommended, awaiting approval",
+   "novelty": "well-known"
+  }
  ]
 }
