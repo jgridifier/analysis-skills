@@ -25,6 +25,11 @@ for a in M:
     for k in ["slug", "title", "type", "method", "date", "tags", "links"]:
         if k not in a: err.append(f"{a.get('slug')}: missing {k}")
     if a["type"] not in ("method", "application"): err.append(f"{a['slug']}: bad type")
+    if a.get("novelty") not in ("well-known", "niche", "obscure"): err.append(f"{a['slug']}: novelty must be well-known|niche|obscure")
+    st = a.get("status")
+    if st not in ("recommended, awaiting approval", "promoted", "rejected"): err.append(f"{a['slug']}: bad status {st!r}")
+    if st == "promoted" and not (R / "methods" / a["method"] / "APPROVAL.md").exists():
+        err.append(f"{a['slug']}: status 'promoted' requires methods/{a['method']}/APPROVAL.md (Jared's dated approval)")
     if not (R / "docs" / "content" / f"{a['slug']}.html").exists(): err.append(f"{a['slug']}: no content fragment")
     if not (R / "docs" / a["links"]["self"]).exists(): err.append(f"{a['slug']}: page not built (run docs/build.py)")
     if a["type"] == "application":

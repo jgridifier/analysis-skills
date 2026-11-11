@@ -56,7 +56,10 @@ Robustness (new): 28–36 breaks across 10 seeds; 23 of 28 recur in ≥ 8/10 (±
 Limitation: binary segmentation with these settings does not isolate the 2008–09 or 2020 spikes as their own segments.
 **Gates: reproduce ✓ · null ✓ · baseline ✓.**
 
-## Stage 4 decision: **PROMOTED**
+## Status: **RECOMMENDED, AWAITING APPROVAL**
+Not promoted. Under Stage 4b, promotion needs Jared's own dated approval recorded in `methods/changeforest/APPROVAL.md`, and that file does not exist.
+
+## Stage 4 decision: **recommend promotion**
 Reproduces exactly in all three applications; applications 2 and 3 clear every gate, and application 1 clears them after
 prewhitening. Lessons the skill makes mandatory: never run it on levels; check persistence (VAR(1) spectral radius) of
 the transformed input and prewhiten if it is high; always run the stationary VAR(1) null, because the iid shuffle passed

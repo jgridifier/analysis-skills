@@ -26,8 +26,15 @@ HEAD = """<!doctype html>
 FOOT = """<footer><p>analysis-skills newsroom · scripts, lockfiles and full results in <a href="{repo}">{repo}</a> ·
 no raw data is published, only aggregates and fitted structure · built {built}</p></footer></main></body></html>
 """
-ACC = {"promoted": "green", "promoted (scoped)": "teal", "rejected": "red"}
+ACC = {"promoted": "green", "rejected": "red"}
+NOV = {"obscure": 0, "niche": 1, "well-known": 2}  # lower = more prominent (diamonds in the rough first)
 VCL = lambda v: "adopt" if v.startswith("promoted") or "all gates" in v else ("skip" if "rejected" in v else "interesting")
+
+
+def badges(a):
+    st = a.get("status", "recommended, awaiting approval")
+    return (f'<span class="tag{" green" if st == "promoted" else ""}">status: {html.escape(st)}</span>'
+            f'<span class="tag">novelty: {html.escape(a.get("novelty", "unrated"))}</span>')
 
 
 def fmt_date(s):
@@ -39,16 +46,26 @@ def tags(a):
 
 
 def card(a, prefix):
-    acc = ACC.get(a["verdict"], "blue" if a["type"] == "application" else "")
+    acc = ACC.get(a.get("status"), "blue" if a["type"] == "application" else ("" if a.get("novelty") == "well-known" else "teal"))
     kind = "Method" if a["type"] == "method" else "Application"
     return (f'<div class="card {acc}"><div class="card-top"><span class="tag">{kind} · {html.escape(a["method"])}</span>'
             f'<span class="verdict {VCL(a["verdict"])}">{html.escape(a["verdict"])}</span></div>'
             f'<h3><a href="{prefix}{a["links"]["self"]}">{html.escape(a["title"])}</a></h3><p>{html.escape(a["dek"])}</p>'
-            f'<div class="foot tags">{tags(a)}<span class="meta">{a["date"]}</span></div></div>')
+            f'<div class="foot tags">{badges(a)}{tags(a)}<span class="meta">{a["date"]}</span></div></div>')
 
 
-def order(arts):  # newest first; within a date keep manifest order
+def order(arts):  # newest first; within a date, more novel first (obscure > niche > well-known), then manifest order
+    arts = sorted(arts, key=lambda a: NOV.get(a.get("novelty"), 1))
     return sorted(arts, key=lambda a: a["date"], reverse=True)
+
+
+def status_note(a, parent):
+    st = a.get("status", "recommended, awaiting approval"); m = a["method"]
+    if st == "promoted": return ""
+    who = "This application's method" if parent else "This method"
+    return (f'<div class="note"><strong>Status: {html.escape(st)}.</strong> {who} ({html.escape(m)}) is not promoted. '
+            f'Promotion needs Jared\'s own dated approval recorded in <code>methods/{html.escape(m)}/APPROVAL.md</code> '
+            f'(<a href="{BLOB}/docs/WORKFLOW.md">workflow</a>, Stage 4b). Until then the skill it feeds is a DRAFT.</div>')
 
 
 def build_article(a, by_self):
@@ -63,7 +80,8 @@ def build_article(a, by_self):
     nav += f'<a href="{BLOB}/{a["links"]["code"]}">Code</a><a href="{BLOB}/{a["links"]["results"]}">Results</a><a href="{BLOB}/{a["links"]["skill"]}">Skill</a>'
     kind = "Method article" if a["type"] == "method" else "Application article"
     mast = (f'<header class="mast"><div class="date">{fmt_date(a["date"])} · {kind}</div><h1>{html.escape(a["title"])}</h1>'
-            f'<p class="dek">{html.escape(a["dek"])}</p><nav>{nav}</nav></header><div class="ticker">{tags(a)}</div>')
+            f'<p class="dek">{html.escape(a["dek"])}</p><nav>{nav}</nav></header><div class="ticker">{badges(a)}{tags(a)}</div>'
+            + status_note(a, parent))
     back = ""
     if parent:
         back = (f'<div class="sec-head"><span class="n">↩</span><h2>Back to the method</h2><span class="line"></span></div>'
@@ -74,37 +92,41 @@ def build_article(a, by_self):
 
 
 def build_index(arts):
-    arts = order(arts); lead = next(a for a in arts if a["type"] == "method"); rest = [a for a in arts if a is not lead]
+    arts = order(arts)
+    lead = sorted([a for a in arts if a["type"] == "method"], key=lambda a: (NOV.get(a.get("novelty"), 1), [-ord(c) for c in a["date"]]))[0]
+    rest = [a for a in arts if a is not lead]
     methods = [a for a in arts if a["type"] == "method"]
-    tick = "".join(f'<span><b>●</b> {html.escape(a["title"])}</span>' for a in methods)
+    methods = sorted(methods, key=lambda a: NOV.get(a.get("novelty"), 1))
+    tick = "".join(f'<span><b>●</b> {html.escape(a["title"])} ({html.escape(a.get("status", ""))})</span>' for a in methods)
     status = "".join(
-        f'<tr><td><a href="{m["links"]["self"]}">{html.escape(m["method"])}</a></td><td>{html.escape(m["verdict"])}</td>'
+        f'<tr><td><a href="{m["links"]["self"]}">{html.escape(m["method"])}</a></td><td>{html.escape(m["verdict"])}</td><td>{html.escape(m.get("novelty", ""))}</td>'
         f'<td>{len(m["links"]["children"])}</td><td><a href="{BLOB}/{m["links"]["results"]}">RESULTS.md</a></td>'
-        f'<td><a href="{BLOB}/{m["links"]["skill"]}">{m["links"]["skill"].split("/")[1]}</a></td></tr>' for m in methods)
+        f'<td><a href="{BLOB}/{m["links"]["skill"]}">{m["links"]["skill"].split("/")[1]}</a>{"" if m.get("status") == "promoted" else " (DRAFT)"}</td></tr>' for m in methods)
     body = f"""<header class="mast"><div class="date">{fmt_date(arts[0]["date"])} · newsroom</div><h1>Analysis skills</h1>
 <p class="dek">Lesser-known, fast, interpretable methods, each run three ways on our own data, reproduced from a clean environment, and folded into general agent skills when they survive. No neural nets.</p>
 <nav><a href="{REPO}">Repo</a><a href="{BLOB}/docs/WORKFLOW.md">Workflow</a><a href="{BLOB}/skills/README.md">Skills</a><a href="articles.json">articles.json</a></nav></header>
 <div class="ticker">{tick}</div>
 <div class="sec-head"><span class="n">Lead</span><h2>Top story</h2><span class="line"></span></div>
 <div class="card dark"><div class="card-top"><span class="tag">Method · {html.escape(lead["method"])}</span><span class="verdict {VCL(lead["verdict"])}">{html.escape(lead["verdict"])}</span></div>
-<h2 style="margin-top:.4rem;color:#fffdf7"><a href="{lead["links"]["self"]}" style="color:#fffdf7;text-decoration-color:#e8902e">{html.escape(lead["title"])}</a></h2><p class="lede">{html.escape(lead["dek"])}</p><div class="foot tags">{tags(lead)}</div></div>
+<h2 style="margin-top:.4rem;color:#fffdf7"><a href="{lead["links"]["self"]}" style="color:#fffdf7;text-decoration-color:#e8902e">{html.escape(lead["title"])}</a></h2><p class="lede">{html.escape(lead["dek"])}</p><div class="foot tags">{badges(lead)}{tags(lead)}</div></div>
 <div class="sec-head"><span class="n">All</span><h2>Articles, newest first</h2><span class="line"></span></div>
 <div class="grid">{"".join(card(a, "") for a in rest)}</div>
 <div class="sec-head"><span class="n">Desk</span><h2>Reproduction status</h2><span class="line"></span></div>
-<div class="table-wrap"><table><thead><tr><th>method</th><th>decision</th><th>applications</th><th>results</th><th>skill</th></tr></thead><tbody>{status}</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>method</th><th>status</th><th>novelty</th><th>applications</th><th>results</th><th>skill</th></tr></thead><tbody>{status}</tbody></table></div>
 <div class="sec-head"><span class="n">How</span><h2>The workflow</h2><span class="line"></span></div>
 <section class="tldr"><ul>
 <li><strong>1 · Candidate</strong>: a method is picked from the daily methods scout.</li>
 <li><strong>2 · Three applications</strong> on our real data, each a script with a pinned environment, a fixed seed and a data manifest (Drive id, retrieval date, rows, sha256; the data itself is never committed).</li>
 <li><strong>3 · Reproduce</strong> from lockfiles in a fresh environment and compare every number; then seeds, windows, a dependence-aware null and a plain baseline.</li>
-<li><strong>4 · Decide</strong>: promote only what reproduces and clears the null and the baseline; otherwise record a rejection with the reason.</li>
+<li><strong>4 · Decide</strong>: recommend only what reproduces and clears the null and the baseline; otherwise record a rejection with the reason.</li>
+<li><strong>4b · Jared approves</strong>: a recommendation stays "recommended, awaiting approval" until Jared's own dated words are recorded in <code>methods/&lt;method&gt;/APPROVAL.md</code>. A relayed "he agreed" doesn't count, and no agent creates that file on its own.</li>
 <li><strong>5 · Skill</strong>: fold the lessons into a general task skill (one row per method in its chooser), then publish a method article and one article per application here.</li>
 </ul><p class="meta">Full text: <a href="{BLOB}/docs/WORKFLOW.md">docs/WORKFLOW.md</a> · agent version: <a href="{BLOB}/skills/promote-method-to-skill/SKILL.md">promote-method-to-skill</a></p></section>
 <div class="sec-head"><span class="n">Skills</span><h2>What agents can use</h2><span class="line"></span></div>
 <ul>
 <li><strong><a href="{BLOB}/skills/choose-analysis-method/SKILL.md">choose-analysis-method</a></strong>: router from question type and data shape to a skill and a starting method.</li>
-<li><strong><a href="{BLOB}/skills/run-changepoint-analysis/SKILL.md">run-changepoint-analysis</a></strong>: when did behaviour change? changeforest by default; mean and kernel baselines.</li>
-<li><strong><a href="{BLOB}/skills/run-regime-tree-analysis/SKILL.md">run-regime-tree-analysis</a></strong>: which conditions mark different groups, and does the slope depend on the state? ctree and MOB.</li>
+<li><strong><a href="{BLOB}/skills/run-changepoint-analysis/SKILL.md">run-changepoint-analysis</a></strong> (DRAFT, pending approval): when did behaviour change? changeforest by default; mean and kernel baselines.</li>
+<li><strong><a href="{BLOB}/skills/run-regime-tree-analysis/SKILL.md">run-regime-tree-analysis</a></strong> (DRAFT, pending approval): which conditions mark different groups, and does the slope depend on the state? ctree and MOB.</li>
 <li><strong><a href="{BLOB}/skills/promote-method-to-skill/SKILL.md">promote-method-to-skill</a></strong>: the workflow above, as an agent checklist.</li>
 </ul>
 """

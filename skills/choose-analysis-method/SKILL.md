@@ -12,13 +12,15 @@ description: Use first when asked to analyse a dataset and it is not yet clear w
 
 | question type | data shape | skill | start with | baselines to always run |
 |---|---|---|---|---|
-| when did the behaviour (mean, volatility, correlation) change? | time series, uni- or multivariate | `run-changepoint-analysis` | changeforest random_forest on changes | change-in-mean, Binseg-rbf |
-| is a claimed regime shift real? | time series | `run-changepoint-analysis` | changeforest + stationary VAR(1) null | iid shuffle null |
-| which conditions mark groups that behave differently? | cross-section | `run-regime-tree-analysis` | ctree | CART, OLS |
-| does a regression's slope depend on the state? | cross-section or time series | `run-regime-tree-analysis` | MOB `lmtree` | pooled OLS, OLS with interaction |
-| which states precede big moves? (descriptive) | time series | `run-regime-tree-analysis` | ctree + circular-shift null | historical mean (walk-forward) |
+| when did the behaviour (mean, volatility, correlation) change? | time series, uni- or multivariate | `run-changepoint-analysis` **DRAFT (pending approval)** | changeforest random_forest on changes | change-in-mean, Binseg-rbf |
+| is a claimed regime shift real? | time series | `run-changepoint-analysis` **DRAFT (pending approval)** | changeforest + stationary VAR(1) null | iid shuffle null |
+| which conditions mark groups that behave differently? | cross-section | `run-regime-tree-analysis` **DRAFT (pending approval)** | ctree | CART, OLS |
+| does a regression's slope depend on the state? | cross-section or time series | `run-regime-tree-analysis` **DRAFT (pending approval)** | MOB `lmtree` | pooled OLS, OLS with interaction |
+| which states precede big moves? (descriptive) | time series | `run-regime-tree-analysis` **DRAFT (pending approval)** | ctree + circular-shift null | historical mean (walk-forward) |
 | forecast the next value | time series | *none yet* — neither skill is a forecaster | — | historical mean / random walk |
-| *(new question type)* | | *(new skill)* | | add one row per promoted skill or method |
+| *(new question type)* | | *(new skill)* | | add one row per skill or method (DRAFT until approved) |
+
+**Both task skills are DRAFT (pending approval)**: neither method has Jared's recorded approval yet. Use them only as drafts, and say so in the output.
 
 Rules of thumb learned so far:
 - Regimes **in time** → change points first; trees on time series need the circular-shift null.

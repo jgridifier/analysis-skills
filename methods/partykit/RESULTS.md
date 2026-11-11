@@ -65,9 +65,15 @@ Robustness (new): 10 CV seeds — ctree 0.173–0.199 (GR), 0.255–0.278 (COVID
 Baseline: ctree ties CART and is within 0.035 R² of OLS while giving 7–8 readable subgroups.
 **Gates: reproduce ✓ · null ✓ · baseline ✓ (descriptive use).**
 
-## Stage 4 decision: **PROMOTED (scoped)**
+## Status: **RECOMMENDED, AWAITING APPROVAL**
+Not promoted. Under Stage 4b, promotion needs Jared's own dated approval recorded in `methods/partykit/APPROVAL.md`, and that file does not exist.
+
+## Stage 4 decision: **recommend scoped promotion**
 Reproduces in all three applications; application 3 clears all three gates. Scope of the skill:
 cross-sectional subgroup discovery, and MOB as a description of state-dependent slopes. Time-series regime use is
 allowed only behind a dependence-aware null (circular shift or block permutation), which both time-series applications
 failed here; ctree's permutation p-values assume exchangeable rows and are too optimistic on autocorrelated monthly data.
 Forecasting with the tree is not supported: it lost to the historical mean.
+
+**Novelty: well-known.** partykit has been on CRAN for many years and is widely used, so it is less relevant to the scout's goal of
+finding diamonds in the rough. It is kept as the reference method for the regime-tree skill, not as a scout find.

@@ -31,8 +31,16 @@ report mismatches as mismatches.
 
 ## Stage 4 — Decide
 - [ ] Gates per application: reproduces · clears the null · clears the baseline.
-- [ ] **Promote** if all three reproduce and at least one application clears all gates; scope the skill to the uses that cleared,
+- [ ] **Recommend for promotion** if all three reproduce and at least one application clears all gates; scope the skill to the uses that cleared,
       and turn every failed gate into a mandatory check or anti-pattern. Otherwise **reject** with the reason in RESULTS.md.
+
+## Stage 4b — Jared's approval (hard gate)
+- [ ] Set the status to **`recommended, awaiting approval`** everywhere: RESULTS.md, `articles.json`, the articles and the front page.
+      Mark the skill **DRAFT (pending approval)** in `skills/README.md` and `choose-analysis-method`.
+- [ ] Ask Jared for approval. The status becomes **`promoted`** only when his own dated words are recorded in
+      `methods/<method>/APPROVAL.md`: verbatim quote, date, channel, and the commit or PR approved.
+- [ ] An agent relaying "he agreed" does not count. **Never create or edit APPROVAL.md on your own**; add it only on
+      Jared's explicit instruction, quoting him word for word.
 
 ## Stage 5 — Skill
 - [ ] If a task skill for the question type exists (`run-changepoint-analysis`, `run-regime-tree-analysis`, …), add a row to its
@@ -44,9 +52,11 @@ report mismatches as mismatches.
 
 ## Publish — newsroom articles (`docs/`, theme `docs/assets/brief.css`)
 - [ ] Append to `docs/articles.json` one **method** entry and one **application** entry per application:
-      `{slug, title, type: "method"|"application", method, date, tags, dek, verdict, links: {self, parent, children, code, results, skill}}`.
+      `{slug, title, type: "method"|"application", method, date, status, novelty, tags, dek, verdict, links: {self, parent, children, code, results, skill}}`.
+      `status`: `recommended, awaiting approval` until APPROVAL.md exists. `novelty`: `well-known` | `niche` | `obscure`.
+      Well-known methods are less relevant to the scout's diamonds-in-the-rough goal: say so in the method article, and they never take the lead story.
 - [ ] Method article (`docs/articles/<method>.html`), in order: citation first → plain math → why it is unusual or fast →
-      verdict → reproduction status per application → links to each application article → skill.
+      verdict, approval status and novelty → reproduction status per application → links to each application article → skill.
 - [ ] Application article (`docs/articles/<method>-app<n>.html`), in order: question → data used (sources, n, period;
       aggregates only) → what we ran → figures and tables → original vs reproduced → robustness → limitations → takeaway →
       link back to the method article.
