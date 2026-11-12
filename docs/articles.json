@@ -3,6 +3,29 @@
  "repo": "https://github.com/jgridifier/analysis-skills",
  "articles": [
   {
+   "slug": "scout-secret-sauce",
+   "type": "scout",
+   "method": "secret-sauce",
+   "date": "2026-11-12",
+   "title": "Secret sauce plans for changeforest, partykit, MARSS and InspectChangepoint",
+   "dek": "Exactly three avenues per method \u2014 Engineering, Math, and a new use on our data \u2014 grounded in the 11-10 and 11-11 runs. Top picks are all math: a dependence-aware changeforest test, time-series-valid partykit splits, a short-sample sticky label for the MARSS decomposition (a v0.1-era framework, not a forecast), and an Inspect procedure with the right size under persistent shares. Plans only.",
+   "verdict": "scout: plans only",
+   "status": "scouted, not in workflow",
+   "novelty": "niche",
+   "tags": [
+    "secret sauce",
+    "changeforest",
+    "partykit",
+    "MARSS",
+    "InspectChangepoint"
+   ],
+   "links": {
+    "self": "https://jgridifier.github.io/research-lab/methods-scout/secret-sauce.html",
+    "parent": null,
+    "children": []
+   }
+  },
+  {
    "slug": "changeforest",
    "type": "method",
    "method": "changeforest",
@@ -37,7 +60,7 @@
    "method": "changeforest",
    "date": "2026-11-10",
    "title": "Weekly rate and stress regimes: 35 breaks, and a null that finds just as many",
-   "dek": "On weekly changes of six series the break dates reproduce exactly, but a stationary VAR(1) null produces 20–37 breaks too. Prewhitening leaves 12 stable breaks.",
+   "dek": "On weekly changes of six series the break dates reproduce exactly, but a stationary VAR(1) null produces 20\u201337 breaks too. Prewhitening leaves 12 stable breaks.",
    "verdict": "null failed raw; passes prewhitened",
    "tags": [
     "changeforest",
@@ -220,7 +243,7 @@
    "method": "MARSS",
    "date": "2026-11-11",
    "title": "Scout: MARSS splits dealer share moves into market, sticky and transient parts",
-   "dek": "State-space model from ecology (R Journal 2012), run on a PROXY Y-9C dealer-share panel for Q1. GS's equity-revenue-share loss is sticky and mirrors JPM's gain (corr −0.79, BH q = 0.04), while market factors drive 59–74% of quarterly swings for JPM, MS and BAC. Scout recommends it for the promote workflow; not started, awaiting Jared's pick.",
+   "dek": "State-space model from ecology (R Journal 2012), run on a PROXY Y-9C dealer-share panel for Q1. GS's equity-revenue-share loss is sticky and mirrors JPM's gain (corr \u22120.79, BH q = 0.04), while market factors drive 59\u201374% of quarterly swings for JPM, MS and BAC. Scout recommends it for the promote workflow; not started, awaiting Jared's pick.",
    "verdict": "scout: recommend for promote workflow",
    "status": "scouted, not in workflow",
    "novelty": "niche",
@@ -242,7 +265,7 @@
    "method": "InspectChangepoint",
    "date": "2026-11-11",
    "title": "Scout: InspectChangepoint names which dealers moved at a break, but the breaks fail a persistence null",
-   "dek": "Sparse-projection change points (JRSS-B 2018), 9.6 ms per panel. On PROXY dealer shares, level breaks (8) are fewer than persistence-matched surrogates produce (12.4–13.3), and drift tests find no significant break: gradual migration, not shocks. Scout verdict: interesting.",
+   "dek": "Sparse-projection change points (JRSS-B 2018), 9.6 ms per panel. On PROXY dealer shares, level breaks (8) are fewer than persistence-matched surrogates produce (12.4\u201313.3), and drift tests find no significant break: gradual migration, not shocks. Scout verdict: interesting.",
    "verdict": "scout: interesting",
    "status": "scouted, not in workflow",
    "novelty": "obscure",
