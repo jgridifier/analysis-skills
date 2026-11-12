@@ -1,285 +1,334 @@
 {
- "site": "analysis-skills newsroom",
- "repo": "https://github.com/jgridifier/analysis-skills",
- "articles": [
-  {
-   "slug": "scout-secret-sauce",
-   "type": "scout",
-   "method": "secret-sauce",
-   "date": "2026-11-12",
-   "title": "Secret sauce plans for changeforest, partykit, MARSS and InspectChangepoint",
-   "dek": "Exactly three avenues per method \u2014 Engineering, Math, and a new use on our data \u2014 grounded in the 11-10 and 11-11 runs. Top picks are all math: a dependence-aware changeforest test, time-series-valid partykit splits, a short-sample sticky label for the MARSS decomposition (a v0.1-era framework, not a forecast), and an Inspect procedure with the right size under persistent shares. Plans only.",
-   "verdict": "scout: plans only",
-   "status": "scouted, not in workflow",
-   "novelty": "niche",
-   "tags": [
-    "secret sauce",
-    "changeforest",
-    "partykit",
-    "MARSS",
-    "InspectChangepoint"
-   ],
-   "links": {
-    "self": "https://jgridifier.github.io/research-lab/methods-scout/secret-sauce.html",
-    "parent": null,
-    "children": []
-   }
-  },
-  {
-   "slug": "changeforest",
-   "type": "method",
-   "method": "changeforest",
-   "date": "2026-11-10",
-   "title": "changeforest: a random forest that dates regime breaks, once you stop feeding it levels",
-   "dek": "Rust-core change-point detection that sees volatility and correlation breaks a mean test misses. Reproduced exactly in all three applications; recommended for promotion with a mandatory persistence check, awaiting Jared's approval.",
-   "verdict": "recommended, awaiting approval",
-   "tags": [
-    "changeforest",
-    "change-points",
-    "Rust",
-    "run-changepoint-analysis"
-   ],
-   "links": {
-    "self": "articles/changeforest.html",
-    "parent": null,
-    "children": [
-     "articles/changeforest-app1.html",
-     "articles/changeforest-app2.html",
-     "articles/changeforest-app3.html"
-    ],
-    "code": "methods/changeforest",
-    "results": "methods/changeforest/RESULTS.md",
-    "skill": "skills/run-changepoint-analysis/SKILL.md"
-   },
-   "status": "recommended, awaiting approval",
-   "novelty": "niche"
-  },
-  {
-   "slug": "changeforest-app1",
-   "type": "application",
-   "method": "changeforest",
-   "date": "2026-11-10",
-   "title": "Weekly rate and stress regimes: 35 breaks, and a null that finds just as many",
-   "dek": "On weekly changes of six series the break dates reproduce exactly, but a stationary VAR(1) null produces 20\u201337 breaks too. Prewhitening leaves 12 stable breaks.",
-   "verdict": "null failed raw; passes prewhitened",
-   "tags": [
-    "changeforest",
-    "weekly",
-    "prewhitening",
-    "run-changepoint-analysis"
-   ],
-   "links": {
-    "self": "articles/changeforest-app1.html",
-    "parent": "articles/changeforest.html",
-    "children": [],
-    "code": "methods/changeforest/applications/1",
-    "results": "methods/changeforest/applications/1/out/results.json",
-    "skill": "skills/run-changepoint-analysis/SKILL.md"
-   },
-   "status": "recommended, awaiting approval",
-   "novelty": "niche"
-  },
-  {
-   "slug": "changeforest-app2",
-   "type": "application",
-   "method": "changeforest",
-   "date": "2026-11-10",
-   "title": "Daily volatility and correlation regimes in 9,174 days of rates and VIX",
-   "dek": "28 breaks, 23 stable across seeds, zero under both nulls, zero for a mean-change test: this is the use changeforest is built for.",
-   "verdict": "all gates pass",
-   "tags": [
-    "changeforest",
-    "daily",
-    "volatility",
-    "correlation",
-    "run-changepoint-analysis"
-   ],
-   "links": {
-    "self": "articles/changeforest-app2.html",
-    "parent": "articles/changeforest.html",
-    "children": [],
-    "code": "methods/changeforest/applications/2",
-    "results": "methods/changeforest/applications/2/out/results.json",
-    "skill": "skills/run-changepoint-analysis/SKILL.md"
-   },
-   "status": "recommended, awaiting approval",
-   "novelty": "niche"
-  },
-  {
-   "slug": "changeforest-app3",
-   "type": "application",
-   "method": "changeforest",
-   "date": "2026-11-10",
-   "title": "Credit spreads have had three regimes since 1990, split in Aug 1998 and Jul 2012",
-   "dek": "New application: monthly changes of the GZ spread, excess bond premium, VIX and the 10y. Two breaks, both stable, zero under both nulls.",
-   "verdict": "all gates pass",
-   "tags": [
-    "changeforest",
-    "monthly",
-    "credit spreads",
-    "run-changepoint-analysis"
-   ],
-   "links": {
-    "self": "articles/changeforest-app3.html",
-    "parent": "articles/changeforest.html",
-    "children": [],
-    "code": "methods/changeforest/applications/3",
-    "results": "methods/changeforest/applications/3/out/results.json",
-    "skill": "skills/run-changepoint-analysis/SKILL.md"
-   },
-   "status": "recommended, awaiting approval",
-   "novelty": "niche"
-  },
-  {
-   "slug": "partykit",
-   "type": "method",
-   "method": "partykit",
-   "date": "2026-11-10",
-   "title": "partykit trees: readable subgroups that pass on a cross-section and overfit time series",
-   "dek": "Conditional inference trees and model-based trees reproduced exactly. They clear every gate on 3,074 counties, but a circular-shift null breaks both time-series uses. Recommended (scoped), awaiting approval. A well-known package, so less of a scout find.",
-   "verdict": "recommended (scoped), awaiting approval",
-   "tags": [
-    "partykit",
-    "ctree",
-    "MOB",
-    "R",
-    "run-regime-tree-analysis"
-   ],
-   "links": {
-    "self": "articles/partykit.html",
-    "parent": null,
-    "children": [
-     "articles/partykit-app1.html",
-     "articles/partykit-app2.html",
-     "articles/partykit-app3.html"
-    ],
-    "code": "methods/partykit",
-    "results": "methods/partykit/RESULTS.md",
-    "skill": "skills/run-regime-tree-analysis/SKILL.md"
-   },
-   "status": "recommended, awaiting approval",
-   "novelty": "well-known"
-  },
-  {
-   "slug": "partykit-app1",
-   "type": "application",
-   "method": "partykit",
-   "date": "2026-11-10",
-   "title": "A VIX-led regime tree for credit spreads: readable, stable, and not real enough",
-   "dek": "The 4-leaf tree reproduces exactly and VIX wins the root in about 70% of bootstraps. But a shifted response still splits 60% of the time, and the tree loses to the historical mean out of sample.",
-   "verdict": "null and baseline failed",
-   "tags": [
-    "partykit",
-    "ctree",
-    "time series",
-    "credit spreads",
-    "run-regime-tree-analysis"
-   ],
-   "links": {
-    "self": "articles/partykit-app1.html",
-    "parent": "articles/partykit.html",
-    "children": [],
-    "code": "methods/partykit/applications/1",
-    "results": "methods/partykit/applications/1/out/results.json",
-    "skill": "skills/run-regime-tree-analysis/SKILL.md"
-   },
-   "status": "recommended, awaiting approval",
-   "novelty": "well-known"
-  },
-  {
-   "slug": "partykit-app2",
-   "type": "application",
-   "method": "partykit",
-   "date": "2026-11-10",
-   "title": "When financial conditions tighten, credit spreads react twice as hard to VIX",
-   "dek": "A model-based tree splits once, at NFCI 0.057, and beats a calendar break. The catch: shifted state variables split 53% of the time too.",
-   "verdict": "null failed; baseline passed",
-   "tags": [
-    "partykit",
-    "MOB",
-    "time series",
-    "run-regime-tree-analysis"
-   ],
-   "links": {
-    "self": "articles/partykit-app2.html",
-    "parent": "articles/partykit.html",
-    "children": [],
-    "code": "methods/partykit/applications/2",
-    "results": "methods/partykit/applications/2/out/results.json",
-    "skill": "skills/run-regime-tree-analysis/SKILL.md"
-   },
-   "status": "recommended, awaiting approval",
-   "novelty": "well-known"
-  },
-  {
-   "slug": "partykit-app3",
-   "type": "application",
-   "method": "partykit",
-   "date": "2026-11-10",
-   "title": "Which counties took the biggest unemployment hits in 2008 and 2020",
-   "dek": "Great Recession damage sorted on pre-crisis unemployment; COVID damage sorted on county size. Both trees clear the null and stay within reach of OLS.",
-   "verdict": "all gates pass",
-   "tags": [
-    "partykit",
-    "ctree",
-    "cross-section",
-    "counties",
-    "run-regime-tree-analysis"
-   ],
-   "links": {
-    "self": "articles/partykit-app3.html",
-    "parent": "articles/partykit.html",
-    "children": [],
-    "code": "methods/partykit/applications/3",
-    "results": "methods/partykit/applications/3/out/results.json",
-    "skill": "skills/run-regime-tree-analysis/SKILL.md"
-   },
-   "status": "recommended, awaiting approval",
-   "novelty": "well-known"
-  },
-  {
-   "slug": "scout-2026-11-11-marss",
-   "type": "scout",
-   "method": "MARSS",
-   "date": "2026-11-11",
-   "title": "Scout: MARSS splits dealer share moves into market, sticky and transient parts",
-   "dek": "State-space model from ecology (R Journal 2012), run on a PROXY Y-9C dealer-share panel for Q1. GS's equity-revenue-share loss is sticky and mirrors JPM's gain (corr \u22120.79, BH q = 0.04), while market factors drive 59\u201374% of quarterly swings for JPM, MS and BAC. Scout recommends it for the promote workflow; not started, awaiting Jared's pick.",
-   "verdict": "scout: recommend for promote workflow",
-   "status": "scouted, not in workflow",
-   "novelty": "niche",
-   "tags": [
-    "MARSS",
-    "state-space",
-    "compositional shares",
-    "Q1"
-   ],
-   "links": {
-    "self": "https://jgridifier.github.io/research-lab/methods-scout/2026-11-11.html#m1",
-    "parent": null,
-    "children": []
-   }
-  },
-  {
-   "slug": "scout-2026-11-11-inspectchangepoint",
-   "type": "scout",
-   "method": "InspectChangepoint",
-   "date": "2026-11-11",
-   "title": "Scout: InspectChangepoint names which dealers moved at a break, but the breaks fail a persistence null",
-   "dek": "Sparse-projection change points (JRSS-B 2018), 9.6 ms per panel. On PROXY dealer shares, level breaks (8) are fewer than persistence-matched surrogates produce (12.4\u201313.3), and drift tests find no significant break: gradual migration, not shocks. Scout verdict: interesting.",
-   "verdict": "scout: interesting",
-   "status": "scouted, not in workflow",
-   "novelty": "obscure",
-   "tags": [
-    "InspectChangepoint",
-    "change-points",
-    "sparse projection",
-    "Q1"
-   ],
-   "links": {
-    "self": "https://jgridifier.github.io/research-lab/methods-scout/2026-11-11.html#m2",
-    "parent": null,
-    "children": []
-   }
-  }
- ]
+  "site": "analysis-skills newsroom",
+  "repo": "https://github.com/jgridifier/analysis-skills",
+  "articles": [
+    {
+      "slug": "scout-2026-11-12-adhoc-codyn",
+      "type": "scout",
+      "method": "codyn",
+      "date": "2026-11-12",
+      "title": "Ad hoc scout: codyn rank clocks and a variance ratio from ecology, aimed at Q1",
+      "dek": "Community-dynamics metrics (Hallett et al., Methods in Ecology and Evolution 2016), run on a PROXY Y-9C dealer panel. US dealer volumes co-move (Schluter VR = 4.45 vs a cyclic-shift null of 0.44–2.00); foreign IHC volumes do not (VR = 0.73, inside the null). Rank clocks make the GS→JPM equity-revenue swap visible. Scout recommends it for the promote workflow; not started, awaiting Jared's pick.",
+      "verdict": "scout: recommend for promote workflow",
+      "status": "scouted, not in workflow",
+      "novelty": "niche",
+      "tags": [
+        "codyn",
+        "ecology",
+        "rank clocks",
+        "variance ratio",
+        "Q1",
+        "ad hoc",
+        "exotic"
+      ],
+      "links": {
+        "self": "https://jgridifier.github.io/research-lab/methods-scout/2026-11-12-adhoc.html#m1",
+        "parent": null,
+        "children": []
+      }
+    },
+    {
+      "slug": "scout-2026-11-12-adhoc-proportionality",
+      "type": "scout",
+      "method": "Lovell proportionality",
+      "date": "2026-11-12",
+      "title": "Ad hoc scout: Lovell proportionality finds a sticky JPM–GS swap that gets stronger after the market is removed",
+      "dek": "A valid, no-tuning alternative to Pearson on compositions (Lovell et al., PLoS Computational Biology 2015). On the PROXY equity-revenue panel, JPM–GS ρ = −0.698 (BH q = 0.021) and −0.882 after residualizing on market factors (q = 0.036); JPM–MS does not survive. Pearson overstates many 14-dealer pairs. Scout recommends it for the promote workflow; not started, awaiting Jared's pick.",
+      "verdict": "scout: recommend for promote workflow",
+      "status": "scouted, not in workflow",
+      "novelty": "obscure",
+      "tags": [
+        "proportionality",
+        "compositional data",
+        "Lovell",
+        "Q1",
+        "ad hoc",
+        "exotic"
+      ],
+      "links": {
+        "self": "https://jgridifier.github.io/research-lab/methods-scout/2026-11-12-adhoc.html#m2",
+        "parent": null,
+        "children": []
+      }
+    },
+    {
+      "slug": "scout-secret-sauce",
+      "type": "scout",
+      "method": "secret-sauce",
+      "date": "2026-11-12",
+      "title": "Secret sauce plans for changeforest, partykit, MARSS and InspectChangepoint",
+      "dek": "Exactly three avenues per method — Engineering, Math, and a new use on our data — grounded in the 11-10 and 11-11 runs. Top picks are all math: a dependence-aware changeforest test, time-series-valid partykit splits, a short-sample sticky label for the MARSS decomposition (a v0.1-era framework, not a forecast), and an Inspect procedure with the right size under persistent shares. Plans only.",
+      "verdict": "scout: plans only",
+      "status": "scouted, not in workflow",
+      "novelty": "niche",
+      "tags": [
+        "secret sauce",
+        "changeforest",
+        "partykit",
+        "MARSS",
+        "InspectChangepoint"
+      ],
+      "links": {
+        "self": "https://jgridifier.github.io/research-lab/methods-scout/secret-sauce.html",
+        "parent": null,
+        "children": []
+      }
+    },
+    {
+      "slug": "changeforest",
+      "type": "method",
+      "method": "changeforest",
+      "date": "2026-11-10",
+      "title": "changeforest: a random forest that dates regime breaks, once you stop feeding it levels",
+      "dek": "Rust-core change-point detection that sees volatility and correlation breaks a mean test misses. Reproduced exactly in all three applications; recommended for promotion with a mandatory persistence check, awaiting Jared's approval.",
+      "verdict": "recommended, awaiting approval",
+      "tags": [
+        "changeforest",
+        "change-points",
+        "Rust",
+        "run-changepoint-analysis"
+      ],
+      "links": {
+        "self": "articles/changeforest.html",
+        "parent": null,
+        "children": [
+          "articles/changeforest-app1.html",
+          "articles/changeforest-app2.html",
+          "articles/changeforest-app3.html"
+        ],
+        "code": "methods/changeforest",
+        "results": "methods/changeforest/RESULTS.md",
+        "skill": "skills/run-changepoint-analysis/SKILL.md"
+      },
+      "status": "recommended, awaiting approval",
+      "novelty": "niche"
+    },
+    {
+      "slug": "changeforest-app1",
+      "type": "application",
+      "method": "changeforest",
+      "date": "2026-11-10",
+      "title": "Weekly rate and stress regimes: 35 breaks, and a null that finds just as many",
+      "dek": "On weekly changes of six series the break dates reproduce exactly, but a stationary VAR(1) null produces 20–37 breaks too. Prewhitening leaves 12 stable breaks.",
+      "verdict": "null failed raw; passes prewhitened",
+      "tags": [
+        "changeforest",
+        "weekly",
+        "prewhitening",
+        "run-changepoint-analysis"
+      ],
+      "links": {
+        "self": "articles/changeforest-app1.html",
+        "parent": "articles/changeforest.html",
+        "children": [],
+        "code": "methods/changeforest/applications/1",
+        "results": "methods/changeforest/applications/1/out/results.json",
+        "skill": "skills/run-changepoint-analysis/SKILL.md"
+      },
+      "status": "recommended, awaiting approval",
+      "novelty": "niche"
+    },
+    {
+      "slug": "changeforest-app2",
+      "type": "application",
+      "method": "changeforest",
+      "date": "2026-11-10",
+      "title": "Daily volatility and correlation regimes in 9,174 days of rates and VIX",
+      "dek": "28 breaks, 23 stable across seeds, zero under both nulls, zero for a mean-change test: this is the use changeforest is built for.",
+      "verdict": "all gates pass",
+      "tags": [
+        "changeforest",
+        "daily",
+        "volatility",
+        "correlation",
+        "run-changepoint-analysis"
+      ],
+      "links": {
+        "self": "articles/changeforest-app2.html",
+        "parent": "articles/changeforest.html",
+        "children": [],
+        "code": "methods/changeforest/applications/2",
+        "results": "methods/changeforest/applications/2/out/results.json",
+        "skill": "skills/run-changepoint-analysis/SKILL.md"
+      },
+      "status": "recommended, awaiting approval",
+      "novelty": "niche"
+    },
+    {
+      "slug": "changeforest-app3",
+      "type": "application",
+      "method": "changeforest",
+      "date": "2026-11-10",
+      "title": "Credit spreads have had three regimes since 1990, split in Aug 1998 and Jul 2012",
+      "dek": "New application: monthly changes of the GZ spread, excess bond premium, VIX and the 10y. Two breaks, both stable, zero under both nulls.",
+      "verdict": "all gates pass",
+      "tags": [
+        "changeforest",
+        "monthly",
+        "credit spreads",
+        "run-changepoint-analysis"
+      ],
+      "links": {
+        "self": "articles/changeforest-app3.html",
+        "parent": "articles/changeforest.html",
+        "children": [],
+        "code": "methods/changeforest/applications/3",
+        "results": "methods/changeforest/applications/3/out/results.json",
+        "skill": "skills/run-changepoint-analysis/SKILL.md"
+      },
+      "status": "recommended, awaiting approval",
+      "novelty": "niche"
+    },
+    {
+      "slug": "partykit",
+      "type": "method",
+      "method": "partykit",
+      "date": "2026-11-10",
+      "title": "partykit trees: readable subgroups that pass on a cross-section and overfit time series",
+      "dek": "Conditional inference trees and model-based trees reproduced exactly. They clear every gate on 3,074 counties, but a circular-shift null breaks both time-series uses. Recommended (scoped), awaiting approval. A well-known package, so less of a scout find.",
+      "verdict": "recommended (scoped), awaiting approval",
+      "tags": [
+        "partykit",
+        "ctree",
+        "MOB",
+        "R",
+        "run-regime-tree-analysis"
+      ],
+      "links": {
+        "self": "articles/partykit.html",
+        "parent": null,
+        "children": [
+          "articles/partykit-app1.html",
+          "articles/partykit-app2.html",
+          "articles/partykit-app3.html"
+        ],
+        "code": "methods/partykit",
+        "results": "methods/partykit/RESULTS.md",
+        "skill": "skills/run-regime-tree-analysis/SKILL.md"
+      },
+      "status": "recommended, awaiting approval",
+      "novelty": "well-known"
+    },
+    {
+      "slug": "partykit-app1",
+      "type": "application",
+      "method": "partykit",
+      "date": "2026-11-10",
+      "title": "A VIX-led regime tree for credit spreads: readable, stable, and not real enough",
+      "dek": "The 4-leaf tree reproduces exactly and VIX wins the root in about 70% of bootstraps. But a shifted response still splits 60% of the time, and the tree loses to the historical mean out of sample.",
+      "verdict": "null and baseline failed",
+      "tags": [
+        "partykit",
+        "ctree",
+        "time series",
+        "credit spreads",
+        "run-regime-tree-analysis"
+      ],
+      "links": {
+        "self": "articles/partykit-app1.html",
+        "parent": "articles/partykit.html",
+        "children": [],
+        "code": "methods/partykit/applications/1",
+        "results": "methods/partykit/applications/1/out/results.json",
+        "skill": "skills/run-regime-tree-analysis/SKILL.md"
+      },
+      "status": "recommended, awaiting approval",
+      "novelty": "well-known"
+    },
+    {
+      "slug": "partykit-app2",
+      "type": "application",
+      "method": "partykit",
+      "date": "2026-11-10",
+      "title": "When financial conditions tighten, credit spreads react twice as hard to VIX",
+      "dek": "A model-based tree splits once, at NFCI 0.057, and beats a calendar break. The catch: shifted state variables split 53% of the time too.",
+      "verdict": "null failed; baseline passed",
+      "tags": [
+        "partykit",
+        "MOB",
+        "time series",
+        "run-regime-tree-analysis"
+      ],
+      "links": {
+        "self": "articles/partykit-app2.html",
+        "parent": "articles/partykit.html",
+        "children": [],
+        "code": "methods/partykit/applications/2",
+        "results": "methods/partykit/applications/2/out/results.json",
+        "skill": "skills/run-regime-tree-analysis/SKILL.md"
+      },
+      "status": "recommended, awaiting approval",
+      "novelty": "well-known"
+    },
+    {
+      "slug": "partykit-app3",
+      "type": "application",
+      "method": "partykit",
+      "date": "2026-11-10",
+      "title": "Which counties took the biggest unemployment hits in 2008 and 2020",
+      "dek": "Great Recession damage sorted on pre-crisis unemployment; COVID damage sorted on county size. Both trees clear the null and stay within reach of OLS.",
+      "verdict": "all gates pass",
+      "tags": [
+        "partykit",
+        "ctree",
+        "cross-section",
+        "counties",
+        "run-regime-tree-analysis"
+      ],
+      "links": {
+        "self": "articles/partykit-app3.html",
+        "parent": "articles/partykit.html",
+        "children": [],
+        "code": "methods/partykit/applications/3",
+        "results": "methods/partykit/applications/3/out/results.json",
+        "skill": "skills/run-regime-tree-analysis/SKILL.md"
+      },
+      "status": "recommended, awaiting approval",
+      "novelty": "well-known"
+    },
+    {
+      "slug": "scout-2026-11-11-marss",
+      "type": "scout",
+      "method": "MARSS",
+      "date": "2026-11-11",
+      "title": "Scout: MARSS splits dealer share moves into market, sticky and transient parts",
+      "dek": "State-space model from ecology (R Journal 2012), run on a PROXY Y-9C dealer-share panel for Q1. GS's equity-revenue-share loss is sticky and mirrors JPM's gain (corr −0.79, BH q = 0.04), while market factors drive 59–74% of quarterly swings for JPM, MS and BAC. Scout recommends it for the promote workflow; not started, awaiting Jared's pick.",
+      "verdict": "scout: recommend for promote workflow",
+      "status": "scouted, not in workflow",
+      "novelty": "niche",
+      "tags": [
+        "MARSS",
+        "state-space",
+        "compositional shares",
+        "Q1"
+      ],
+      "links": {
+        "self": "https://jgridifier.github.io/research-lab/methods-scout/2026-11-11.html#m1",
+        "parent": null,
+        "children": []
+      }
+    },
+    {
+      "slug": "scout-2026-11-11-inspectchangepoint",
+      "type": "scout",
+      "method": "InspectChangepoint",
+      "date": "2026-11-11",
+      "title": "Scout: InspectChangepoint names which dealers moved at a break, but the breaks fail a persistence null",
+      "dek": "Sparse-projection change points (JRSS-B 2018), 9.6 ms per panel. On PROXY dealer shares, level breaks (8) are fewer than persistence-matched surrogates produce (12.4–13.3), and drift tests find no significant break: gradual migration, not shocks. Scout verdict: interesting.",
+      "verdict": "scout: interesting",
+      "status": "scouted, not in workflow",
+      "novelty": "obscure",
+      "tags": [
+        "InspectChangepoint",
+        "change-points",
+        "sparse projection",
+        "Q1"
+      ],
+      "links": {
+        "self": "https://jgridifier.github.io/research-lab/methods-scout/2026-11-11.html#m2",
+        "parent": null,
+        "children": []
+      }
+    }
+  ]
 }
