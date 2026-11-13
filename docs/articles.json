@@ -3,6 +3,56 @@
   "repo": "https://github.com/jgridifier/analysis-skills",
   "articles": [
     {
+      "slug": "scout-2026-11-13-ebnm",
+      "type": "scout",
+      "method": "ebnm",
+      "date": "2026-11-13",
+      "title": "Scout: ebnm tells which of a thousand noisy budget moves are real",
+      "dek": "Empirical Bayes normal means (Willwerscheid, Carbonetto & Stephens, Journal of Statistical Software 2025), run on SYNTHETIC mock ZBB budgets for Q2. These are not real budgets. Pooling cuts each program's 2025-level error by 21–26%. lfsr < 0.05 calls 91 real year-on-year moves on the Corning mock, all with the right sign, where BH calls 14. It does not help on text vs numbers. The scout recommends it for the promote workflow; not started, awaiting Jared's pick.",
+      "verdict": "scout: recommend for promote workflow",
+      "status": "scouted, not in workflow",
+      "novelty": "niche",
+      "tags": [
+        "ebnm",
+        "empirical Bayes",
+        "statistical genetics",
+        "shrinkage",
+        "Q2",
+        "exotic",
+        "synthetic"
+      ],
+      "links": {
+        "self": "https://jgridifier.github.io/research-lab/methods-scout/2026-11-13.html#m1",
+        "parent": null,
+        "children": []
+      }
+    },
+    {
+      "slug": "scout-2026-11-13-denselines",
+      "type": "scout",
+      "method": "DenseLines",
+      "date": "2026-11-13",
+      "title": "Scout: DenseLines draws a thousand short budget lines as one density, once made gap-safe",
+      "dek": "Density line charts (Moritz & Fisher, arXiv 2018), run on SYNTHETIC mock ZBB budgets for Q2. The NumPy port matches the authors' Rust reference pixel for pixel (max rel. diff 2.1e-7) but is 10–120× slower. The reference renders start/stop portfolios as all-NaN. A residual brush plus a text keyword finds 94% of a hidden AI-demand group, but the brush is bandwidth-fragile. Scout status: interesting; not started.",
+      "verdict": "scout: interesting",
+      "status": "scouted, not in workflow",
+      "novelty": "obscure",
+      "tags": [
+        "DenseLines",
+        "visualization",
+        "HCI",
+        "Rust",
+        "Q2",
+        "exotic",
+        "synthetic"
+      ],
+      "links": {
+        "self": "https://jgridifier.github.io/research-lab/methods-scout/2026-11-13.html#m2",
+        "parent": null,
+        "children": []
+      }
+    },
+    {
       "slug": "scout-2026-11-12-ecotraj",
       "type": "scout",
       "method": "ecotraj",
