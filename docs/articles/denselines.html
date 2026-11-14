@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DenseLines: a density view of a thousand overlapping short series · analysis-skills</title><meta name="description" content="Moritz &amp; Fisher (arXiv:1808.06019). A NumPy port of the authors&#x27; Rust reference, promoted on Jared&#x27;s 2026-11-13 approval. Gap-case invariants replayed; Rust pixel-parity (max rel. diff 2.1e-7 on the scout) was not re-run. Stage 2–3 on the real panels has not been run. Scout data were SYNTHETIC mock budgets.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="../assets/brief.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>.grid figure img,figure img{max-width:100%;height:auto} .card h3 a{color:inherit} .tags .tag{margin-right:.35rem}</style>
+</head><body><main>
+<header class="mast"><div class="date">Friday · November 13, 2026 · Method article</div><h1>DenseLines: a density view of a thousand overlapping short series</h1><p class="dek">Moritz &amp; Fisher (arXiv:1808.06019). A NumPy port of the authors&#x27; Rust reference, promoted on Jared&#x27;s 2026-11-13 approval. Gap-case invariants replayed; Rust pixel-parity (max rel. diff 2.1e-7 on the scout) was not re-run. Stage 2–3 on the real panels has not been run. Scout data were SYNTHETIC mock budgets.</p><nav><a href="../index.html">Newsroom</a><a href="https://github.com/jgridifier/analysis-skills/blob/main/methods/denselines">Code</a><a href="https://github.com/jgridifier/analysis-skills/blob/main/methods/denselines/RESULTS.md">Results</a><a href="https://github.com/jgridifier/analysis-skills/blob/main/skills/run-line-density-chart/SKILL.md">Skill</a></nav></header><div class="ticker"><span class="tag green">status: promoted</span><span class="tag">novelty: obscure</span><span class="tag">DenseLines</span><span class="tag">line density</span><span class="tag">visualization</span><span class="tag">Q2</span><span class="tag teal">run-line-density-chart</span></div><section class="tldr"><h2>The short version</h2><ul>
+<li><strong>What it is.</strong> A density view of many overlapping short series: each series is rasterised, normalised by its own arc length, and added, so ink shows how many series pass through a pixel rather than how wiggly the noisiest ones are.</li>
+<li><strong>Status:</strong> <span class="verdict adopt">promoted</span> (Jared, 2026-11-13, 11:51 PM ET). Teaching page: <a href="https://jgridifier.github.io/research-lab/methods-scout/2026-11-13.html#m2">2026-11-13 scout, method 2</a>. Approval: <a href="https://github.com/jgridifier/analysis-skills/blob/main/methods/denselines/APPROVAL.md">APPROVAL.md</a>.</li>
+<li><strong>Novelty: obscure.</strong> A visualization paper with a small Rust reference implementation, not a standard statistical package.</li>
+<li><strong>Evidence limit:</strong> Stage 2–3 on this repo's real panels has not been run. Pixel-level parity with the authors' Rust reference was recorded on the scout (max relative difference 2.1e-7) and was not re-run at promotion (that would have required a Rust build). The gap-case invariants were replayed.</li>
+</ul></section>
+
+<div class="sec-head"><span class="n">01</span><h2>Citations</h2><span class="line"></span></div>
+<div class="card teal"><p>Moritz, D. &amp; Fisher, D. (2018). "DenseLines: Efficient Many-To-One Context Preservation in Line Chart Visualizations." arXiv:1808.06019.<br>
+Authors' Rust reference: <a href="https://github.com/domoritz/line-density-rust">github.com/domoritz/line-density-rust</a> @ 083890c. The supported implementation here is a NumPy port in <a href="https://github.com/jgridifier/analysis-skills/blob/main/skills/run-line-density-chart/scripts/line_density.py"><code>skills/run-line-density-chart/scripts/line_density.py</code></a>, checked against that reference on the scout. No neural nets.</p></div>
+
+<div class="sec-head"><span class="n">02</span><h2>The math, plainly</h2><span class="line"></span></div>
+<p>Each series is drawn onto a canvas with a Bresenham rasteriser (the reference uses imageproc's iterator: a pixel is set to 1, not incremented, so shared endpoints count once). The binary image is then divided, column by column, by that series' own column sum — arc-length normalisation — and the normalised images are summed. A column's ink is therefore "how many series pass here," not "how much ink the jumpy ones spilled." If any series does not cover a column, the reference does 0/0 and writes NaN, which poisons that whole column of the aggregate. The port's <code>gap_safe=True</code> extension treats uncovered columns as 0 instead. Use that flag whenever start or end dates are staggered.</p>
+
+<div class="sec-head"><span class="n">03</span><h2>Why it is unusual, and fast</h2><span class="line"></span></div>
+<ul>
+<li>The normalisation is the unusual part: it is a small, inspectable alternative to "plot all the lines and hope."</li>
+<li>The Rust reference is fast; the NumPy port matches it closely (max relative difference 2.1e-7 on 5,000 series) and is 10–120× slower. The 50,000-series speed step ran out of memory on the scout and was never finished.</li>
+<li>A residual brush can point at a hidden group (94% recall, with a keyword, of a planted AI-demand cluster on the Corning mock) but is bandwidth-fragile.</li>
+</ul>
+
+<div class="sec-head"><span class="n">04</span><h2>Verdict</h2><span class="line"></span></div>
+<div class="card"><div class="card-top"><span class="tag teal">Stage 4b</span><span class="verdict adopt">promoted</span></div>
+<p><strong>Status:</strong> promoted, on Jared's dated words in <a href="https://github.com/jgridifier/analysis-skills/blob/main/methods/denselines/APPROVAL.md"><code>methods/denselines/APPROVAL.md</code></a> (2026-11-13, 11:51 PM ET, message t189u). <strong>Novelty: obscure.</strong></p>
+<p>Recommended for <a href="https://github.com/jgridifier/analysis-skills/blob/main/skills/run-line-density-chart/SKILL.md"><code>run-line-density-chart</code></a> as a view of many overlapping short series. Turn <code>gap_safe</code> on for staggered spans. Treat a brush as a hint: vary the smooth width and, when a label exists, combine it with the keyword. A later three-application pass is still worth doing; it was not a condition of the approval.</p></div>
+
+<div class="sec-head"><span class="n">05</span><h2>Reproduction status</h2><span class="line"></span></div>
+<div class="table-wrap"><table><thead><tr><th>evidence</th><th>what was checked</th><th>status</th></tr></thead><tbody>
+<tr><td>Scout parity vs Rust reference, n = 100, 1,000, 5,000</td><td>same nonzero pixels; max rel. diff 2.1e-7; column sums equal n</td><td>recorded in <code>original/parity_aggregates.json</code>; not re-run (no Rust build this turn)</td></tr>
+<tr><td>Scout gap case (50 series, 10 stop at column 300)</td><td>default NaN columns = 100; gap-safe = 0; column-sum after the stop = 40</td><td>replayed by <code>--synthetic</code>, PASS</td></tr>
+<tr><td>Stage 2–3 on this repo's real panels</td><td>three distinct applications, clean-environment reproduction</td><td>not run</td></tr>
+</tbody></table></div>
+<p class="meta">Details in <a href="https://github.com/jgridifier/analysis-skills/blob/main/methods/denselines/RESULTS.md">RESULTS.md</a>. Scout plots used SYNTHETIC mock budgets, not real firm budgets.</p>
+
+<div class="sec-head"><span class="n">06</span><h2>Applications</h2><span class="line"></span></div>
+<p>No Stage 2 application articles yet. The scout write-up is the teaching page, <a href="https://jgridifier.github.io/research-lab/methods-scout/2026-11-13.html#m2">research-lab methods-scout 2026-11-13 #m2</a>.</p>
+
+<div class="sec-head"><span class="n">07</span><h2>Skill</h2><span class="line"></span></div>
+<p><a href="https://github.com/jgridifier/analysis-skills/blob/main/skills/run-line-density-chart/SKILL.md"><code>run-line-density-chart</code></a>. Usage example: <code>python skills/run-line-density-chart/scripts/line_density.py --synthetic</code>.</p>
+<footer><p>analysis-skills newsroom · scripts, lockfiles and full results in <a href="https://github.com/jgridifier/analysis-skills">https://github.com/jgridifier/analysis-skills</a> ·
+no raw data is published, only aggregates and fitted structure · built 2026-11-13</p></footer></main></body></html>

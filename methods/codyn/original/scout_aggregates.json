@@ -1,0 +1,442 @@
+{
+  "note": "Aggregates from the 2026-11-12 ad hoc scout run on a public FR Y-9C proxy panel. No raw amounts and no period-by-period share series are stored here. first_last is the start/end rank table already published on the teaching page.",
+  "meta": {
+    "method": "codyn",
+    "version": "2.0.6",
+    "seed": 20261112,
+    "boot": 999,
+    "date": "2026-11-12",
+    "elapsed_s": 129.344,
+    "R": "4.5.3",
+    "note": "PROXY FR Y-9C. VR and Loreau/Gross synchrony use RAW amounts (VR on shares is degenerate because the share total is 1). rank_shift, rate_change, rank clocks use SHARES. Cyclic-shift nulls preserve each series' autocorrelation (Hallett et al. 2014)."
+  },
+  "A": {
+    "nT": 40,
+    "species": [
+      "JPM",
+      "GS",
+      "MS",
+      "BAC",
+      "C",
+      "WFC",
+      "Barclays",
+      "UBS+CS",
+      "DB",
+      "BNP",
+      "HSBC",
+      "Mizuho",
+      "RBC",
+      "TD"
+    ],
+    "q_first": "2016Q3",
+    "q_last": "2026Q2",
+    "first_last": [
+      {
+        "species": "JPM",
+        "rank_first": 1,
+        "rank_last": 1,
+        "d_rank": 0,
+        "share_first": 0.21295161966,
+        "share_last": 0.27393096479,
+        "d_share": 0.060979345129
+      },
+      {
+        "species": "GS",
+        "rank_first": 2,
+        "rank_last": 2,
+        "d_rank": 0,
+        "share_first": 0.16711179852,
+        "share_last": 0.2055213724,
+        "d_share": 0.038409573875
+      },
+      {
+        "species": "MS",
+        "rank_first": 5,
+        "rank_last": 4,
+        "d_rank": -1,
+        "share_first": 0.14274967045,
+        "share_last": 0.13061880472,
+        "d_share": -0.012130865735
+      },
+      {
+        "species": "BAC",
+        "rank_first": 3,
+        "rank_last": 5,
+        "d_rank": 2,
+        "share_first": 0.14499419432,
+        "share_last": 0.10832723929,
+        "d_share": -0.036666955035
+      },
+      {
+        "species": "C",
+        "rank_first": 4,
+        "rank_last": 3,
+        "d_rank": -1,
+        "share_first": 0.14483435874,
+        "share_last": 0.15933142548,
+        "d_share": 0.014497066739
+      },
+      {
+        "species": "WFC",
+        "rank_first": 6,
+        "rank_last": 6,
+        "d_rank": 0,
+        "share_first": 0.048886935778,
+        "share_last": 0.062868392382,
+        "d_share": 0.013981456604
+      },
+      {
+        "species": "Barclays",
+        "rank_first": 8,
+        "rank_last": 7,
+        "d_rank": -1,
+        "share_first": 0.024077154312,
+        "share_last": 0.013584076289,
+        "d_share": -0.010493078023
+      },
+      {
+        "species": "UBS+CS",
+        "rank_first": 7,
+        "rank_last": 14,
+        "d_rank": 7,
+        "share_first": 0.042326751644,
+        "share_last": 0.001549988171,
+        "d_share": -0.040776763473
+      },
+      {
+        "species": "DB",
+        "rank_first": 9,
+        "rank_last": 12,
+        "d_rank": 3,
+        "share_first": 0.016922663374,
+        "share_last": 0.0049976610375,
+        "d_share": -0.011925002336
+      },
+      {
+        "species": "BNP",
+        "rank_first": 12,
+        "rank_last": 10,
+        "d_rank": -2,
+        "share_first": 0.0092008903572,
+        "share_last": 0.0072231615629,
+        "d_share": -0.0019777287944
+      },
+      {
+        "species": "HSBC",
+        "rank_first": 10,
+        "rank_last": 9,
+        "d_rank": -1,
+        "share_first": 0.016458125428,
+        "share_last": 0.010288940223,
+        "d_share": -0.0061691852053
+      },
+      {
+        "species": "Mizuho",
+        "rank_first": 14,
+        "rank_last": 8,
+        "d_rank": -6,
+        "share_first": 0.0057284845161,
+        "share_last": 0.013193690612,
+        "d_share": 0.0074652060963
+      },
+      {
+        "species": "RBC",
+        "rank_first": 11,
+        "rank_last": 13,
+        "d_rank": 2,
+        "share_first": 0.014804097337,
+        "share_last": 0.0030931123839,
+        "d_share": -0.011710984953
+      },
+      {
+        "species": "TD",
+        "rank_first": 13,
+        "rank_last": 11,
+        "d_rank": -2,
+        "share_first": 0.0089532555538,
+        "share_last": 0.0054711706647,
+        "d_share": -0.0034820848892
+      }
+    ],
+    "turnover_mean": {
+      "total": 0.0,
+      "appearance": 0.0,
+      "disappearance": 0.0,
+      "note": "Closed balanced panel: every dealer is present every quarter, so appearance, disappearance and total turnover are identically 0."
+    },
+    "rank_shift_mean": 0.38461538462,
+    "rate_change": 0.0013789308745,
+    "vr": {
+      "lowerCI": 0.43762295713,
+      "upperCI": 2.0025608176,
+      "nullmean": 1.0057036471,
+      "VR": 4.4536782878
+    },
+    "vr_on_shares": {
+      "lowerCI": 0.59424114915,
+      "upperCI": 1.8100971127,
+      "nullmean": 1.0061606857,
+      "VR": 4.0736176905e-17
+    },
+    "synchrony_Loreau": 0.7596910742,
+    "synchrony_Gross": 0.49800505462,
+    "mrs_null": {
+      "observed": 0.38461538462,
+      "null_mean": 0.43333076666,
+      "null_sd": 0.03927166963,
+      "null_q025": 0.35897435897,
+      "null_q975": 0.50915750916,
+      "null_min": 0.31868131868,
+      "null_max": 0.58241758242,
+      "p_ge": 0.896,
+      "p_le": 0.13,
+      "nboot": 999
+    },
+    "rate_null": {
+      "observed": 0.0013789308745,
+      "null_mean": 0.00042554350132,
+      "null_sd": 0.00019072762418,
+      "null_q025": 9.6351673287e-05,
+      "null_q975": 0.00081675397295,
+      "null_min": -5.1485429381e-05,
+      "null_max": 0.0010434211155,
+      "p_ge": 0.001,
+      "p_le": 1,
+      "nboot": 999
+    },
+    "windows": {
+      "2016Q3-2019Q4": {
+        "q0": "2016Q3",
+        "q1": "2019Q4",
+        "n": 14,
+        "vr": {
+          "lowerCI": 0.38407164376,
+          "upperCI": 2.173639753,
+          "nullmean": 1.039610737,
+          "VR": 2.4467631437
+        },
+        "rank_shift_mean": 0.50549450549,
+        "rate_change": 0.0025486559181
+      },
+      "2020Q1-2026Q2": {
+        "q0": "2020Q1",
+        "q1": "2026Q2",
+        "n": 26,
+        "vr": {
+          "lowerCI": 0.35501293823,
+          "upperCI": 2.2279478288,
+          "nullmean": 1.028265639,
+          "VR": 4.4819528571
+        },
+        "rank_shift_mean": 0.32,
+        "rate_change": 0.001277872275
+      }
+    },
+    "leaveout": {
+      "all": {
+        "lowerCI": 0.43762295713,
+        "upperCI": 2.0025608176,
+        "nullmean": 1.0057036471,
+        "VR": 4.4536782878
+      },
+      "drop_foreign": {
+        "lowerCI": 0.43434865295,
+        "upperCI": 2.1060738796,
+        "nullmean": 0.99872639572,
+        "VR": 4.4341132968
+      },
+      "drop_JPM": {
+        "lowerCI": 0.43057214503,
+        "upperCI": 1.9798528314,
+        "nullmean": 0.98631574212,
+        "VR": 3.9286087668
+      },
+      "US_big6_only": {
+        "lowerCI": 0.43065097458,
+        "upperCI": 2.0242541503,
+        "nullmean": 1.0039020021,
+        "VR": 4.4341132968
+      },
+      "foreign_only": {
+        "lowerCI": 0.28615892402,
+        "upperCI": 2.1899396831,
+        "nullmean": 0.99468908972,
+        "VR": 0.72921075224
+      }
+    }
+  },
+  "E4": {
+    "nT": 62,
+    "species": [
+      "JPM",
+      "GS",
+      "MS",
+      "BAC"
+    ],
+    "q_first": "2011Q1",
+    "q_last": "2026Q2",
+    "first_last": [
+      {
+        "species": "JPM",
+        "rank_first": 3,
+        "rank_last": 1,
+        "d_rank": -2,
+        "share_first": 0.14512704992,
+        "share_last": 0.4344040976,
+        "d_share": 0.28927704768
+      },
+      {
+        "species": "GS",
+        "rank_first": 1,
+        "rank_last": 2,
+        "d_rank": 1,
+        "share_first": 0.52275738395,
+        "share_last": 0.2308825214,
+        "d_share": -0.29187486255
+      },
+      {
+        "species": "MS",
+        "rank_first": 2,
+        "rank_last": 3,
+        "d_rank": 1,
+        "share_first": 0.24987852953,
+        "share_last": 0.19108478293,
+        "d_share": -0.058793746605
+      },
+      {
+        "species": "BAC",
+        "rank_first": 4,
+        "rank_last": 4,
+        "d_rank": 0,
+        "share_first": 0.082237036598,
+        "share_last": 0.14362859808,
+        "d_share": 0.061391561481
+      }
+    ],
+    "turnover_mean": {
+      "total": 0.0,
+      "appearance": 0.0,
+      "disappearance": 0.0,
+      "note": "Closed balanced panel: every dealer is present every quarter, so appearance, disappearance and total turnover are identically 0."
+    },
+    "rank_shift_mean": 0.23770491803,
+    "rate_change": 0.0047265033589,
+    "vr": {
+      "lowerCI": 0.57239324697,
+      "upperCI": 1.6622193668,
+      "nullmean": 0.99088631523,
+      "VR": 2.355677669
+    },
+    "vr_on_shares": {
+      "lowerCI": 0.46218700996,
+      "upperCI": 1.7889748827,
+      "nullmean": 1.0460005885,
+      "VR": -6.4277423016e-17
+    },
+    "synchrony_Loreau": 0.78361944136,
+    "synchrony_Gross": 0.76491829297,
+    "mrs_null": {
+      "observed": 0.23770491803,
+      "null_mean": 0.36671097327,
+      "null_sd": 0.042282714287,
+      "null_q025": 0.2868852459,
+      "null_q975": 0.45081967213,
+      "null_min": 0.22131147541,
+      "null_max": 0.50819672131,
+      "p_ge": 0.999,
+      "p_le": 0.002,
+      "nboot": 999
+    },
+    "rate_null": {
+      "observed": 0.0047265033589,
+      "null_mean": 0.0016535800186,
+      "null_sd": 0.00083975482769,
+      "null_q025": 0.00016874203379,
+      "null_q975": 0.0033769854202,
+      "null_min": -0.00022152748197,
+      "null_max": 0.0040604662687,
+      "p_ge": 0.001,
+      "p_le": 1,
+      "nboot": 999
+    },
+    "windows": {
+      "2011Q1-2015Q4": {
+        "q0": "2011Q1",
+        "q1": "2015Q4",
+        "n": 20,
+        "vr": {
+          "lowerCI": 0.56522119388,
+          "upperCI": 1.462470181,
+          "nullmean": 0.99193186289,
+          "VR": 1.3731590336
+        },
+        "rank_shift_mean": 0.21052631579,
+        "rate_change": 0.0065208293061
+      },
+      "2016Q1-2019Q4": {
+        "q0": "2016Q1",
+        "q1": "2019Q4",
+        "n": 16,
+        "vr": {
+          "lowerCI": 0.54856396245,
+          "upperCI": 1.6837128134,
+          "nullmean": 1.0126995198,
+          "VR": 1.1222773595
+        },
+        "rank_shift_mean": 0.23333333333,
+        "rate_change": 0.012627658558
+      },
+      "2020Q1-2026Q2": {
+        "q0": "2020Q1",
+        "q1": "2026Q2",
+        "n": 26,
+        "vr": {
+          "lowerCI": 0.42787030821,
+          "upperCI": 1.6717209053,
+          "nullmean": 1.0175596431,
+          "VR": 1.7860068308
+        },
+        "rank_shift_mean": 0.22,
+        "rate_change": 0.010077592073
+      }
+    },
+    "leaveout": {
+      "all": {
+        "lowerCI": 0.57239324697,
+        "upperCI": 1.6622193668,
+        "nullmean": 0.99088631523,
+        "VR": 2.355677669
+      },
+      "drop_GS": {
+        "lowerCI": 0.65947390188,
+        "upperCI": 1.64375852,
+        "nullmean": 0.99740721489,
+        "VR": 1.9281627043
+      },
+      "drop_JPM": {
+        "lowerCI": 0.50084678814,
+        "upperCI": 1.7028612016,
+        "nullmean": 1.0071905062,
+        "VR": 2.0499535983
+      },
+      "drop_GS_JPM": {
+        "lowerCI": 0.46139260454,
+        "upperCI": 1.6980662092,
+        "nullmean": 0.98533217713,
+        "VR": 1.7721149269
+      },
+      "drop_MS": {
+        "lowerCI": 0.61818230179,
+        "upperCI": 1.6469534573,
+        "nullmean": 1.0065453168,
+        "VR": 1.9184940799
+      },
+      "drop_BAC": {
+        "lowerCI": 0.63758618245,
+        "upperCI": 1.542964803,
+        "nullmean": 1.0023570901,
+        "VR": 1.8227980665
+      }
+    }
+  }
+}

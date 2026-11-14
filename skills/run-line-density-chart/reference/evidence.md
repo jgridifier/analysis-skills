@@ -1,0 +1,3 @@
+See [`methods/denselines/RESULTS.md`](../../../methods/denselines/RESULTS.md), [`methods/denselines/APPROVAL.md`](../../../methods/denselines/APPROVAL.md), and the teaching page https://jgridifier.github.io/research-lab/methods-scout/2026-11-13.html#m2.
+
+Headline scout figures: NumPy port vs Rust reference, max relative difference 2.1e-7 on n = 100, 1,000, 5,000 full-span series; gap-case default NaN columns = 100, gap-safe = 0, column-sum after the stop = 40. On the Corning mock, residual brush plus a text keyword recovered 94% of a planted group; the brush is bandwidth-fragile. Stage 2–3 on this repo's real panels has not been run. Rust pixel-parity was not re-run at promotion.

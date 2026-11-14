@@ -17,13 +17,19 @@ description: Use first when asked to analyse a dataset and it is not yet clear w
 | which conditions mark groups that behave differently? | cross-section | `run-regime-tree-analysis` **DRAFT (pending approval)** | ctree | CART, OLS |
 | does a regression's slope depend on the state? | cross-section or time series | `run-regime-tree-analysis` **DRAFT (pending approval)** | MOB `lmtree` | pooled OLS, OLS with interaction |
 | which states precede big moves? (descriptive) | time series | `run-regime-tree-analysis` **DRAFT (pending approval)** | ctree + circular-shift null | historical mean (walk-forward) |
-| forecast the next value | time series | *none yet* — neither skill is a forecaster | — | historical mean / random walk |
+| which of many noisy observations should be shrunk, and which moves are real? | many units, each with an estimate and a standard error | `run-empirical-bayes-shrinkage` | ebnm ash (normal scale mixture) | unpooled observation, complete-pooled group mean, BH z-test |
+| how do I see the typical shape and unusual branches in hundreds of overlapping short series? | a bundle of aligned short series (panel of paths) | `run-line-density-chart` | DenseLines with `gap_safe=True` | unnormalised overlay |
+| do these units' amounts co-move, and how do their ranks rearrange? | closed panel (units × time) | `run-community-rank-analysis` | codyn rank clocks + variance ratio, with a cyclic-shift null | iid shuffle is not a sufficient null |
+| forecast the next value | time series | *none yet* — none of the skills is a forecaster | — | historical mean / random walk |
 | *(new question type)* | | *(new skill)* | | add one row per skill or method (DRAFT until approved) |
 
-**Both task skills are DRAFT (pending approval)**: neither method has Jared's recorded approval yet. Use them only as drafts, and say so in the output.
+**changeforest and partykit remain DRAFT (pending approval).** ebnm, DenseLines and codyn rank clocks were approved by Jared on 2026-11-13 (see each method's `APPROVAL.md`). Their Stage 2–3 three-application pipeline has not been run; say that when you use those skills. Lovell proportionality was approved in the same message but is not promoted; its direction is still to be decided.
 
 Rules of thumb learned so far:
 - Regimes **in time** → change points first; trees on time series need the circular-shift null.
 - Groups **across units** → trees.
-- Neither skill is evidence of predictive power; a forecasting claim needs a walk-forward test against the historical mean.
-- Skills and methods enter this table only through `promote-method-to-skill` (see `docs/WORKFLOW.md`).
+- Many noisy means → ebnm; do not use it to catch a text-vs-numbers mismatch.
+- A spaghetti chart of many short series → DenseLines, with `gap_safe=True` if spans differ, and a brush-sensitivity check.
+- Co-movement and rank rearrangement in a closed group → codyn; VR on raw amounts, ranks on shares, always a cyclic-shift null.
+- None of these skills is evidence of predictive power; a forecasting claim needs a walk-forward test against the historical mean.
+- Skills and methods enter this table only through `promote-method-to-skill` (see `docs/WORKFLOW.md`), plus Jared's dated approval for a non-DRAFT skill.

@@ -6,10 +6,13 @@ lockfiles, aggregates, fitted structure and figures.
 
 - **Newsroom (Pages):** https://jgridifier.github.io/analysis-skills/ — a method article per method, an article per application.
 - **Workflow:** [docs/WORKFLOW.md](docs/WORKFLOW.md) (agent version: [skills/promote-method-to-skill](skills/promote-method-to-skill/SKILL.md)).
-- **Skills:** [skills/README.md](skills/README.md) — `choose-analysis-method`, `run-changepoint-analysis`, `run-regime-tree-analysis`, `promote-method-to-skill`.
+- **Skills:** [skills/README.md](skills/README.md) — `choose-analysis-method`, `run-changepoint-analysis`, `run-regime-tree-analysis`, `run-empirical-bayes-shrinkage`, `run-line-density-chart`, `run-community-rank-analysis`, `promote-method-to-skill`.
 
 | method | applications | reproduction | status (novelty) | skill |
 |---|---|---|---|---|
+| [ebnm](methods/ebnm/RESULTS.md) (Willwerscheid, Carbonetto & Stephens 2025, JSS 114(3)) | scout only (synthetic mock ZBB; Stage 2–3 not run) | scout aggregates locked; `--synthetic` self-test | **promoted** 2026-11-13 (niche) | run-empirical-bayes-shrinkage |
+| [DenseLines](methods/denselines/RESULTS.md) (Moritz & Fisher 2018, arXiv:1808.06019) | scout only (synthetic mock ZBB; Stage 2–3 not run) | gap-case invariants replayed; Rust pixel-parity not re-run | **promoted** 2026-11-13 (obscure) | run-line-density-chart |
+| [codyn](methods/codyn/RESULTS.md) (Hallett et al. 2016, MEE 7(10)) | scout only (Y-9C proxy; Stage 2–3 not run) | scout aggregates locked; `--synthetic` self-test | **promoted** 2026-11-13 (niche) | run-community-rank-analysis |
 | [changeforest](methods/changeforest/RESULTS.md) (Londschien, Bühlmann & Kovács 2023, JMLR 24(216)) | 3 | 3/3 exact | **recommended, awaiting approval** (niche) | run-changepoint-analysis |
 | [partykit ctree/MOB](methods/partykit/RESULTS.md) (Hothorn, Hornik & Zeileis 2006; Zeileis, Hothorn & Hornik 2008; Hothorn & Zeileis 2015) | 3 | 2/3 exact, 1/3 at stated tolerance (CV folds) | **recommended (scoped), awaiting approval** (well-known) | run-regime-tree-analysis |
 

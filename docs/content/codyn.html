@@ -1,0 +1,39 @@
+<section class="tldr"><h2>The short version</h2><ul>
+<li><strong>What it is.</strong> Community-dynamics metrics from ecology, including rank clocks (how each unit's rank moves over time), mean rank shift, rate of compositional change, the variance ratio, and synchrony. One R package, transparent formulas, no neural nets.</li>
+<li><strong>Status:</strong> <span class="verdict adopt">promoted</span> (Jared, 2026-11-13, 11:51 PM ET, naming rank clocks; variance-ratio, synchrony and rate-of-change from the same scout are kept in the skill). Teaching page: <a href="https://jgridifier.github.io/research-lab/methods-scout/2026-11-12-adhoc.html#m1">2026-11-12 ad hoc scout, method 1</a>. Approval: <a href="../methods/codyn/APPROVAL.md">APPROVAL.md</a>.</li>
+<li><strong>Novelty: niche.</strong> Well known in ecology; unusual as a tool for a closed group of firms or programs.</li>
+<li><strong>Evidence limit:</strong> Stage 2–3 on this repo's real panels has not been run. The numbers below are from a public FR Y-9C <em>proxy</em> panel, used descriptively, plus a <code>--synthetic</code> self-test.</li>
+</ul></section>
+
+<div class="sec-head"><span class="n">01</span><h2>Citations</h2><span class="line"></span></div>
+<div class="card teal"><p>Hallett, L. M. et al. (2016). "codyn: An R package of community dynamics metrics." <em>Methods in Ecology and Evolution</em> 7(10):1146–1151. doi:10.1111/2041-210X.12611.<br>
+Package <a href="https://cran.r-project.org/package=codyn">codyn</a> 2.0.6 (R). Scout ran under R 4.5.3. Cyclic-shift null: Hallett et al., <em>Proceedings of the Royal Society B</em> (2014). Variance ratio: Schluter, <em>Ecology</em> 65(3):743–754 (1984).</p></div>
+
+<div class="sec-head"><span class="n">02</span><h2>The math, plainly</h2><span class="line"></span></div>
+<p><strong>Split the inputs.</strong> Use raw amounts for the variance ratio and synchrony; use shares for rank shift, rank clocks, and rate of change. The variance ratio is \(\mathrm{VR} = \mathrm{Var}(\sum_j y_{jt}) / \sum_j \mathrm{Var}(y_{jt})\). On shares of a closed composition the numerator is zero, so VR is degenerate — the scout recorded that explicitly. Mean rank shift is the average, over consecutive times, of how many rank positions units move. Rate of change is the slope of compositional distance against the time lag, and asks whether the mix is walking in one direction. A cyclic-shift null rotates each unit's own series independently, keeping its autocorrelation; an iid shuffle is not a substitute.</p>
+
+<div class="sec-head"><span class="n">03</span><h2>Why it is unusual, and fast</h2><span class="line"></span></div>
+<ul>
+<li>Rank clocks are an unusual, readable picture of who gained or lost position, without fitting a model.</li>
+<li>The cyclic-shift null is the important companion: it is what stops a persistent series from looking like co-movement or a directional walk.</li>
+<li>Leave-outs matter. On the scout, the 14-dealer raw-volume VR was 4.45 (null 0.44–2.00), but the foreign-only subset was 0.73 and inside its own null.</li>
+</ul>
+
+<div class="sec-head"><span class="n">04</span><h2>Verdict</h2><span class="line"></span></div>
+<div class="card"><div class="card-top"><span class="tag teal">Stage 4b</span><span class="verdict adopt">promoted</span></div>
+<p><strong>Status:</strong> promoted, on Jared's dated words in <a href="../methods/codyn/APPROVAL.md"><code>methods/codyn/APPROVAL.md</code></a> (2026-11-13, 11:51 PM ET, message t189u). <strong>Novelty: niche.</strong></p>
+<p>Recommended for <a href="../skills/run-community-rank-analysis/SKILL.md"><code>run-community-rank-analysis</code></a> as a descriptive tool for co-movement and rank rearrangement in a closed group. Always split raw vs shares, always run the cyclic-shift null, and report leave-outs. This is not a forecast, and it is not part of the pre-registered Y-9C trading-OT study. A later three-application pass is still worth doing; it was not a condition of the approval.</p></div>
+
+<div class="sec-head"><span class="n">05</span><h2>Reproduction status</h2><span class="line"></span></div>
+<div class="table-wrap"><table><thead><tr><th>evidence</th><th>what was checked</th><th>status</th></tr></thead><tbody>
+<tr><td>2026-11-12 ad hoc scout, two proxy panels, 999 cyclic shifts</td><td>published VR, null range, foreign-only leave-out, and rate-of-change p locked in <code>original/scout_aggregates.json</code></td><td>aggregates match the teaching page; the 999-draw scout was not re-run</td></tr>
+<tr><td>Skill <code>--synthetic</code> self-test</td><td>VR above a short cyclic-shift null on a co-moving community, not on an independent one; a designed rank swap is recovered</td><td>PASS</td></tr>
+<tr><td>Stage 2–3 on this repo's real panels</td><td>three distinct applications, clean-environment reproduction</td><td>not run</td></tr>
+</tbody></table></div>
+<p class="meta">Details in <a href="../methods/codyn/RESULTS.md">RESULTS.md</a>. Headline scout figures: 14-dealer raw-volume VR = 4.45 vs cyclic-shift null 0.44–2.00; foreign-only VR = 0.73, inside its null; rate of compositional change p = 0.001. Public FR Y-9C proxy; descriptive only.</p>
+
+<div class="sec-head"><span class="n">06</span><h2>Applications</h2><span class="line"></span></div>
+<p>No Stage 2 application articles yet. The scout write-up is the teaching page, <a href="https://jgridifier.github.io/research-lab/methods-scout/2026-11-12-adhoc.html#m1">research-lab methods-scout 2026-11-12 ad hoc #m1</a>.</p>
+
+<div class="sec-head"><span class="n">07</span><h2>Skill</h2><span class="line"></span></div>
+<p><a href="../skills/run-community-rank-analysis/SKILL.md"><code>run-community-rank-analysis</code></a>. Usage example: <code>Rscript skills/run-community-rank-analysis/scripts/rank_clocks.R --synthetic</code>.</p>

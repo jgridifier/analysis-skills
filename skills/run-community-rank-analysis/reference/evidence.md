@@ -1,0 +1,3 @@
+See [`methods/codyn/RESULTS.md`](../../../methods/codyn/RESULTS.md), [`methods/codyn/APPROVAL.md`](../../../methods/codyn/APPROVAL.md), and the teaching page https://jgridifier.github.io/research-lab/methods-scout/2026-11-12-adhoc.html#m1.
+
+Headline scout figures (public FR Y-9C proxy, descriptive only, codyn 2.0.6): 14-dealer raw-volume VR = 4.45 vs cyclic-shift null 0.44–2.00; foreign-only VR = 0.73, inside its null; rate of compositional change p = 0.001. Rank shift on that panel was not unusual under the null. Stage 2–3 on this repo's real panels has not been run, and the 999-draw scout itself was not re-run at promotion.
