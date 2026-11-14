@@ -129,6 +129,9 @@ def build_index(arts):
 <li><strong><a href="{BLOB}/skills/choose-analysis-method/SKILL.md">choose-analysis-method</a></strong>: router from question type and data shape to a skill and a starting method.</li>
 <li><strong><a href="{BLOB}/skills/run-changepoint-analysis/SKILL.md">run-changepoint-analysis</a></strong> (DRAFT, pending approval): when did behaviour change? changeforest by default; mean and kernel baselines.</li>
 <li><strong><a href="{BLOB}/skills/run-regime-tree-analysis/SKILL.md">run-regime-tree-analysis</a></strong> (DRAFT, pending approval): which conditions mark different groups, and does the slope depend on the state? ctree and MOB.</li>
+<li><strong><a href="{BLOB}/skills/run-empirical-bayes-shrinkage/SKILL.md">run-empirical-bayes-shrinkage</a></strong>: shrink many noisy observations and call which moves are real. ebnm (promoted 2026-11-13; Stage 2–3 not yet run).</li>
+<li><strong><a href="{BLOB}/skills/run-line-density-chart/SKILL.md">run-line-density-chart</a></strong>: see the typical path and unusual branches in a bundle of short series. DenseLines (promoted 2026-11-13; Stage 2–3 not yet run).</li>
+<li><strong><a href="{BLOB}/skills/run-community-rank-analysis/SKILL.md">run-community-rank-analysis</a></strong>: co-movement and rank rearrangement in a closed group. codyn rank clocks (promoted 2026-11-13; Stage 2–3 not yet run).</li>
 <li><strong><a href="{BLOB}/skills/promote-method-to-skill/SKILL.md">promote-method-to-skill</a></strong>: the workflow above, as an agent checklist.</li>
 </ul>
 """

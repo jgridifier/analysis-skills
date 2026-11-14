@@ -1,0 +1,39 @@
+<section class="tldr"><h2>The short version</h2><ul>
+<li><strong>What it is.</strong> Empirical Bayes for the normal-means problem: many noisy observations \(x_i=\theta_i+\varepsilon_i\), a prior \(G\) estimated from the whole set, and a posterior mean plus a local false sign rate for each \(i\). Fifteen prior families in one R package, from a point-normal spike-and-slab to a nonparametric scale mixture (ash).</li>
+<li><strong>Status:</strong> <span class="verdict adopt">promoted</span> (Jared, 2026-11-13, 11:51 PM ET). Teaching page: <a href="https://jgridifier.github.io/research-lab/methods-scout/2026-11-13.html#m1">2026-11-13 scout, method 1</a>. Approval: <a href="../methods/ebnm/APPROVAL.md">APPROVAL.md</a>.</li>
+<li><strong>Novelty: niche.</strong> Standard in statistical genetics; less used as a general tool for noisy program-level series.</li>
+<li><strong>Evidence limit:</strong> the formal three-application pipeline on this repo's real panels has not been run. The numbers below are from a SYNTHETIC mock-budget scout, plus a <code>--synthetic</code> self-test.</li>
+</ul></section>
+
+<div class="sec-head"><span class="n">01</span><h2>Citations</h2><span class="line"></span></div>
+<div class="card teal"><p>Willwerscheid, J., Carbonetto, P. &amp; Stephens, M. (2025). "ebnm: An R Package for Solving the Empirical Bayes Normal Means Problem Using a Variety of Prior Families." <em>Journal of Statistical Software</em> 114(3):1–33. doi:10.18637/jss.v114.i03.<br>
+Package <a href="https://cran.r-project.org/package=ebnm">ebnm</a> 1.1.42 (R), with ashr 2.2.63 and mixsqp 0.3.54. Scout ran under R 4.5.3.</p></div>
+
+<div class="sec-head"><span class="n">02</span><h2>The math, plainly</h2><span class="line"></span></div>
+<p>Each unit gives an observation \(x_i \sim N(\theta_i, s_i^2)\) and a known (or carefully estimated) standard error \(s_i\). The unknown means \(\theta_i\) are drawn from a prior \(G\) that is itself estimated from \(\{(x_i,s_i)\}\). The package returns the posterior mean \(\hat\theta_i = E(\theta_i \mid x_i, s_i, \hat G)\) and the local false sign rate, the posterior probability that a reported sign is wrong. A small lfsr is a call that the move is real and of that sign. The default starting family here is ash, a mixture of zero-mean normals at many scales; point-normal (a spike at the mode plus one normal slab) is the usual companion.</p>
+
+<div class="sec-head"><span class="n">03</span><h2>Why it is unusual, and fast</h2><span class="line"></span></div>
+<ul>
+<li>One interface covers many prior families, so a flexible mixture and a simple baseline can be compared without switching packages.</li>
+<li>lfsr is a built-in, signed alternative to a BH-adjusted z-test: on the Corning mock it called 91 real year-on-year moves with 0 wrong signs, against 14 for BH.</li>
+<li>The fits themselves are cheap (tenths of a second for a thousand observations on the scout). The work is in getting honest \(s_i\).</li>
+</ul>
+
+<div class="sec-head"><span class="n">04</span><h2>Verdict</h2><span class="line"></span></div>
+<div class="card"><div class="card-top"><span class="tag teal">Stage 4b</span><span class="verdict adopt">promoted</span></div>
+<p><strong>Status:</strong> promoted, on Jared's dated words in <a href="../methods/ebnm/APPROVAL.md"><code>methods/ebnm/APPROVAL.md</code></a> (2026-11-13, 11:51 PM ET, message t189u). <strong>Novelty: niche.</strong></p>
+<p>Recommended for <a href="../skills/run-empirical-bayes-shrinkage/SKILL.md"><code>run-empirical-bayes-shrinkage</code></a> when the question is shrinkage or "which of these noisy moves are real?" Always report the unpooled observation and the complete-pooled group mean; complete pooling was worse than doing nothing on the scout. Do <em>not</em> use it to catch a mismatch between a text label and a numeric path — that use showed no material gain. A later three-application pass on this repo's real panels is still worth doing; it was not a condition of the approval.</p></div>
+
+<div class="sec-head"><span class="n">05</span><h2>Reproduction status</h2><span class="line"></span></div>
+<div class="table-wrap"><table><thead><tr><th>evidence</th><th>what was checked</th><th>status</th></tr></thead><tbody>
+<tr><td>2026-11-13 scout, A1–A3, two synthetic mock firms</td><td>published RMSE and lfsr call counts locked in <code>original/scout_aggregates.json</code></td><td>aggregates match the teaching page</td></tr>
+<tr><td>Skill <code>--synthetic</code> self-test</td><td>ash beats unpooled and complete-pooled RMSE on a 400-point spike-and-slab problem; lfsr &lt; 0.05 calls have a low false-sign rate</td><td>PASS</td></tr>
+<tr><td>Stage 2–3 on this repo's real panels</td><td>three distinct applications, clean-environment reproduction, null and baseline gates</td><td>not run</td></tr>
+</tbody></table></div>
+<p class="meta">Details in <a href="../methods/ebnm/RESULTS.md">RESULTS.md</a>. Headline scout figures: 2025-level log RMSE 0.146 → 0.108 (Corning mock) and 0.138 → 0.109 (Morgan Stanley mock) with ash; lfsr &lt; 0.05 called 91 real year-on-year moves with 0 wrong signs on the Corning mock, versus 14 for BH. These are SYNTHETIC mock budgets, not real firm budgets.</p>
+
+<div class="sec-head"><span class="n">06</span><h2>Applications</h2><span class="line"></span></div>
+<p>No Stage 2 application articles yet. The scout write-up is the teaching page, <a href="https://jgridifier.github.io/research-lab/methods-scout/2026-11-13.html#m1">research-lab methods-scout 2026-11-13 #m1</a>.</p>
+
+<div class="sec-head"><span class="n">07</span><h2>Skill</h2><span class="line"></span></div>
+<p><a href="../skills/run-empirical-bayes-shrinkage/SKILL.md"><code>run-empirical-bayes-shrinkage</code></a>. Usage example: <code>Rscript skills/run-empirical-bayes-shrinkage/scripts/shrinkage.R --synthetic</code>.</p>

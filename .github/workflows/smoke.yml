@@ -17,13 +17,19 @@ jobs:
         run: python docs/build.py && git diff --stat --exit-code -- docs/articles docs/index.html || (echo "run python docs/build.py and commit" && exit 1)
       - name: run-changepoint-analysis synthetic example
         run: python skills/run-changepoint-analysis/scripts/changepoint.py --synthetic
+      - name: run-line-density-chart synthetic example
+        run: python skills/run-line-density-chart/scripts/line_density.py --synthetic
   r:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: r-lib/actions/setup-r@v2
         with: {r-version: "4.4.3", use-public-rspm: true}
-      - name: install partykit, rpart, jsonlite (binaries from Posit Public Package Manager)
-        run: Rscript -e 'install.packages(c("partykit","rpart","jsonlite"))'
+      - name: install partykit, rpart, jsonlite, ebnm, codyn (binaries from Posit Public Package Manager)
+        run: Rscript -e 'install.packages(c("partykit","rpart","jsonlite","ebnm","codyn"))'
       - name: run-regime-tree-analysis synthetic example
         run: Rscript skills/run-regime-tree-analysis/scripts/regime_tree.R --synthetic
+      - name: run-empirical-bayes-shrinkage synthetic example
+        run: Rscript skills/run-empirical-bayes-shrinkage/scripts/shrinkage.R --synthetic
+      - name: run-community-rank-analysis synthetic example
+        run: Rscript skills/run-community-rank-analysis/scripts/rank_clocks.R --synthetic
