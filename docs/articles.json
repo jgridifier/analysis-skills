@@ -81,6 +81,56 @@
       }
     },
     {
+      "slug": "scout-2026-11-15-ccm",
+      "type": "scout",
+      "method": "Convergent cross mapping (pyEDM)",
+      "date": "2026-11-15",
+      "title": "Scout: convergent cross mapping finds fails and leveraged-fund positioning in the repo spread\u2019s dynamics, not in each other",
+      "dek": "Convergent cross mapping from fisheries ecology (Sugihara et al., Science 2012; Ye et al., Scientific Reports 2015; pyEDM 2.5.7), run on public CFTC TFF, NY Fed fails and OFR repo aggregates for Q1.5. Weekly fails cross-map the DVP\u2013tri-party spread (\u03c1 = 0.33) and so do leveraged-fund Treasury-futures position changes (\u03c1 = 0.25): shift-null p = 0.005, Holm 0.05 (the 200-surrogate floor), stable across halves. Positioning and fails don\u2019t cross-map either way, though linear Granger rejects both ways. Scout status: interesting; not started.",
+      "verdict": "scout: interesting",
+      "status": "scouted, not in workflow",
+      "novelty": "niche",
+      "tags": [
+        "CCM",
+        "empirical dynamic modeling",
+        "ecology",
+        "positioning vs funding",
+        "Q1",
+        "exotic",
+        "exotic-transfer"
+      ],
+      "links": {
+        "self": "https://jgridifier.github.io/research-lab/methods-scout/2026-11-15.html#m1",
+        "parent": null,
+        "children": []
+      }
+    },
+    {
+      "slug": "scout-2026-11-15-kairos",
+      "type": "scout",
+      "method": "Seriation + event dates (kairos/tabula)",
+      "date": "2026-11-15",
+      "title": "Scout: archaeological seriation dates the repo market\u2019s venue and tenor mix, and Form PF borrowing growth sets its pace",
+      "dek": "Correspondence-analysis seriation, Por\u010di\u0107\u2019s significance test, Bellanger\u2013Husi event dates and EPPM battleship plots from archaeology (kairos 2.3.0, tabula 3.3.2), run on public OFR repo and SEC Form PF aggregates for Q1.4. The 9-segment mix orders 101 months almost exactly by date (Spearman \u22120.96, p < 0.001). A walk-forward mix clock errs by 1.06 years vs 1.92 naive. Form PF total borrowing growth leads the clock\u2019s speed by 3\u20136 months (r = 0.56, Holm p = 0.009). The scout recommends it for the promote workflow; not started, awaiting Jared\u2019s pick.",
+      "verdict": "scout: recommend for promote workflow",
+      "status": "scouted, not in workflow",
+      "novelty": "obscure",
+      "tags": [
+        "seriation",
+        "event dates",
+        "archaeology",
+        "battleship plot",
+        "Q1",
+        "exotic",
+        "exotic-transfer"
+      ],
+      "links": {
+        "self": "https://jgridifier.github.io/research-lab/methods-scout/2026-11-15.html#m2",
+        "parent": null,
+        "children": []
+      }
+    },
+    {
       "slug": "scout-2026-11-14-crqa",
       "type": "scout",
       "method": "CRQA (crqa)",
