@@ -81,6 +81,54 @@
       }
     },
     {
+      "slug": "scout-2026-11-14-crqa",
+      "type": "scout",
+      "method": "CRQA (crqa)",
+      "date": "2026-11-14",
+      "title": "Scout: cross-recurrence shows when Treasury fails and repo spreads move together, and when they stop",
+      "dek": "Cross-recurrence quantification analysis (Coco & Dale, Frontiers in Psychology 2014; The R Journal 2021), run on public Form PF, OFR repo and NY Fed fails aggregates for Q1. The run was interrupted on 11-14 and completed on 11-15. Weekly financing fails and the DVP\u2013tri-party spread are anti-recurrent in the same week (p = 0.011), from late 2018 to mid-2025, and not in the late-2025 fails spike. Form PF prime-broker borrowings show no familywise lead or lag. The first pass's windowed null was shift-invariant; that is fixed. Scout status: interesting; not started.",
+      "verdict": "scout: interesting",
+      "status": "scouted, not in workflow",
+      "novelty": "niche",
+      "tags": [
+        "CRQA",
+        "recurrence",
+        "cognitive science",
+        "lead/lag",
+        "Q1",
+        "exotic"
+      ],
+      "links": {
+        "self": "https://jgridifier.github.io/research-lab/methods-scout/2026-11-14.html#m1",
+        "parent": null,
+        "children": []
+      }
+    },
+    {
+      "slug": "scout-2026-11-14-idr",
+      "type": "scout",
+      "method": "IDR (isodistrreg)",
+      "date": "2026-11-14",
+      "title": "Scout: isotonic distributional regression says the stress path, not the buffer, describes payouts",
+      "dek": "Isotonic distributional regression (Henzi, Ziegel & Gneiting, JRSS-B 2021; CRAN isodistrreg with a Rust core), run on public Fed stress-test results and FR Y-9C payouts for Q3. The run was interrupted on 11-14 and completed on 11-15. Projected pre-tax income gives 15% CRPS skill over climatology for next payout ranks (p = 0.003). The SCB alone gives none (\u22121.9%), with 38% of firm-years at the floor. IDR beats OLS on raw payouts, but loses with a 2-D partial order. The scout recommends it for the promote workflow; not started, awaiting Jared's pick.",
+      "verdict": "scout: recommend for promote workflow",
+      "status": "scouted, not in workflow",
+      "novelty": "niche",
+      "tags": [
+        "IDR",
+        "distributional regression",
+        "weather forecasting",
+        "CRPS",
+        "Q3",
+        "exotic"
+      ],
+      "links": {
+        "self": "https://jgridifier.github.io/research-lab/methods-scout/2026-11-14.html#m2",
+        "parent": null,
+        "children": []
+      }
+    },
+    {
       "slug": "scout-2026-11-13-ebnm",
       "type": "scout",
       "method": "ebnm",
