@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nitro XML hand-check v3 — phone checklist</title>
+<meta name="description" content="Phone-friendly Office hand-check for Nitro XML pack v3 at 4aee651. Open each saved file in Word, Excel, or PowerPoint.">
+<style>
+:root{
+  --navy:#0b1f3a; --navy2:#16325c; --navy3:#e8eef7; --ink:#111; --paper:#fff;
+  --saved:#0b6e4f; --saved-bg:#e3f6ee; --orig:#16325c; --warn:#7a4a00; --warn-bg:#fff4d6;
+  --line:#c9d3e3;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+header{background:var(--navy);color:#fff;padding:18px 16px 16px;padding-top:max(18px,env(safe-area-inset-top));}
+header h1{margin:0;font-size:1.28rem;line-height:1.3}
+header p{margin:8px 0 0;opacity:.88;font-size:.92rem}
+header a{color:#fff}
+main{max-width:720px;margin:0 auto;padding:12px 16px 64px}
+h2{color:var(--navy);font-size:1.15rem;margin:1.6em 0 .5em;border-bottom:3px solid var(--navy);padding-bottom:4px}
+.how,.known,.meta{background:var(--navy3);border-left:4px solid var(--navy);padding:12px 14px;margin:14px 0;border-radius:0 8px 8px 0}
+.known{background:var(--warn-bg);border-left-color:var(--warn)}
+.how h2{margin:0 0 .4em;border:0;padding:0;font-size:1.05rem}
+.how ol{margin:8px 0 0;padding-left:1.25em}
+.how li{margin:8px 0}
+.jump{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 8px}
+.jump a{display:inline-block;background:var(--navy3);color:var(--navy2);text-decoration:none;padding:8px 10px;border-radius:999px;font-size:.86rem;font-weight:600}
+.case{border:1px solid var(--line);border-radius:12px;padding:14px 14px 16px;margin:18px 0 28px;background:#fff}
+.case h2{margin-top:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:8px}
+.tag{display:inline-block;background:var(--navy);color:#fff;font-size:.7rem;letter-spacing:.04em;padding:3px 8px;border-radius:999px;font-weight:700;text-transform:uppercase;position:relative;top:-2px}
+.look{margin:8px 0 12px}
+.btns{display:grid;grid-template-columns:1fr;gap:10px;margin:14px 0}
+a.btn{display:block;text-align:center;text-decoration:none;font-weight:700;padding:14px 12px;border-radius:10px;font-size:1.05rem}
+a.btn.saved{background:var(--saved);color:#fff}
+a.btn.orig{background:var(--navy3);color:var(--orig);border:1px solid var(--navy2)}
+.pair{display:grid;grid-template-columns:1fr;gap:12px;margin-top:10px}
+figcaption{font-size:.8rem;color:#444;margin:.35em 0 0}
+figure{margin:0}
+figure img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:8px;background:#fafafa}
+.sub{font-size:.85rem;color:#333;margin:10px 0 4px;font-weight:700}
+.lo{font-size:.8rem;color:#555;background:#f6f8fb;padding:8px 10px;border-radius:8px;margin:8px 0 0}
+.folder{margin:10px 0;font-size:.95rem}
+footer{margin:32px 0 8px;font-size:.85rem;color:#444}
+@media (min-width:640px){
+  .btns{grid-template-columns:1fr 1fr}
+  .pair.side{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Nitro XML hand-check v3</h1>
+  <p>Phone checklist · pack at <code>4aee651</code> · 10 Office files saved through packed <code>@nitro-xml/react</code></p>
+</header>
+<main>
+<section class="how" id="how">
+  <h2>How to check on your phone</h2>
+  <ol>
+    <li>Tap <strong>Open Saved</strong> for a case. The file is a real <code>.docx</code>, <code>.xlsx</code>, or <code>.pptx</code> in your Google Drive (not converted to a Google Doc).</li>
+    <li>In Drive, tap the share / overflow menu and choose <strong>Word</strong>, <strong>Excel</strong>, or <strong>PowerPoint</strong> — not Google Docs, Sheets, or Slides.</li>
+    <li>Confirm it opens <strong>without a repair prompt</strong>, and that the edit described below looks right. Surrounding text, formatting, images, tables, and sheet or slide order should be unchanged except for that edit.</li>
+    <li>Optionally open <strong>Original</strong> the same way to compare.</li>
+  </ol>
+  <p class="folder"><a href="https://drive.google.com/drive/folders/12fA6KmofEaFx48zEZxF8R-WIEli6GvVD">All 20 unzipped files in Drive</a> (sign in to this Google account if prompted).</p>
+</section>
+
+<section class="known">
+  <strong>Known item (case 5).</strong> <code>xlsx-insert-row-formula</code> rewrites <code>xl/workbook.xml</code>: it adds a recalc flag (<code>fullCalcOnLoad</code>) and a <code>fileVersion</code> element, tracked as E2 <a href="https://github.com/jgridifier/nitro-xml/issues/509">#509</a>. The formula and inserted row should still be correct when Excel opens the file.
+</section>
+
+<p class="lo">The before/after images are <strong>LibreOffice headless previews</strong> of the first relevant page or slide, not Microsoft Office. Use them to find the edit. The official check is opening the Saved file in the Office app.</p>
+
+<nav class="jump" aria-label="Cases">
+  <a href="#c01">1 Word text</a>
+  <a href="#c02">2 Word table</a>
+  <a href="#c03">3 Word row</a>
+  <a href="#c04">4 Excel text</a>
+  <a href="#c05">5 Excel formula</a>
+  <a href="#c06">6 Excel style</a>
+  <a href="#c07">7 PPT style</a>
+  <a href="#c08">8 PPT move</a>
+  <a href="#c09">9 PPT reorder</a>
+  <a href="#c10">10 Excel undo</a>
+</nav>
+
+<article class="case" id="c01">
+  <h2><span class="tag">Word</span> 1. Text and format</h2>
+  <p class="look"><strong>Edit:</strong> Replace the first paragraph with “Formatted”, make that run bold and blue (<code>#0000FF</code>), and center the paragraph.</p>
+  <p class="look"><strong>Look for:</strong> Line 1 reads <em>Formatted</em>, bold, blue, and centered. Line 2 still says “Line two”, left-aligned, not bold. Line numbers 1 and 2 remain. No repair prompt.</p>
+  <div class="btns">
+    <a class="btn saved" href="https://drive.google.com/file/d/1wYAN9TOYf5IX1LqNN1EgVBk26QREdy64/view">Open Saved in Word</a>
+    <a class="btn orig" href="https://drive.google.com/file/d/1hCsvUppAygONgbPxxsm-IRGVqEn29V8O/view">Open Original</a>
+  </div>
+  <div class="pair side">
+    <figure><figcaption>Original · LibreOffice preview, page 1 — not Office</figcaption><img src="previews/01-docx-text-and-format__ORIGINAL.png" alt="Original Word document, first paragraph says Line one"></figure>
+    <figure><figcaption>Saved · LibreOffice preview, page 1 — not Office</figcaption><img src="previews/01-docx-text-and-format__SAVED.png" alt="Saved Word document, first paragraph is blue centered Formatted"></figure>
+  </div>
+</article>
+
+<article class="case" id="c02">
+  <h2><span class="tag">Word</span> 2. Text plus table cell</h2>
+  <p class="look"><strong>Edit:</strong> Change the first paragraph of this 10-page document to “Intro”, and set the table cell at row 0, column 0 (on page 10) to “ZZ”.</p>
+  <p class="look"><strong>Look for:</strong> Page 1 starts with “Intro” instead of “Page 1 seed=4”. On page 10, the first table cell is “ZZ” (it was “A”); cell “B” and the blue square are unchanged. Pages 2–9 stay “Page N seed=4”.</p>
+  <div class="btns">
+    <a class="btn saved" href="https://drive.google.com/file/d/1OxscSfIl9lrWQeNHaEfGKKs3M0NErTZ-/view">Open Saved in Word</a>
+    <a class="btn orig" href="https://drive.google.com/file/d/13TDUO8YbRfzS0U2w1YAKXg04l9y2m4xQ/view">Open Original</a>
+  </div>
+  <p class="sub">Page 1</p>
+  <div class="pair side">
+    <figure><figcaption>Original · LibreOffice preview, page 1 — not Office</figcaption><img src="previews/02-docx-pages10-multi__ORIGINAL__p01.png" alt="Original page 1 text Page 1 seed=4"></figure>
+    <figure><figcaption>Saved · LibreOffice preview, page 1 — not Office</figcaption><img src="previews/02-docx-pages10-multi__SAVED__p01.png" alt="Saved page 1 text Intro"></figure>
+  </div>
+  <p class="sub">Page 10 — table</p>
+  <div class="pair side">
+    <figure><figcaption>Original · LibreOffice preview, page 10 — not Office</figcaption><img src="previews/02-docx-pages10-multi__ORIGINAL__p10.png" alt="Original page 10 table cells A and B"></figure>
+    <figure><figcaption>Saved · LibreOffice preview, page 10 — not Office</figcaption><img src="previews/02-docx-pages10-multi__SAVED__p10.png" alt="Saved page 10 table cells ZZ and B"></figure>
+  </div>
+</article>
+
+<article class="case" id="c03">
+  <h2><span class="tag">Word</span> 3. Insert table row</h2>
+  <p class="look"><strong>Edit:</strong> Insert a row in the page-10 table at position 1, then set that new row’s first cell to “R1”.</p>
+  <p class="look"><strong>Look for:</strong> Page 1 is unchanged (“Page 1 seed=4”). On page 10 the table still has “A” and “B” in the first row, plus a new second row whose first cell is “R1”. The blue square is still there. No repair prompt.</p>
+  <div class="btns">
+    <a class="btn saved" href="https://drive.google.com/file/d/1U7eWEqbmA2GOGIVoEvXPa61pLT_XGQJb/view">Open Saved in Word</a>
+    <a class="btn orig" href="https://drive.google.com/file/d/1fI2IOqNRKVGoOhhqFRyTymlC31R43Hpf/view">Open Original</a>
+  </div>
+  <p class="sub">Page 10 — table (page 1 is unchanged)</p>
+  <div class="pair side">
+    <figure><figcaption>Original · LibreOffice preview, page 10 — not Office</figcaption><img src="previews/03-docx-pages10-insert-row__ORIGINAL__p10.png" alt="Original page 10 table with one row A and B"></figure>
+    <figure><figcaption>Saved · LibreOffice preview, page 10 — not Office</figcaption><img src="previews/03-docx-pages10-insert-row__SAVED__p10.png" alt="Saved page 10 table with a new R1 row"></figure>
+  </div>
+</article>
+
+<article class="case" id="c04">
+  <h2><span class="tag">Excel</span> 4. Set cell text</h2>
+  <p class="look"><strong>Edit:</strong> Set B1 to the plain text “hello”.</p>
+  <p class="look"><strong>Look for:</strong> B1 is <em>hello</em>. A1 is still “row-0”. C1 is still 3. The rest of the 1k-cell sheet, including the color scale on the numbers, is unchanged.</p>
+  <div class="btns">
+    <a class="btn saved" href="https://drive.google.com/file/d/1iKW4xBTOoBLgUEigwKL12drvs2PWgjxX/view">Open Saved in Excel</a>
+    <a class="btn orig" href="https://drive.google.com/file/d/1d2eoLXHgumuLaCsZR39Wt3jOnogUQPpA/view">Open Original</a>
+  </div>
+  <div class="pair side">
+    <figure><figcaption>Original · LibreOffice preview, top of sheet — not Office</figcaption><img src="previews/04-xlsx-set-cell-text__ORIGINAL.png" alt="Original sheet, B1 is 2"></figure>
+    <figure><figcaption>Saved · LibreOffice preview, top of sheet — not Office</figcaption><img src="previews/04-xlsx-set-cell-text__SAVED.png" alt="Saved sheet, B1 is hello"></figure>
+  </div>
+</article>
+
+<article class="case" id="c05">
+  <h2><span class="tag">Excel</span> 5. Insert row + formula</h2>
+  <p class="look"><strong>Edit:</strong> Set B1 to the formula <code>=A1</code>, then insert one row at the top so that formula moves down and becomes <code>=A2</code>.</p>
+  <p class="look"><strong>Look for:</strong> Row 1 is empty. A2 is “row-0”. B2’s formula is <code>=A2</code> (check the formula bar). After Excel calculates, B2’s value should be “row-0”. C2 is still 3. The old first row of data has shifted down one.</p>
+  <p class="known" style="margin:12px 0"><strong>Known item.</strong> This save rewrites <code>xl/workbook.xml</code> (recalc flag <code>fullCalcOnLoad</code>, plus <code>fileVersion</code>, tracked as <a href="https://github.com/jgridifier/nitro-xml/issues/509">#509</a>). That’s expected. The file should still open and the formula should be correct.</p>
+  <div class="btns">
+    <a class="btn saved" href="https://drive.google.com/file/d/1VGOHYBloPRj6Ywq9J07voSBeai_c5wbg/view">Open Saved in Excel</a>
+    <a class="btn orig" href="https://drive.google.com/file/d/19hPJzq2MZAjrmylyszYe3t0HjXglXOcn/view">Open Original</a>
+  </div>
+  <div class="pair side">
+    <figure><figcaption>Original · LibreOffice preview, top of sheet — not Office</figcaption><img src="previews/05-xlsx-insert-row-formula__ORIGINAL.png" alt="Original sheet, data starts at row 1"></figure>
+    <figure><figcaption>Saved · LibreOffice preview, top of sheet — not Office</figcaption><img src="previews/05-xlsx-insert-row-formula__SAVED.png" alt="Saved sheet, empty row 1 and B2 showing row-0"></figure>
+  </div>
+</article>
+
+<article class="case" id="c06">
+  <h2><span class="tag">Excel</span> 6. Value and style</h2>
+  <p class="look"><strong>Edit:</strong> Set A1 to 100, then apply bold and number format <code>0</code>.</p>
+  <p class="look"><strong>Look for:</strong> A1 shows <strong>100</strong> in bold. B1 is still 2. The other cells and the color scale are unchanged.</p>
+  <div class="btns">
+    <a class="btn saved" href="https://drive.google.com/file/d/112yUgmwRE2KihGKwA5qPduSqt_dXJPkj/view">Open Saved in Excel</a>
+    <a class="btn orig" href="https://drive.google.com/file/d/1tSMTaPQjgt-XdpMl1xdxcGX6vyCHMx7P/view">Open Original</a>
+  </div>
+  <div class="pair side">
+    <figure><figcaption>Original · LibreOffice preview, top of sheet — not Office</figcaption><img src="previews/06-xlsx-value-and-style__ORIGINAL.png" alt="Original sheet, A1 is row-0"></figure>
+    <figure><figcaption>Saved · LibreOffice preview, top of sheet — not Office</figcaption><img src="previews/06-xlsx-value-and-style__SAVED.png" alt="Saved sheet, A1 is bold 100"></figure>
+  </div>
+</article>
+
+<article class="case" id="c07">
+  <h2><span class="tag">PowerPoint</span> 7. Text and style</h2>
+  <p class="look"><strong>Edit:</strong> Change the first shape on slide 1 to the text “Styled”, then set that text bold at 28 pt.</p>
+  <p class="look"><strong>Look for:</strong> Slide 1 shows <strong>Styled</strong> in a larger bold font. The original shape is a tall, narrow box, so LibreOffice may stack the letters vertically — in PowerPoint, confirm the text, bold, and 28 pt size. Slides 2–10 still say “Slide 2” through “Slide 10”.</p>
+  <div class="btns">
+    <a class="btn saved" href="https://drive.google.com/file/d/15WLnc4HPBtcM2aFkmY7_m6ALZ9Xm9jGZ/view">Open Saved in PowerPoint</a>
+    <a class="btn orig" href="https://drive.google.com/file/d/1EMARduyuspDe-PH7TFw2bIDY53-NmKAi/view">Open Original</a>
+  </div>
+  <div class="pair side">
+    <figure><figcaption>Original · LibreOffice preview, slide 1 — not Office</figcaption><img src="previews/07-pptx-text-and-style__ORIGINAL.png" alt="Original slide 1 with stacked Slide 1 text"></figure>
+    <figure><figcaption>Saved · LibreOffice preview, slide 1 — not Office</figcaption><img src="previews/07-pptx-text-and-style__SAVED.png" alt="Saved slide 1 with stacked Styled text"></figure>
+  </div>
+</article>
+
+<article class="case" id="c08">
+  <h2><span class="tag">PowerPoint</span> 8. Move and resize</h2>
+  <p class="look"><strong>Edit:</strong> Move and resize the first shape on slide 1 to x=40, y=60, width=280, height=90.</p>
+  <p class="look"><strong>Look for:</strong> Slide 1 still says “Slide 1”, but the text box is wider and shorter, so the words read on one line instead of stacking. The box has moved in from the corner. Other slides are unchanged.</p>
+  <div class="btns">
+    <a class="btn saved" href="https://drive.google.com/file/d/1S6gsg68o4DdBdkYCGh3qLEZJ19PlT-d2/view">Open Saved in PowerPoint</a>
+    <a class="btn orig" href="https://drive.google.com/file/d/1whTL9MiKnY91qO37hjMIW9FQhqHoXNDU/view">Open Original</a>
+  </div>
+  <div class="pair side">
+    <figure><figcaption>Original · LibreOffice preview, slide 1 — not Office</figcaption><img src="previews/08-pptx-move-resize-s0__ORIGINAL.png" alt="Original slide 1, tall narrow Slide 1 text"></figure>
+    <figure><figcaption>Saved · LibreOffice preview, slide 1 — not Office</figcaption><img src="previews/08-pptx-move-resize-s0__SAVED.png" alt="Saved slide 1, Slide 1 on one line in a wider box"></figure>
+  </div>
+</article>
+
+<article class="case" id="c09">
+  <h2><span class="tag">PowerPoint</span> 9. Reorder slides</h2>
+  <p class="look"><strong>Edit:</strong> Move the first slide to the end of the thumbnail rail (from index 0 to 9).</p>
+  <p class="look"><strong>Look for:</strong> The deck still has 10 slides. The first slide is now “Slide 2”. The last slide is the original “Slide 1”. Thumbnails should follow 2, 3, … 10, then 1.</p>
+  <div class="btns">
+    <a class="btn saved" href="https://drive.google.com/file/d/1otmJvKHmtF4ebrBFEGyymWogeBTjWBN8/view">Open Saved in PowerPoint</a>
+    <a class="btn orig" href="https://drive.google.com/file/d/1CWq2ItVk6fO2k_BNq07CB5cBiIgaCsD4/view">Open Original</a>
+  </div>
+  <p class="sub">First slide</p>
+  <div class="pair side">
+    <figure><figcaption>Original first slide · LibreOffice preview — not Office</figcaption><img src="previews/09-pptx-reorder-slide__ORIGINAL__first.png" alt="Original first slide is Slide 1"></figure>
+    <figure><figcaption>Saved first slide · LibreOffice preview — not Office</figcaption><img src="previews/09-pptx-reorder-slide__SAVED__first.png" alt="Saved first slide is Slide 2"></figure>
+  </div>
+  <p class="sub">Last slide</p>
+  <div class="pair side">
+    <figure><figcaption>Original last slide · LibreOffice preview — not Office</figcaption><img src="previews/09-pptx-reorder-slide__ORIGINAL__last.png" alt="Original last slide is Slide 10"></figure>
+    <figure><figcaption>Saved last slide · LibreOffice preview — not Office</figcaption><img src="previews/09-pptx-reorder-slide__SAVED__last.png" alt="Saved last slide is Slide 1"></figure>
+  </div>
+</article>
+
+<article class="case" id="c10">
+  <h2><span class="tag">Excel</span> 10. Undo then redo</h2>
+  <p class="look"><strong>Edit:</strong> Set B1 to “hello”, undo that change, then redo it. After save and reopen, B1 must still contain the replacement.</p>
+  <p class="look"><strong>Look for:</strong> B1 is <em>hello</em> (the redo stuck). A1 is still “row-0”. C1 is still 3. Same visual result as case 4, but this file went through undo and redo before save.</p>
+  <div class="btns">
+    <a class="btn saved" href="https://drive.google.com/file/d/1wV-ObUfw57nTnsNIF-L-WP8CNJvtZTrN/view">Open Saved in Excel</a>
+    <a class="btn orig" href="https://drive.google.com/file/d/1p1Dq1zIIR1n0oL2QFWI8ro3RTiqdxgQ0/view">Open Original</a>
+  </div>
+  <div class="pair side">
+    <figure><figcaption>Original · LibreOffice preview, top of sheet — not Office</figcaption><img src="previews/10-xlsx-undo-redo__ORIGINAL.png" alt="Original sheet, B1 is 2"></figure>
+    <figure><figcaption>Saved · LibreOffice preview, top of sheet — not Office</figcaption><img src="previews/10-xlsx-undo-redo__SAVED.png" alt="Saved sheet after undo and redo, B1 is hello"></figure>
+  </div>
+</article>
+
+<footer>
+  <p>Pack v3 from SHA <code>4aee651</code> (generated 6:35 AM ET, Friday Nov 13, 2026, America/New_York). Originals and saved files are byte-identical to pack v2. Validators already passed; this page is only for human Office review.</p>
+  <p><a href="https://drive.google.com/drive/folders/12fA6KmofEaFx48zEZxF8R-WIEli6GvVD">Drive folder</a> · <a href="https://github.com/jgridifier/nitro-xml">nitro-xml repo</a></p>
+</footer>
+</main>
+</body>
+</html>
