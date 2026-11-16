@@ -81,6 +81,54 @@
       }
     },
     {
+      "slug": "scout-2026-11-16-ecofolio",
+      "type": "scout",
+      "method": "Mean-variance portfolio effect (ecofolio)",
+      "date": "2026-11-16",
+      "title": "Scout: Taylor\u2019s power law says the mock program books are not as diversified as CV-based measures claim",
+      "dek": "Mean-variance portfolio effects from fisheries ecology (Anderson, Cooper & Dulvy, Methods in Ecology and Evolution 2013; ecofolio 0.1.0), run on the SYNTHETIC mock ZBB datasets for Q2.3/Q2.4. Program volatility scales with size at Taylor z = 1.67 / 1.77, not 2, so the average-CV portfolio effect (3.36 / 3.25) and the diversification ratio (3.14 / 3.10) overstate stability against the mean-variance effect (0.99 / 1.15). Part of the apparent diversification is noise. It loses to plain correlation as a hidden-group screen. Scout status: interesting; not started.",
+      "verdict": "scout: interesting",
+      "status": "scouted, not in workflow",
+      "novelty": "niche",
+      "tags": [
+        "portfolio effect",
+        "Taylor's power law",
+        "ecology",
+        "Q2",
+        "exotic-transfer",
+        "SYNTHETIC"
+      ],
+      "links": {
+        "self": "https://jgridifier.github.io/research-lab/methods-scout/2026-11-16.html#ecofolio",
+        "parent": null,
+        "children": []
+      }
+    },
+    {
+      "slug": "scout-2026-11-16-pim",
+      "type": "scout",
+      "method": "Probabilistic index models (pim)",
+      "date": "2026-11-16",
+      "title": "Scout: probabilistic index models show the stress-test pre-tax path, not the drawdown, orders bank payouts",
+      "dek": "Probabilistic index models from biostatistics (Thas et al., JRSS-B 2012; pim 2.0.4), run within test years on public Fed stress-test results and FR Y-9C payouts for Q3. A bank with a one-IQR better severely adverse pre-tax path has the higher payout/RWA 68% of the time (Holm p = 0.02); drawdown adds nothing beyond it; the Adverse\u2013SA gap adds nothing. Before 2020 the stress ranking shows up in dividends (Holm p = 0.02); after 2020, weakly, in buybacks. OLS on payout/NI loses 43% of its slope after trimming 2% of ratios; PIM moves under 2%. The scout recommends it for the promote workflow; not started, awaiting Jared\u2019s pick.",
+      "verdict": "scout: recommend for promote workflow",
+      "status": "scouted, not in workflow",
+      "novelty": "niche",
+      "tags": [
+        "probabilistic index",
+        "rank regression",
+        "biostatistics",
+        "stress tests",
+        "Q3",
+        "exotic-transfer"
+      ],
+      "links": {
+        "self": "https://jgridifier.github.io/research-lab/methods-scout/2026-11-16.html#pim",
+        "parent": null,
+        "children": []
+      }
+    },
+    {
       "slug": "scout-2026-11-15-ccm",
       "type": "scout",
       "method": "Convergent cross mapping (pyEDM)",
