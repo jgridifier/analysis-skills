@@ -81,6 +81,102 @@
       }
     },
     {
+      "slug": "scout-2026-11-18-stem",
+      "type": "scout",
+      "method": "STEM (Short Time-series Expression Miner)",
+      "date": "2026-11-18",
+      "title": "Scout: a genomics short-series miner says which budget shapes are real, where k-means just returns clusters",
+      "dek": "STEM from genomics (Ernst, Nau & Bar-Joseph, Bioinformatics 2005; Ernst & Bar-Joseph, BMC Bioinformatics 2006; stem.jar 1.3.15), run on the SYNTHETIC mock ZBB datasets for Q2. 7 and 5 of 50 fixed shapes are over-represented on the Corning-like and MS-like mocks; with years shuffled, 1 and 0, while k-means still returns 10 and 5 clusters. Using the budget as a same-year replicate (exploratory) lifts the share of programs on their noise-free shape from 0.31 to 0.47 and 0.75 to 0.82. K-means at the same k matches or beats it on 5 of 7 planted groups, and its text-vs-numbers flag loses to an OLS slope. Paper simulation reproduced in 20 of 20 seeds; NumPy port identical to the jar. Scout status: interesting; not started.",
+      "verdict": "scout: interesting",
+      "status": "scouted, not in workflow",
+      "novelty": "niche",
+      "tags": [
+        "short time series",
+        "clustering",
+        "genomics",
+        "Q2",
+        "exotic-transfer",
+        "SYNTHETIC"
+      ],
+      "links": {
+        "self": "https://jgridifier.github.io/research-lab/methods-scout/2026-11-18.html#stem",
+        "parent": null,
+        "children": []
+      }
+    },
+    {
+      "slug": "scout-2026-11-18-hysteresis-index",
+      "type": "scout",
+      "method": "Storm concentration\u2013discharge hysteresis index",
+      "date": "2026-11-18",
+      "title": "Scout: a river-chemistry loop index finds repo spreads peak after settlement fails, mostly at quarter-ends",
+      "dek": "The Lloyd et al. (HESS 2016) hysteresis index and Vaughan et al. (WRR 2017) flushing index from catchment hydrology, run on public weekly repo and settlement-fails aggregates for Q1. In 13 fails storms (2019\u20132026), the DVP minus tri-party spread lags fails (mean HI \u22120.17, 6 of 13 storms clearly anticlockwise, none clockwise; circular-shift p = 0.042, Holm 0.126). With quarter-end weeks masked (post hoc) it falls to \u22120.08 (p = 0.35). DVP volume and leveraged-fund positioning show no loop, and a limb term adds nothing to an ARDL walk-forward (RMSE +0.5%). Lloyd Fig. 1 reproduced exactly. Scout status: interesting; not started.",
+      "verdict": "scout: interesting",
+      "status": "scouted, not in workflow",
+      "novelty": "niche",
+      "tags": [
+        "hysteresis",
+        "storm loops",
+        "hydrology",
+        "repo",
+        "Q1",
+        "exotic-transfer"
+      ],
+      "links": {
+        "self": "https://jgridifier.github.io/research-lab/methods-scout/2026-11-18.html#hysteresis-index",
+        "parent": null,
+        "children": []
+      }
+    },
+    {
+      "slug": "scout-2026-11-17-eca",
+      "type": "scout",
+      "method": "Event coincidence analysis (ECA)",
+      "date": "2026-11-17",
+      "title": "Scout: climate-impact event coincidence finds financing fails spike a week after leveraged-fund unwinds",
+      "dek": "Event coincidence analysis from climate-impact science (Donges et al., EPJ ST 2016; CoinCalc 2.0), run on public weekly repo, settlement-fails and CFTC positioning aggregates for Q1. 26% of financing-fails spike weeks come exactly one week after a big leveraged-fund unwind (vs about 10% by chance, circular-shift p = 0.008); builds show nothing and the reverse direction is not significant. The package's Poisson test has a 9.2\u20139.4% false-positive rate at nominal 5% on these clustered series. Paper examples reproduced exactly. Scout status: recommend for promote workflow; not started, awaiting Jared's pick.",
+      "verdict": "scout: recommend for promote workflow",
+      "status": "scouted, not in workflow",
+      "novelty": "niche",
+      "tags": [
+        "event coincidence",
+        "precursors",
+        "climate science",
+        "repo",
+        "Q1",
+        "exotic-transfer"
+      ],
+      "links": {
+        "self": "https://jgridifier.github.io/research-lab/methods-scout/2026-11-17.html#eca",
+        "parent": null,
+        "children": []
+      }
+    },
+    {
+      "slug": "scout-2026-11-17-statis",
+      "type": "scout",
+      "method": "STATIS multi-table analysis",
+      "date": "2026-11-17",
+      "title": "Scout: STATIS finds the stress-test and payout pattern split into pre- and post-2020 eras",
+      "dek": "STATIS from sensory science and ecology (Lavit et al., CSDA 1994; Abdi et al., WIREs 2012; ade4 1.7.24), run on 13 public stress-test exercises (7 variables) for Q3. The joint pattern splits into 2013\u201319 and 2020\u201325 eras (exact p = 0.023; modified RV 0.016), with the best cut at 2021 (exploratory); no single pair is familywise significant (max-T p = 0.11), and the year-departure bootstrap was invalid. NumPy core at 3e-13 parity with ade4. Scout status: interesting; not started.",
+      "verdict": "scout: interesting",
+      "status": "scouted, not in workflow",
+      "novelty": "niche",
+      "tags": [
+        "multi-table",
+        "RV coefficient",
+        "sensory science",
+        "stress tests",
+        "Q3",
+        "exotic-transfer"
+      ],
+      "links": {
+        "self": "https://jgridifier.github.io/research-lab/methods-scout/2026-11-17.html#statis",
+        "parent": null,
+        "children": []
+      }
+    },
+    {
       "slug": "scout-2026-11-16-ecofolio",
       "type": "scout",
       "method": "Mean-variance portfolio effect (ecofolio)",
