@@ -81,6 +81,53 @@
       }
     },
     {
+      "slug": "scout-2026-11-19-poset-ranking",
+      "type": "scout",
+      "method": "Partial-order ranking (netrankr)",
+      "date": "2026-11-19",
+      "title": "Scout: weight-free dominance ranking shows which stress-test trade-offs payouts actually follow",
+      "dek": "Partial-order ranking with exact rank probabilities from network science and environmental chemistry (Schoch, Social Networks 2018; netrankr 2.0.0), run on public stress-test results for Q3: 13 severely adverse exercises 2013\u20132025, 360 firm-years. Where one firm is worse on all three indicators it paid out less in 71.5% of 2,203 pairs (null 50%, p = 0.0002). 55% of pairs are trade-offs; there, payouts follow pre-tax income (0.639) and run against the loan-loss rate (0.409), which an equal-weight composite averages to 0.552. In 2021\u201325 pairs where the SCB disagrees with the path, payouts follow the path in 78.9%. Walk-forward miss: 0.36 vs OLS 0.46, ARDL 0.67, SARIMAX 0.65. netrankr vignette reproduced. Scout status: recommend; not started.",
+      "verdict": "scout: recommend",
+      "status": "scouted, not in workflow",
+      "novelty": "niche",
+      "tags": [
+        "partial order",
+        "Hasse diagram",
+        "ranking",
+        "Q3",
+        "exotic-transfer"
+      ],
+      "links": {
+        "self": "https://jgridifier.github.io/research-lab/methods-scout/2026-11-19.html#poset-ranking",
+        "parent": null,
+        "children": []
+      }
+    },
+    {
+      "slug": "scout-2026-11-19-phylo-signal",
+      "type": "scout",
+      "method": "Phylogenetic signal and LIPA (phylosignal)",
+      "date": "2026-11-19",
+      "title": "Scout: comparative-biology signal tests show noise hides half the program hierarchy's growth signal",
+      "dek": "Blomberg's K, Pagel's \u03bb and local indicators of phylogenetic association (Keck et al., Ecology and Evolution 2016; phylosignal 1.3.1), run on the SYNTHETIC mock ZBB datasets for Q2 with the label hierarchy as the tree. \u03bb of per-program growth is 0.52 vs 1.22 noise-free (Corning-like) and 0.78 vs 1.12 (MS-like); a scrubbed-text tree carries less (0.35, 0.57). A relatives' mean beats a per-program OLS trend by 7.2% and 14.3% RMSE, about as well as ARDL(1). LIPA misses on mismatch (AUC 0.59, 0.53 vs OLS 0.74, 0.65) and drift. Brownian checks reproduced. Scout status: interesting; not started.",
+      "verdict": "scout: interesting",
+      "status": "scouted, not in workflow",
+      "novelty": "niche",
+      "tags": [
+        "phylogenetic signal",
+        "hierarchy",
+        "spatial autocorrelation",
+        "Q2",
+        "exotic-transfer",
+        "SYNTHETIC"
+      ],
+      "links": {
+        "self": "https://jgridifier.github.io/research-lab/methods-scout/2026-11-19.html#phylo-signal",
+        "parent": null,
+        "children": []
+      }
+    },
+    {
       "slug": "scout-2026-11-18-stem",
       "type": "scout",
       "method": "STEM (Short Time-series Expression Miner)",
