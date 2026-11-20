@@ -128,6 +128,52 @@
       }
     },
     {
+      "slug": "scout-2026-11-20-lkif",
+      "type": "scout",
+      "method": "Liang\u2013Kleeman information flow (LK_Info_flow)",
+      "date": "2026-11-20",
+      "title": "Scout: climate-science information flow finds spread moves feed fails uncertainty, but its built-in test is just Granger",
+      "dek": "Liang\u2013Kleeman information flow from climate dynamics (Liang, Entropy 2021; LK_Info_flow 3.1.2.1), run on public repo aggregates for Q1: 399 weeks 2018\u20132025 of fails, DVP and tri-party volumes, the DVP \u2212 tri-party spread, leveraged-fund positioning and VIX. Spread moves precede fails and raise their uncertainty (\u03c4 +1.7%, bootstrap p = 0.033) and damp DVP volume (\u03c4 \u22123.6%, p = 0.013); none survive Holm. Positioning \u2192 fails is Granger-significant (p = 0.012) with no flow (\u03c4 \u22120.10%). The package's test equals the lag-1 Granger t and rejects true-zero links 14\u201320% of the time on these series. Monthly Form PF: no flow. Walk-forward miss (\u22122.4% RMSE, DM p = 0.57). Liang (2021) network reproduced within 0.4 pp. Scout status: interesting; not started.",
+      "verdict": "scout: interesting",
+      "status": "scouted, not in workflow",
+      "novelty": "niche",
+      "tags": [
+        "information flow",
+        "causality",
+        "climate dynamics",
+        "Q1",
+        "exotic-transfer"
+      ],
+      "links": {
+        "self": "https://jgridifier.github.io/research-lab/methods-scout/2026-11-20.html#lkif",
+        "parent": null,
+        "children": []
+      }
+    },
+    {
+      "slug": "scout-2026-11-20-nca-ceiling",
+      "type": "scout",
+      "method": "Necessary Condition Analysis (NCA)",
+      "date": "2026-11-20",
+      "title": "Scout: necessity ceilings show the stressed capital trough gates payouts; the SCB almost never binds",
+      "dek": "Necessary Condition Analysis from organization science (Dul, ORM 2016; Dul, van der Laan & Kuik, ORM 2020; NCA 5.1.0), run on public stress-test results for Q3: 13 severely adverse exercises 2013\u20132025, 360 firm-years. The stressed minimum CET1 ratio caps payout/RWA beyond what its correlation produces (d 0.245 vs 95th pct 0.211 under a Gaussian-copula null, p = 0.012; within-year p = 0.0002), also for dividends and buybacks. The drawdown passes the standard NCA test but its ceiling is correlation-made (p = 0.48). The trough binds for 69% of firm-years, the SCB for 1.5%. The default NCA test calls correlated-only data necessary 56\u201374% of the time at \u03c1 0.3. Misses: total payout fragile to the top-2% trim; envelope looser than a 95% quantile line. Scout status: interesting; not started.",
+      "verdict": "scout: interesting",
+      "status": "scouted, not in workflow",
+      "novelty": "niche",
+      "tags": [
+        "necessary condition",
+        "ceiling",
+        "stress tests",
+        "Q3",
+        "exotic-transfer"
+      ],
+      "links": {
+        "self": "https://jgridifier.github.io/research-lab/methods-scout/2026-11-20.html#nca-ceiling",
+        "parent": null,
+        "children": []
+      }
+    },
+    {
       "slug": "scout-2026-11-18-stem",
       "type": "scout",
       "method": "STEM (Short Time-series Expression Miner)",
