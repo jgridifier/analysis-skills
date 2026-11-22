@@ -851,7 +851,7 @@
       "dek": "Interpolated cross-correlation with random-subset-selection lag distributions from reverberation mapping (Peterson et al., PASP 1998; PyCCF V2.2, ported to Python 3 and NumPy at 2e-13 parity, 10x faster), run on public aggregates for Q1: monthly SEC Form PF tab 8.27 against weekly NY Fed fails and OFR repo series, 2013\u20132025, without regridding. Of five pre-registered pairs only PF reverse repo \u2192 DVP volume passes Holm under AR(1) and phase nulls (centroid +39 d, 68% [+31, +54] d, r 0.92, p = 0.001; ZDCF +46 d). On independent series with our persistence the home-field 68% rule finds lags 54\u201360% of the time, monthly Bartlett bands 75\u201399%. The lead holds in 2018\u201321 and flips sign after 2022. Walk-forward miss (\u22120.24% RMSE vs ARDL, DM p = 0.47). Scout status: interesting; not started.",
       "verdict": "scout: interesting",
       "status": "scouted, not in workflow",
-      "novelty": "exotic",
+      "novelty": "niche",
       "tags": [
         "cross-correlation",
         "lag",
@@ -874,7 +874,7 @@
       "dek": "L-moment regional frequency analysis from hydrology (Hosking & Wallis 1997; lmomRFA 3.8, Fortran core), run on the SYNTHETIC mock ZBB datasets for Q2: 901 and 1,549 programs with 4\u20136 years of actual \u00f7 budget. The heterogeneity statistic H1 calls stated-function regions homogeneous (median \u22120.09 / \u22120.05) and rejects discretionary \u00d7 size (3.56 / 2.34) and random groupings (4.89 / 8.33); it ranks truly mixed regions better than Brown\u2013Forsythe (AUC 0.86 / 0.89 vs 0.81 / 0.85) but has no power edge at matched size. RFA on function regions cuts the q90 error 23\u201326%, tied with category pooling; discordancy finds planted mislabels weakly (AUC 0.64 / 0.54). Hosking's Cascades example reproduced exactly. Scout status: interesting; not started.",
       "verdict": "scout: interesting",
       "status": "scouted, not in workflow",
-      "novelty": "exotic",
+      "novelty": "niche",
       "tags": [
         "L-moments",
         "regional frequency analysis",
