@@ -174,6 +174,29 @@
       }
     },
     {
+      "slug": "scout-2026-11-23-gaussian-pid",
+      "type": "scout",
+      "method": "Partial information decomposition (Gaussian PID)",
+      "date": "2026-11-23",
+      "title": "Scout: the stress buffer's payout news is synergy with the drawdown, i.e. the dividend add-on",
+      "dek": "Partial information decomposition from computational neuroscience (Williams & Beer 2010; Barrett, PRE 2015; Kay & Ince 2018; dit, gpid, gcmi), run on public stress-test results and Y-9C payouts for Q3, 2021\u20132025, 132 firm-years. Within a test year the SCB carries 0.023 bits about payout/RWA, all shared with the drawdown; the pair adds 0.097 bits of MMI synergy (firm-bootstrap CI 0.008\u20130.186; within-year Freedman\u2013Lane p = 0.0002), which is the SCB's planned-dividend add-on. OLS reads the same data as a positive SCB effect (t = +5.07, VIF 6.5). Miss: under Idep and the measure-free Hi-Fi bound the synergy CI reaches 0. Shared information of drawdown and pre-tax income rose 0.036 \u2192 0.128 bits after 2020 (p = 0.033). All numbers computed. Scout status: interesting; not started.",
+      "verdict": "scout: interesting",
+      "status": "scouted, not in workflow",
+      "novelty": "niche",
+      "tags": [
+        "partial information decomposition",
+        "synergy",
+        "stress tests",
+        "Q3",
+        "exotic-transfer"
+      ],
+      "links": {
+        "self": "https://jgridifier.github.io/research-lab/methods-scout/m/gaussian-pid.html",
+        "parent": null,
+        "children": []
+      }
+    },
+    {
       "slug": "scout-2026-11-18-stem",
       "type": "scout",
       "method": "STEM (Short Time-series Expression Miner)",
